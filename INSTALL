@@ -27,8 +27,21 @@ and this one is in YOUR_PROJECT_DIRECTORY\lib
 GdiPlus.lib
 
 removed a bunch of #defines from gdiplus that force compiler warnings / errors
+GdiPlusEnums.h:543:// enum EmfPlusRecordType;   # ahkgcc
+GdiPlusEnums.h:548:// # ahkgcc
+GdiPlusImaging.h:163:    INT PixelFormat; // PixelFormat # ahkgcc changed type
+GdiplusFlat.h:2347:                     ImageCodecInfo *decoders); // ahkgcc removed  __out_bcount(size)
+GdiplusFlat.h:2355:                    ImageCodecInfo *encoders); // ahkgcc removed  __out_bcount(size)
+GdiplusFlat.h:2388:        LPWSTR    name,  // ahkgcc removed __out_ecount(LF_FACESIZE)
+GdiplusFontFamily.h:123:     LPWSTR    name, // ahkgcc removed __out_ecount(LF_FACESIZE)
+GdiplusFontFamily.h:124:     WCHAR                     language // ahkgcc replaced    IN LANGID    with WCHAR
+GdiplusHeaders.h:196:         LPWSTR    name,  // ahkgcc removed __out_ecount(LF_FACESIZE)
+GdiplusHeaders.h:197:        WCHAR                        language = 0 // ahkgcc replaced IN LANGID    with WCHAR
+GdiplusHeaders.h:707:  friend class Graphics;  // # ahkgcc  although line numbers didn't match
+GdiplusTypes.h:744:    BYTE* Types;  // ahkgcc removed  __field_ecount_opt(Count)
+
 removed mscvr70 dependency: libmsvcr70.a
 
-in util.h
+in util.h, added
 #define _strtoi64 strtoll // ahkgcc to remove msvcrt dep
 #define _strtoui64 strtoull  // ahkgcc to remove msvcrt dep
