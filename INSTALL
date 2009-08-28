@@ -1,0 +1,31 @@
+GDK+ is not included in GCC. It is a proprietary Microsoft package and requires a genuine copy of windows. Here is a link to the download: http://www.microsoft.com/downloads/details.aspx?FamilyId=A55B6B43-E24F-4EA3-A93E-40C0EC4F68E5&displaylang=en. At the bottom of the page is a "Files in This Download" section that allows you to bypass the validation, if you know the system architecture you are compiling on. Once you have that file, chose custom and install only the SDK base. This will give you the files you need (All the header files that start with GdiPlus and PopPack.h)
+
+In gdiplusenums.h
+L534: enum EmfPlusRecordType; >> //enum EmfPlusRecordType
+L538: #define GDIP_WMF_RECORD_TO_EMFPLUS(n)   ((EmfPlusRecordType)((n) | GDIP_WMF_RECORD_BASE)) >> #define GDIP_WMF_RECORD_TO_EMFPLUS(n)   (/*(EmfPlusRecordType)*/((n) | GDIP_WMF_RECORD_BASE))
+
+In GdiplusImaging.h
+L156: PixelFormat PixelFormat; >> INT PixelFormat
+
+In GdiplusHeaders.h
+L247: friend Graphics; >> friend class Graphics;
+
+
+GdiplusEnums.h 534: comment out  (//enum EmfPlusRecordType)
+GdiplusEnums.h 538: Comment out EmfPlusRecordType (/*(EmfPlusRecordType*/((n)...)
+GdiplusImaging.h 156: PixelFormat PixelFormat; -> INT PixelFormat;
+GDiplusHeaders.h 653: friend Graphics; -> friend class Graphics;
+
+
+C:\CodeBlocks\MinGW\lib
+C:\CodeBlocks\MinGW\lib\libcomctl32.a;C:\CodeBlocks\MinGW\lib\libwinmm.a;C:\CodeBlocks\MinGW\lib\libgdi32.a;C:\CodeBlocks\MinGW\lib\libole32.a;C:\CodeBlocks\MinGW\lib\liboleaut32.a;C:\CodeBlocks\MinGW\lib\libcomdlg32.a;C:\CodeBlocks\MinGW\lib\libversion.a;C:\CodeBlocks\MinGW\lib\libws2_32.a;C:\CodeBlocks\MinGW\lib\libuuid.a
+
+and this one is in YOUR_PROJECT_DIRECTORY\lib
+GdiPlus.lib
+
+removed a bunch of #defines from gdiplus that force compiler warnings / errors
+removed mscvr70 dependency: libmsvcr70.a
+
+in util.h
+#define _strtoi64 strtoll // ahkgcc to remove msvcrt dep
+#define _strtoui64 strtoull  // ahkgcc to remove msvcrt dep
