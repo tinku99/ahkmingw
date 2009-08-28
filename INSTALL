@@ -1,9 +1,12 @@
+for instructions on using codeblocks to compile see: 
+http://www.autohotkey.com/forum/viewtopic.php?t=31475
+
 GDK+ is not included in GCC. It is a proprietary Microsoft package and requires a genuine copy of windows. Here is a link to the download: http://www.microsoft.com/downloads/details.aspx?FamilyId=A55B6B43-E24F-4EA3-A93E-40C0EC4F68E5&displaylang=en. At the bottom of the page is a "Files in This Download" section that allows you to bypass the validation, if you know the system architecture you are compiling on. Once you have that file, chose custom and install only the SDK base. This will give you the files you need (All the header files that start with GdiPlus and PopPack.h)
 
 In gdiplusenums.h
 L534: enum EmfPlusRecordType; >> //enum EmfPlusRecordType
 L538: #define GDIP_WMF_RECORD_TO_EMFPLUS(n)   ((EmfPlusRecordType)((n) | GDIP_WMF_RECORD_BASE)) >> #define GDIP_WMF_RECORD_TO_EMFPLUS(n)   (/*(EmfPlusRecordType)*/((n) | GDIP_WMF_RECORD_BASE))
-
+      
 In GdiplusImaging.h
 L156: PixelFormat PixelFormat; >> INT PixelFormat
 

@@ -1,0 +1,5 @@
+ahkmingw is a project to compile autohotkey using gcc / mingw on windows.
+The project was started single handedly by by xx3nvyxx http://www.autohotkey.com/forum/author-xx3nvyxx.html
+In my effort to port autohotkey to linux, I learned enough to be able to follow xx3nvyxx's instructions for mingw.  Also, I removed the dependency on libmsvcr70.a .
+Hopefully i will be able to slowly remove the remainder of the windows dependencies and transition over to x11.
+
