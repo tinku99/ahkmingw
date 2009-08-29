@@ -65,6 +65,9 @@ char *Line::ExpandExpression(int aArgIndex, ResultType &aResult, char *&aTarget,
 //
 // Thanks to Joost Mulders for providing the expression evaluation code upon which this function is based.
 {
+
+  ExprTokenType right;
+
 	char *target = aTarget; // "target" is used to track our usage (current position) within the aTarget buffer.
 
 	// The following must be defined early so that mem_count is initialized and the array is guaranteed to be
@@ -1045,7 +1048,7 @@ end_of_infix_to_postfix:
 	// function call, evaluate it and push its result onto the stack.
 	for (i = 0; i < postfix_count; ++i) // Performance: Using a handle to traverse the postfix array rather than array indexing unexpectedly benchmarked 3% slower (perhaps not statistically significant due to being caused by CPU cache hits or compiler's use of registers).  Because of that, there's not enough reason to switch to that method -- though it does generate smaller code (perhaps a savings of 200 bytes).
 	{
-		ExprTokenType &this_token = *postfix[i];  // For performance and convenience.
+	  ExprTokenType  &this_token = *postfix[i];  // For performance and convenience.
 
 		// At this stage, operands in the postfix array should be SYM_OPERAND, SYM_STRING, or SYM_DYNAMIC.
 		// But all are checked since that operation is just as fast:
@@ -1735,12 +1738,12 @@ end_of_infix_to_postfix:
 		// Since the above didn't "goto" or continue, this token must be a unary or binary operator.
 		// Get the first operand for this operator (for non-unary operators, this is the right-side operand):
 		if (!stack_count) // Prevent stack underflow.  An expression such as -*3 causes this.
-			goto abnormal_end;
-		//ExprTokenType &right = *STACK_POP;
+		  goto abnormal_end;
+		right = *STACK_POP;
 		// Below uses IS_OPERAND rather than checking for only SYM_OPERAND because the stack can contain
 		// both generic and specific operands.  Specific operands were evaluated by a previous iteration
 		// of this section.  Generic ones were pushed as-is onto the stack by a previous iteration.
-		if (!IS_OPERAND(STACK_POP->symbol)) // Haven't found a way to produce this situation yet, but safe to assume it's possible.
+		if (!IS_OPERAND(right.symbol)) // Haven't found a way to produce this situation yet, but safe to assume it's possible.
 			goto abnormal_end;
 
 		// The following check is done after popping "right" off the stack because a prior iteration has set up
@@ -1754,7 +1757,7 @@ end_of_infix_to_postfix:
 			// "right".  So skip over its "else" branch (short-circuit) because that doesn't need to be evaluated.
 			for (++i; postfix[i] != this_token.circuit_token; ++i); // Should always be found, so no need to check postfix_count.
 			// And very soon, the outer loop's ++i will skip over the SYM_IFF_ELSE just found above.
-			STACK_POP->circuit_token = this_token.circuit_token->circuit_token; // Can be NULL (in fact, it usually is).
+			right.circuit_token = this_token.circuit_token->circuit_token; // Can be NULL (in fact, it usually is).
 			this_token = *STACK_POP;   // Struct copy to set things up for push_this_token, which in turn is needed
 			goto push_this_token; // (rather than a simple STACK_PUSH(right)) because it checks for *cascading* short circuit in cases where this ternary's result is the boolean condition of another ternary.
 		}
@@ -1772,22 +1775,22 @@ end_of_infix_to_postfix:
 		if (this_token.symbol != SYM_ASSIGN) // SYM_ASSIGN doesn't need "right" to be resolved.
 		{
 			// If the operand is still generic/undetermined, find out whether it is a string, integer, or float:
-			switch(STACK_POP->symbol)
+			switch(right.symbol)
 			{
 			case SYM_VAR:
-				right_contents = STACK_POP->var->Contents(); // Can be the clipboard in this case, but it works even then.
+				right_contents = right.var->Contents(); // Can be the clipboard in this case, but it works even then.
 				right_is_number = IsPureNumeric(right_contents, true, false, true);
 				break;
 			case SYM_OPERAND:
-				right_contents = STACK_POP->marker;
+				right_contents = right.marker;
 				right_is_number = IsPureNumeric(right_contents, true, false, true);
 				break;
 			case SYM_STRING:
-				right_contents = STACK_POP->marker;
+				right_contents = right.marker;
 				right_is_number = PURE_NOT_NUMERIC; // Explicitly-marked strings are not numeric, which allows numeric strings to be compared as strings rather than as numbers.
 			default: // INTEGER or FLOAT
 				// right_contents is left uninitialized for performance and to catch bugs.
-				right_is_number = STACK_POP->symbol;
+				right_is_number = right.symbol;
 			}
 		}
 
@@ -1800,12 +1803,12 @@ end_of_infix_to_postfix:
 		case SYM_AND: // These are now unary operators because short-circuit has made them so.  If the AND/OR
 		case SYM_OR:  // had short-circuited, we would never be here, so this is the right branch of a non-short-circuit AND/OR.
 			if (right_is_number == PURE_INTEGER)
-				this_token.value_int64 = (STACK_POP->symbol == SYM_INTEGER ? STACK_POP->value_int64 : ATOI64(right_contents)) != 0;
+				this_token.value_int64 = (right.symbol == SYM_INTEGER ? right.value_int64 : ATOI64(right_contents)) != 0;
 			else if (right_is_number == PURE_FLOAT)
-				this_token.value_int64 = (STACK_POP->symbol == SYM_FLOAT ? STACK_POP->value_double : atof(right_contents)) != 0.0;
+				this_token.value_int64 = (right.symbol == SYM_FLOAT ? right.value_double : atof(right_contents)) != 0.0;
 			else // This is either a non-numeric string or a numeric raw literal string such as "123".
 				// All non-numeric strings are considered TRUE here.  In addition, any raw literal string,
-				// even "0", is considered to be TRUE.  This relies on the fact that STACK_POP->symbol will be
+				// even "0", is considered to be TRUE.  This relies on the fact that right.symbol will be
 				// SYM_OPERAND/generic (and thus handled higher above) for all pure-numeric strings except
 				// explicit raw literal strings.  Thus, if something like !"0" ever appears in an expression,
 				// it evaluates to !true.  EXCEPTION: Because "if x" evaluates to false when X is blank,
@@ -1816,10 +1819,10 @@ end_of_infix_to_postfix:
 
 		case SYM_NEGATIVE:  // Unary-minus.
 			if (right_is_number == PURE_INTEGER)
-				this_token.value_int64 = -(STACK_POP->symbol == SYM_INTEGER ? STACK_POP->value_int64 : ATOI64(right_contents));
+				this_token.value_int64 = -(right.symbol == SYM_INTEGER ? right.value_int64 : ATOI64(right_contents));
 			else if (right_is_number == PURE_FLOAT)
 				// Overwrite this_token's union with a float. No need to have the overhead of ATOF() since PURE_FLOAT is never hex.
-				this_token.value_double = -(STACK_POP->symbol == SYM_FLOAT ? STACK_POP->value_double : atof(right_contents));
+				this_token.value_double = -(right.symbol == SYM_FLOAT ? right.value_double : atof(right_contents));
 			else // String.
 			{
 				// Seems best to consider the application of unary minus to a string, even a quoted string
@@ -1841,13 +1844,13 @@ end_of_infix_to_postfix:
 		case SYM_LOWNOT:  // The operator-word "not".
 		case SYM_HIGHNOT: // The symbol !
 			if (right_is_number == PURE_INTEGER)
-				this_token.value_int64 = !(STACK_POP->symbol == SYM_INTEGER ? STACK_POP->value_int64 : ATOI64(right_contents));
+				this_token.value_int64 = !(right.symbol == SYM_INTEGER ? right.value_int64 : ATOI64(right_contents));
 			else if (right_is_number == PURE_FLOAT) // Convert to float, not int, so that a number between 0.0001 and 0.9999 is considered "true".
 				// Using ! vs. comparing explicitly to 0.0 might generate faster code, and K&R implies it's okay:
-				this_token.value_int64 = !(STACK_POP->symbol == SYM_FLOAT ? STACK_POP->value_double : atof(right_contents));
+				this_token.value_int64 = !(right.symbol == SYM_FLOAT ? right.value_double : atof(right_contents));
 			else // This is either a non-numeric string or a numeric raw literal string such as "123".
 				// All non-numeric strings are considered TRUE here.  In addition, any raw literal string,
-				// even "0", is considered to be TRUE.  This relies on the fact that STACK_POP->symbol will be
+				// even "0", is considered to be TRUE.  This relies on the fact that right.symbol will be
 				// SYM_OPERAND/generic (and thus handled higher above) for all pure-numeric strings except
 				// explicit raw literal strings.  Thus, if something like !"0" ever appears in an expression,
 				// it evaluates to !true.  EXCEPTION: Because "if x" evaluates to false when X is blank,
@@ -1861,11 +1864,11 @@ end_of_infix_to_postfix:
 		case SYM_PRE_INCREMENT:  // it might introduce precedence problems, plus the post-inc/dec's nature is
 		case SYM_PRE_DECREMENT:  // unique among all the operators in that it pushes an operand before the evaluation.
 			is_pre_op = (this_token.symbol >= SYM_PRE_INCREMENT); // Store this early because its symbol will soon be overwritten.
-			if (STACK_POP->symbol != SYM_VAR || right_is_number == PURE_NOT_NUMERIC) // Invalid operation.
+			if (right.symbol != SYM_VAR || right_is_number == PURE_NOT_NUMERIC) // Invalid operation.
 			{
-				if (STACK_POP->symbol == SYM_VAR) // Thus due to the above check, it's a non-numeric target such as ++i when "i" is blank or contains text. This line was fixed in v1.0.46.16.
+				if (right.symbol == SYM_VAR) // Thus due to the above check, it's a non-numeric target such as ++i when "i" is blank or contains text. This line was fixed in v1.0.46.16.
 				{
-					STACK_POP->var->Assign(); // If target var contains "" or "non-numeric text", make it blank. Clipboard is also supported here.
+					right.var->Assign(); // If target var contains "" or "non-numeric text", make it blank. Clipboard is also supported here.
 					if (is_pre_op)
 					{
 						// v1.0.46.01: For consistency, it seems best to make the result of a pre-op be a
@@ -1886,9 +1889,9 @@ end_of_infix_to_postfix:
 						//    it also allows ++++x to work.
 						// 2) Backward compatibility: Some existing scripts probably already rely on the fact that
 						//    ++x and --x produce an lvalue (though it's undocumented).
-						if (STACK_POP->var->Type() == VAR_NORMAL)
+						if (right.var->Type() == VAR_NORMAL)
 						{
-							this_token.var = STACK_POP->var;  // Make the result a variable rather than a normal operand so that its
+							this_token.var = right.var;  // Make the result a variable rather than a normal operand so that its
 							this_token.symbol = SYM_VAR; // address can be taken, and it can be passed ByRef. e.g. &(++x)
 							break;
 						}
@@ -1916,22 +1919,22 @@ end_of_infix_to_postfix:
 			delta = (this_token.symbol == SYM_POST_INCREMENT || this_token.symbol == SYM_PRE_INCREMENT) ? 1 : -1;
 			if (right_is_number == PURE_INTEGER)
 			{
-				this_token.value_int64 = (STACK_POP->symbol == SYM_INTEGER) ? STACK_POP->value_int64 : ATOI64(right_contents);
-				STACK_POP->var->Assign(this_token.value_int64 + delta);
+				this_token.value_int64 = (right.symbol == SYM_INTEGER) ? right.value_int64 : ATOI64(right_contents);
+				right.var->Assign(this_token.value_int64 + delta);
 			}
 			else // right_is_number must be PURE_FLOAT because it's the only remaining alternative.
 			{
 				// Uses atof() because no need to have the overhead of ATOF() since PURE_FLOAT is never hex.
-				this_token.value_double = (STACK_POP->symbol == SYM_FLOAT) ? STACK_POP->value_double : atof(right_contents);
-				STACK_POP->var->Assign(this_token.value_double + delta);
+				this_token.value_double = (right.symbol == SYM_FLOAT) ? right.value_double : atof(right_contents);
+				right.var->Assign(this_token.value_double + delta);
 			}
 			if (is_pre_op)
 			{
 				// Push the variable itself so that the operation will have already taken effect for whoever
 				// uses this operand/result in the future (i.e. pre-op vs. post-op).
-				if (STACK_POP->var->Type() == VAR_NORMAL)
+				if (right.var->Type() == VAR_NORMAL)
 				{
-					this_token.var = STACK_POP->var;  // Make the result a variable rather than a normal operand so that its
+					this_token.var = right.var;  // Make the result a variable rather than a normal operand so that its
 					this_token.symbol = SYM_VAR; // address can be taken, and it can be passed ByRef. e.g. &(++x)
 				}
 				else // VAR_CLIPBOARD, which is allowed in only when it's the lvalue of an assignent or inc/dec.
@@ -1951,7 +1954,7 @@ end_of_infix_to_postfix:
 			break;
 
 		case SYM_ADDRESS: // Take the address of a variable.
-			if (STACK_POP->symbol == SYM_VAR) // At this stage, SYM_VAR is always a normal variable, never a built-in one, so taking its address should be safe.
+			if (right.symbol == SYM_VAR) // At this stage, SYM_VAR is always a normal variable, never a built-in one, so taking its address should be safe.
 			{
 				this_token.symbol = SYM_INTEGER;
 				this_token.value_int64 = (__int64)right_contents;
@@ -1966,10 +1969,10 @@ end_of_infix_to_postfix:
 		case SYM_DEREF:   // Dereference an address to retrieve a single byte.
 		case SYM_BITNOT:           // The tilde (~) operator.
 			if (right_is_number == PURE_INTEGER) // But in this case, it can be hex, so use ATOI64().
-				right_int64 = STACK_POP->symbol == SYM_INTEGER ? STACK_POP->value_int64 : ATOI64(right_contents);
+				right_int64 = right.symbol == SYM_INTEGER ? right.value_int64 : ATOI64(right_contents);
 			else if (right_is_number == PURE_FLOAT)
 				// No need to have the overhead of ATOI64() since PURE_FLOAT can't be hex:
-				right_int64 = STACK_POP->symbol == SYM_FLOAT ? (__int64)STACK_POP->value_double : _atoi64(right_contents);
+				right_int64 = right.symbol == SYM_FLOAT ? (__int64)right.value_double : _atoi64(right_contents);
 			else // String.  Seems best to consider the application of unary minus to a string, even a quoted string literal such as "15", to be a failure.
 			{
 				this_token.marker = "";
@@ -2090,11 +2093,11 @@ end_of_infix_to_postfix:
 				// Above check has ensured that at least one of them is a string.  But the other
 				// one might be a number such as in 5+10="15", in which 5+10 would be a numerical
 				// result being compared to the raw string literal "15".
-				switch (STACK_POP->symbol)
+				switch (right.symbol)
 				{
 				// Seems best to obey SetFormat for these two, though it's debatable:
-				case SYM_INTEGER: right_string = ITOA64(STACK_POP->value_int64, right_buf); break;
-				case SYM_FLOAT: snprintf(right_buf, sizeof(right_buf), g.FormatFloat, STACK_POP->value_double); right_string = right_buf; break;
+				case SYM_INTEGER: right_string = ITOA64(right.value_int64, right_buf); break;
+				case SYM_FLOAT: snprintf(right_buf, sizeof(right_buf), g.FormatFloat, right.value_double); right_string = right_buf; break;
 				default: right_string = right_contents; // SYM_STRING/SYM_OPERAND/SYM_VAR, which is already in the right format.
 				}
 
@@ -2126,7 +2129,7 @@ end_of_infix_to_postfix:
 					// Binary clipboard is ignored because it's documented that except for certain features,
 					// binary clipboard variables are seen only up to the first binary zero (mostly to
 					// simplify the code).
-					right_length = (STACK_POP->symbol == SYM_VAR) ? STACK_POP->var->LengthIgnoreBinaryClip() : strlen(right_string);
+					right_length = (right.symbol == SYM_VAR) ? right.var->LengthIgnoreBinaryClip() : strlen(right_string);
 					if (sym_assign_var // Since "right" is being appended onto a variable ("left"), an optimization is possible.
 						&& sym_assign_var->AppendIfRoom(right_string, (VarSizeType)right_length)) // But only if the target variable has enough remaining capacity.
 					{
@@ -2165,7 +2168,7 @@ end_of_infix_to_postfix:
 								else // temp_var is from look-ahead to a future assignment.
 								{
 									this_token.circuit_token = postfix[++i]->circuit_token; // this_token.circuit_token should have been NULL prior to this because the final right-side result of an assignment shouldn't be the last item of an AND/OR/IFF's left branch. The assignment itself would be that.
-									this_token.var = STACK_POP->var; // Make the result a variable rather than a normal operand so that its
+									this_token.var = right.var; // Make the result a variable rather than a normal operand so that its
 									this_token.symbol = SYM_VAR;     // address can be taken, and it can be passed ByRef. e.g. &(x:=1)
 									goto push_this_token;
 								}
@@ -2194,7 +2197,7 @@ end_of_infix_to_postfix:
 							else // temp_var is from look-ahead to a future assignment.
 							{
 								this_token.circuit_token = postfix[++i]->circuit_token; // this_token.circuit_token should have been NULL prior to this because the final right-side result of an assignment shouldn't be the last item of an AND/OR/IFF's left branch. The assignment itself would be that.
-								this_token.var = STACK_POP->var; // Make the result a variable rather than a normal operand so that its
+								this_token.var = right.var; // Make the result a variable rather than a normal operand so that its
 								this_token.symbol = SYM_VAR;     // address can be taken, and it can be passed ByRef. e.g. &(x:=1)
 								goto push_this_token;
 							}
@@ -2247,7 +2250,7 @@ end_of_infix_to_postfix:
 					// result of the operation is later used, it will be a real string even if pure numeric,
 					// which allows an exact string match to be specified even when the inputs are
 					// technically numeric; e.g. the following should be true only if (Var . 33 = "1133")
-					result_symbol = (left.symbol == SYM_STRING || STACK_POP->symbol == SYM_STRING) ? SYM_STRING: SYM_OPERAND;
+					result_symbol = (left.symbol == SYM_STRING || right.symbol == SYM_STRING) ? SYM_STRING: SYM_OPERAND;
 					break;
 
 				default:
@@ -2267,10 +2270,10 @@ end_of_infix_to_postfix:
 				// because this behavior conforms to that of the Transform command.  Any floating point
 				// operands are truncated to integers prior to doing the bitwise operation.
 
-				switch (STACK_POP->symbol)
+				switch (right.symbol)
 				{
-				case SYM_INTEGER: right_int64 = STACK_POP->value_int64; break;
-				case SYM_FLOAT: right_int64 = (__int64)STACK_POP->value_double; break;
+				case SYM_INTEGER: right_int64 = right.value_int64; break;
+				case SYM_FLOAT: right_int64 = (__int64)right.value_double; break;
 				default: right_int64 = ATOI64(right_contents); // SYM_OPERAND or SYM_VAR
 				// It can't be SYM_STRING because in here, both right and left are known to be numbers
 				// (otherwise an earlier "else if" would have executed instead of this one).
@@ -2349,10 +2352,10 @@ end_of_infix_to_postfix:
 			{
 				// For these two, use ATOF vs. atof so that if one of them is an integer to be converted
 				// to a float for the purpose of this calculation, hex will be supported:
-				switch (STACK_POP->symbol)
+				switch (right.symbol)
 				{
-				case SYM_INTEGER: right_double = (double)STACK_POP->value_int64; break;
-				case SYM_FLOAT: right_double = STACK_POP->value_double; break;
+				case SYM_INTEGER: right_double = (double)right.value_int64; break;
+				case SYM_FLOAT: right_double = right.value_double; break;
 				default: right_double = ATOF(right_contents); // SYM_OPERAND or SYM_VAR
 				// It can't be SYM_STRING because in here, both right and left are known to be numbers.
 				}
