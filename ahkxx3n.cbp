@@ -37,6 +37,16 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libcomctl32.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libwinmm.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libgdi32.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libole32.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\liboleaut32.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libcomdlg32.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libversion.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libws2_32.a" />
+					<Add library="C:\CodeBlocks\MinGW\lib\libuuid.a" />
+					<Add library="lib\GdiPlus.lib" />
 				</Linker>
 			</Target>
 		</Build>

@@ -485,7 +485,7 @@
 1251427411 l:\codeblocks\ahkmingw\keyboard_mouse.h
 	"defines.h"
 
-1251427411 l:\codeblocks\ahkmingw\defines.h
+1251536920 l:\codeblocks\ahkmingw\defines.h
 	"stdafx.h"
 
 1251427410 l:\codeblocks\ahkmingw\script.h
@@ -888,4 +888,10 @@
 	"window.h"
 	"util.h"
 	"application.h"
+
+1251536426 source:l:\codeblocks\ahkmingw\script_expression.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"qmath.h"
 

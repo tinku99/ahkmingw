@@ -33,7 +33,7 @@ GNU General Public License for more details.
 #endif
 
 #define NAME_P "AutoHotkey"
-#define NAME_VERSION "1.0.47.06"
+#define NAME_VERSION "1.0.47.06MINGW"
 #define NAME_PV NAME_P " v" NAME_VERSION
 
 // Window class names: Changing these may result in new versions not being able to detect any old instances
@@ -196,7 +196,7 @@ struct ExprTokenType  // Something in the compiler hates the name TokenType, so 
 				char *marker;     // for SYM_STRING and SYM_OPERAND.
 			};
 			char *buf; // This doesn't increase the total size of the struct. It's used by built-in functions and perhaps other misc. purposes.
-		};  
+		};
 	};
 	// Note that marker's str-length should not be stored in this struct, even though it might be readily
 	// available in places and thus help performance.  This is because if it were stored and the marker
@@ -543,7 +543,7 @@ struct global_struct
 	int KeyDelay;     //
 	int KeyDelayPlay; //
 	int PressDuration;     // The delay between the up-event and down-event of each keystroke.
-	int PressDurationPlay; // 
+	int PressDurationPlay; //
 	int MouseDelay;     // negative values may be used as special flags.
 	int MouseDelayPlay; //
 	char FormatFloat[32];
