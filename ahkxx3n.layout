@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="defines.h" open="1" top="1" tabpos="6">
-		<Cursor position="1170" topLine="23" />
+	<File name="defines.h" open="1" top="0" tabpos="6">
+		<Cursor position="1470" topLine="23" />
 	</File>
 	<File name="os_version.h" open="1" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
@@ -10,11 +10,14 @@
 	<File name="script.h" open="1" top="0" tabpos="1">
 		<Cursor position="324" topLine="0" />
 	</File>
+	<File name="script2.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="542620" topLine="11323" />
+	</File>
 	<File name="script_expression.cpp" open="1" top="0" tabpos="4">
 		<Cursor position="4217" topLine="46" />
 	</File>
-	<File name="stdafx.h" open="1" top="0" tabpos="2">
-		<Cursor position="0" topLine="46" />
+	<File name="stdafx.h" open="1" top="1" tabpos="2">
+		<Cursor position="2279" topLine="37" />
 	</File>
 	<File name="util.h" open="1" top="0" tabpos="3">
 		<Cursor position="15427" topLine="334" />

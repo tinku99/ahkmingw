@@ -202,7 +202,7 @@ struct input_type
 	char *buffer; // Stores the user's actual input.
 	int BufferLength; // The current length of what the user entered.
 	int BufferLengthMax; // The maximum allowed length of the input.
-	input_type::input_type() // A simple constructor to initialize the fields that need it.
+	input_type() // A simple constructor to initialize the fields that need it.
 		: status(INPUT_OFF), match(NULL), MatchBuf(NULL), MatchBufSize(0), buffer(NULL)
 	{}
 };

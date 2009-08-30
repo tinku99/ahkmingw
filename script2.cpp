@@ -21,7 +21,7 @@ GNU General Public License for more details.
 #include "script.h"
 #include "window.h" // for IF_USE_FOREGROUND_WINDOW
 #include "application.h" // for MsgSleep()
-#include "resources\resource.h"  // For InputBox.
+#include "resources/resource.h"  // For InputBox.
 
 #define PCRE_STATIC             // For RegEx. PCRE_STATIC tells PCRE to declare its functions for normal, static
 #include "lib_pcre/pcre/pcre.h" // linkage rather than as functions inside an external DLL.
@@ -4014,6 +4014,8 @@ LPCOLORREF getbits(HBITMAP ahImage, HDC hdc, LONG &aWidth, LONG &aHeight, bool &
 // Returns an array of pixels to the caller, which it must free when done.  Returns NULL on failure,
 // in which case the contents of the output parameters is indeterminate.
 {
+    	bool is_8bit ;
+	int image_pixel_count;
 	HDC tdc = CreateCompatibleDC(hdc);
 	if (!tdc)
 		return NULL;
@@ -4048,7 +4050,7 @@ LPCOLORREF getbits(HBITMAP ahImage, HDC hdc, LONG &aWidth, LONG &aHeight, bool &
 	aWidth = bmi.bmiHeader.biWidth;
 	aHeight = bmi.bmiHeader.biHeight;
 
-	int image_pixel_count = aWidth * aHeight;
+	image_pixel_count = aWidth * aHeight;
 	if (   !(image_pixel = (LPCOLORREF)malloc(image_pixel_count * sizeof(COLORREF)))   )
 		goto end;
 
@@ -4056,7 +4058,7 @@ LPCOLORREF getbits(HBITMAP ahImage, HDC hdc, LONG &aWidth, LONG &aHeight, bool &
 	// of the extra color table handling for 1-bpp images.  Update: For code simplification, support only
 	// 8-bpp images.  If ever support lower color depths, use something like "bmi.bmiHeader.biBitCount > 1
 	// && bmi.bmiHeader.biBitCount < 9";
-	bool is_8bit = (bmi.bmiHeader.biBitCount == 8);
+	is_8bit = (bmi.bmiHeader.biBitCount == 8);
 	if (!is_8bit)
 		bmi.bmiHeader.biBitCount = 32;
 	bmi.bmiHeader.biHeight = -bmi.bmiHeader.biHeight; // Storing a negative inside the bmiHeader struct is a signal for GetDIBits().
@@ -4129,6 +4131,7 @@ ResultType Line::PixelSearch(int aLeft, int aTop, int aRight, int aBottom, COLOR
 // it's in RGB format.
 // Author: The fast-mode PixelSearch was created by Aurelian Maga.
 {
+    LONG screen_pixel_count;
 	// For maintainability, get options and RGB/BGR conversion out of the way early.
 	bool fast_mode = aIsPixelGetColor || strcasestr(aOptions, "Fast");
 	bool use_rgb = strcasestr(aOptions, "RGB") != NULL;
@@ -4230,7 +4233,7 @@ ResultType Line::PixelSearch(int aLeft, int aTop, int aRight, int aBottom, COLOR
 		// second problem [in the test script], since GetPixel even in 16bit will return some "valid"
 		// data in the last 3bits of each byte."
 		register int i;
-		LONG screen_pixel_count = screen_width * screen_height;
+		screen_pixel_count = screen_width * screen_height;
 		if (screen_is_16bit)
 			for (i = 0; i < screen_pixel_count; ++i)
 				screen_pixel[i] &= 0xF8F8F8F8;
@@ -4409,8 +4412,15 @@ ResultType Line::ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char 
 {
 	// Many of the following sections are similar to those in PixelSearch(), so they should be
 	// maintained together.
+	LONG screen_width, screen_height;
 	Var *output_var_x = ARGVAR1;  // Ok if NULL. RAW wouldn't be safe because load-time validation actually
 	Var *output_var_y = ARGVAR2;  // requires a minimum of zero parameters so that the output-vars can be optional.
+LONG image_pixel_count ;
+	int search_width ;
+	int search_height ;
+
+	LONG screen_pixel_count ;
+	int i, j, k, x, y; // Declaring as "register" makes no performance difference with current compiler, so let the compiler choose which should be registers.
 
 	// Set default results, both ErrorLevel and output variables, in case of early return:
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR2);  // 2 means error other than "image not found".
@@ -4574,8 +4584,8 @@ ResultType Line::ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char 
 		goto end;
 
 	// Create an empty bitmap to hold all the pixels currently visible on the screen that lie within the search area:
-	int search_width = aRight - aLeft + 1;
-	int search_height = aBottom - aTop + 1;
+	search_width = aRight - aLeft + 1;
+	search_height = aBottom - aTop + 1;
 	if (   !(sdc = CreateCompatibleDC(hdc)) || !(hbitmap_screen = CreateCompatibleBitmap(hdc, search_width, search_height))   )
 		goto end;
 
@@ -4586,14 +4596,14 @@ ResultType Line::ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char 
 	if (   !(BitBlt(sdc, 0, 0, search_width, search_height, hdc, aLeft, aTop, SRCCOPY))   )
 		goto end;
 
-	LONG screen_width, screen_height;
+
 	bool screen_is_16bit;
 	if (   !(screen_pixel = getbits(hbitmap_screen, sdc, screen_width, screen_height, screen_is_16bit))   )
 		goto end;
 
-	LONG image_pixel_count = image_width * image_height;
-	LONG screen_pixel_count = screen_width * screen_height;
-	int i, j, k, x, y; // Declaring as "register" makes no performance difference with current compiler, so let the compiler choose which should be registers.
+	image_pixel_count = image_width * image_height;
+	screen_pixel_count = screen_width * screen_height;
+	// Declaring as "register" makes no performance difference with current compiler, so let the compiler choose which should be registers.
 
 	// If either is 16-bit, convert *both* to the 16-bit-compatible 32-bit format:
 	if (image_is_16bit || screen_is_16bit)
@@ -7626,7 +7636,8 @@ ResultType Line::DriveLock(char aDriveLetter, bool aLockIt)
 		// Use the Windows 9x method.  The code below is based on an example posted by Microsoft.
 		// Note: The presence of the code below does not add a detectible amount to the EXE size
 		// (probably because it's mostly defines and data types).
-		#pragma pack(1)
+		/* winemaker: #pragma pack(1) */
+		#include <pshpack1.h>
 		typedef struct _DIOC_REGISTERS
 		{
 			DWORD reg_EBX;
@@ -7642,7 +7653,9 @@ ResultType Line::DriveLock(char aDriveLetter, bool aLockIt)
 			BYTE Operation;
 			BYTE NumLocks;
 		} PARAMBLOCK, *PPARAMBLOCK;
-		#pragma pack()
+		/* winemaker: #pragma pack() */
+		/* winemaker:warning: Using 4 as the default alignment */
+		#include <pshpack4.h>
 
 		// MS: Prepare for lock or unlock IOCTL call
 		#define CARRY_FLAG 0x1

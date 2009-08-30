@@ -23,10 +23,10 @@ GNU General Public License for more details.
 #include "keyboard_mouse.h" // for modLR_type
 #include "var.h" // for a script's variables.
 #include "WinGroup.h" // for a script's Window Groups.
-#include "Util.h" // for FileTimeToYYYYMMDD(), strlcpy()
-#include "resources\resource.h"  // For tray icon.
+#include "util.h" // for FileTimeToYYYYMMDD(), strlcpy()
+#include "resources/resource.h"  // For tray icon.
 #ifdef AUTOHOTKEYSC
-	#include "lib\exearc_read.h"
+	#include "lib/exearc_read.h"
 #endif
 
 #include "os_version.h" // For the global OS_Version object
@@ -533,14 +533,14 @@ private:
 	static Var *sArgVar[MAX_ARGS];
 
 	ResultType EvaluateCondition();
-	ResultType Line::PerformLoop(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine
+	ResultType PerformLoop(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine
 		, __int64 aIterationLimit, bool aIsInfinite);
-	ResultType Line::PerformLoopFilePattern(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine
+	ResultType PerformLoopFilePattern(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine
 		, FileLoopModeType aFileLoopMode, bool aRecurseSubfolders, char *aFilePattern);
 	ResultType PerformLoopReg(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine
 		, FileLoopModeType aFileLoopMode, bool aRecurseSubfolders, HKEY aRootKeyType, HKEY aRootKey, char *aRegSubkey);
 	ResultType PerformLoopParse(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine);
-	ResultType Line::PerformLoopParseCSV(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine);
+	ResultType PerformLoopParseCSV(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine);
 	ResultType PerformLoopReadFile(char **apReturnValue, bool &aContinueMainLoop, Line *&aJumpToLine, FILE *aReadFile, char *aWriteFileName);
 	ResultType Perform();
 
@@ -713,7 +713,7 @@ public:
 	#define LINE_RAW_ARG7 (line->mArgc > 6 ? line->mArg[6].text : "")
 	#define LINE_RAW_ARG8 (line->mArgc > 7 ? line->mArg[7].text : "")
 	#define LINE_RAW_ARG9 (line->mArgc > 8 ? line->mArg[8].text : "")
-	
+
 	#define NEW_RAW_ARG1 (aArgc > 0 ? new_arg[0].text : "") // Helps performance to use this vs. LINE_RAW_ARG where possible.
 	#define NEW_RAW_ARG2 (aArgc > 1 ? new_arg[1].text : "")
 	#define NEW_RAW_ARG3 (aArgc > 2 ? new_arg[2].text : "")
@@ -723,7 +723,7 @@ public:
 	#define NEW_RAW_ARG7 (aArgc > 6 ? new_arg[6].text : "")
 	#define NEW_RAW_ARG8 (aArgc > 7 ? new_arg[7].text : "")
 	#define NEW_RAW_ARG9 (aArgc > 8 ? new_arg[8].text : "")
-	
+
 	#define SAVED_ARG1 (mArgc > 0 ? arg[0] : "")
 	#define SAVED_ARG2 (mArgc > 1 ? arg[1] : "")
 	#define SAVED_ARG3 (mArgc > 2 ? arg[2] : "")
@@ -872,7 +872,7 @@ public:
 	static size_t ConvertEscapeCharGetLine(char *aBuf, int aMaxCharsToRead, FILE *fp);
 #endif  // The functions above are not needed by the self-contained version.
 
-	
+
 	// This is in the .h file so that it's more likely the compiler's cost/benefit estimate will
 	// make it inline (since it is called from only one place).  Inline would be good since it
 	// is called frequently during script loading and is difficult to macro-ize in a way that
@@ -1418,7 +1418,7 @@ public:
 		if (!stricmp(aBuf, "NoTimers")) return THREAD_CMD_NOTIMERS;
 		return THREAD_CMD_INVALID;
 	}
-	
+
 	static ProcessCmds ConvertProcessCmd(char *aBuf)
 	{
 		if (!aBuf || !*aBuf) return PROCESS_CMD_INVALID;
@@ -1903,7 +1903,7 @@ public:
 	bool mEnabled;
 	bool mRunOnlyOnce;
 	ScriptTimer *mNextTimer;  // Next items in linked list
-	void ScriptTimer::Disable();
+	void Disable();
 	ScriptTimer(Label *aLabel)
 		#define DEFAULT_TIMER_PERIOD 250
 		: mLabel(aLabel), mPeriod(DEFAULT_TIMER_PERIOD), mPriority(0) // Default is always 0.
@@ -2428,7 +2428,7 @@ public:
 	UINT mCustomIconNumber; // The number of the icon inside the above file.
 
 	UserMenu *mTrayMenu; // Our tray menu, which should be destroyed upon exiting the program.
-    
+
 	ResultType Init(char *aScriptFilename, bool aIsRestart);
 	ResultType CreateWindows();
 	void EnableOrDisableViewMenuItems(HMENU aMenu, UINT aFlags);

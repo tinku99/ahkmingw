@@ -8,3 +8,6 @@ bin
 obj
 MSC_HEADERS
 \.svn
+*.exe
+msc_headers
+*.bak

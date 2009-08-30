@@ -450,7 +450,8 @@ typedef UCHAR HookType;
 // Defining these here avoids awkwardness due to the fact that globaldata.cpp
 // does not (for design reasons) include globaldata.h:
 typedef UCHAR ActionTypeType; // If ever have more than 256 actions, will have to change this (but it would increase code size due to static data in g_act).
-#pragma pack(1) // v1.0.45: Reduces code size a little without impacting runtime performance because this struct is hardly ever accessed during runtime.
+/* winemaker: #pragma pack(1) */
+#include <pshpack1.h> // v1.0.45: Reduces code size a little without impacting runtime performance because this struct is hardly ever accessed during runtime.
 struct Action
 {
 	char *Name;
@@ -473,7 +474,9 @@ struct Action
 	#define MAX_NUMERIC_PARAMS 7
 	ActionTypeType NumericParams[MAX_NUMERIC_PARAMS];
 };
-#pragma pack()  // Calling pack with no arguments restores the default value (which is 8, but "the alignment of a member will be on a boundary that is either a multiple of n or a multiple of the size of the member, whichever is smaller.")
+/* winemaker: #pragma pack() */
+/* winemaker:warning: Using 4 as the default alignment */
+#include <pshpack4.h>  // Calling pack with no arguments restores the default value (which is 8, but "the alignment of a member will be on a boundary that is either a multiple of n or a multiple of the size of the member, whichever is smaller.")
 
 // Values are hard-coded for some of the below because they must not deviate from the documented, numerical
 // TitleMatchModes:

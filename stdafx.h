@@ -47,7 +47,7 @@ GNU General Public License for more details.
 	//#include <tchar.h>
 
 	#include <windows.h>
-	#include <commctrl.h> // for status bar functions. Must be included after <windows.h>.
+	#include <commctrl.h> // for status bar functions. must be included after <windows.h>.
 	#include <shellapi.h>  // for ShellExecute()
 	#include <shlobj.h>  // for SHGetMalloc()
 	#include <mmsystem.h> // for mciSendString() and waveOutSetVolume()

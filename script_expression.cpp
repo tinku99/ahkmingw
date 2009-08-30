@@ -2744,7 +2744,7 @@ ResultType Line::ExpandArgs(VarSizeType aSpaceNeeded, Var *aArgVar[])
 	char *arg_deref[MAX_ARGS];
 	Var *arg_var[MAX_ARGS];
 	int i;
-
+	int max_params ;
 	// Make two passes through this line's arg list.  This is done because the performance of
 	// realloc() is worse than doing a free() and malloc() because the former often does a memcpy()
 	// in addition to the latter's steps.  In addition, realloc() as much as doubles the memory
@@ -2975,7 +2975,7 @@ ResultType Line::ExpandArgs(VarSizeType aSpaceNeeded, Var *aArgVar[])
 	// that all the other sections don't need to check mArgc anymore.
 	// Benchmarks show that it doesn't help performance to try to tweak this with a pre-check such as
 	// "if (mArgc < max_params)":
-	int max_params = g_act[mActionType].MaxParams; // Resolve once for performance.
+	max_params = g_act[mActionType].MaxParams; // Resolve once for performance.
 	for (i = mArgc; i < max_params; ++i) // For performance, this only does the actual max args for THIS command, not MAX_ARGS.
 		sArgDeref[i] = "";
 		// But sArgVar isn't done (since it's more rarely used) except sArgVar[0] = NULL higher above.

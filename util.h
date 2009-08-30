@@ -50,11 +50,11 @@ inline char *StrToTitleCase(char *aStr)
 		{
 			if (convert_next_alpha_char_to_upper)
 			{
-				*aStr = (char)ltoupper(*aStr);
+				*aStr = (char)toupper(*aStr);  // naveen removed ltolower, now not locale independent
 				convert_next_alpha_char_to_upper = false;
 			}
 			else
-				*aStr = (char)ltolower(*aStr);
+				*aStr = (char)tolower(*aStr); // naveen removed ltolower, now not locale independent
 		}
 		else
 			if (isspace((UCHAR)*aStr))

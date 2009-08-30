@@ -16,7 +16,7 @@ GNU General Public License for more details.
 
 #include "stdafx.h" // pre-compiled headers
 #include <olectl.h> // for OleLoadPicture()
-#include "MSC_HEADERS/GdiPlus.h" // Used by LoadPicture().
+#include "msc_headers/GdiPlus.h" // Used by LoadPicture().
 #include "util.h"
 #include "globaldata.h"
 
@@ -541,7 +541,7 @@ char *strrstr(char *aStr, char *aPattern, StringCaseSenseType aStringCaseSense, 
 	size_t aPattern_length = strlen(aPattern);
 	char aPattern_last_char = aPattern[aPattern_length - 1];
 	char aPattern_last_char_lower = (aStringCaseSense == SCS_INSENSITIVE_LOCALE)
-		? (char)ltolower(aPattern_last_char)
+		? (char)(int)ltolower(aPattern_last_char)
 		: tolower(aPattern_last_char);
 
 	int occurrence = 0;
@@ -563,7 +563,7 @@ char *strrstr(char *aStr, char *aPattern, StringCaseSenseType aStringCaseSense, 
 			}
 			else if (aStringCaseSense == SCS_INSENSITIVE_LOCALE)
 			{
-				if ((char)ltolower(*last_char_match) == aPattern_last_char_lower)
+				if ((char)(int)ltolower(*last_char_match) == aPattern_last_char_lower)
 					break;
 			}
 			else // Case sensitive.

@@ -350,7 +350,7 @@ public:
 		}
 		else
 		{
-			mType = (VarTypeType)aType;
+			mType = (VarTypeType)(int)aType; // naveen
 			mCapacity = 0; // This also initializes mBIV within the same union.
 		}
 	}

@@ -349,7 +349,7 @@ void Hotkey::ManifestAllHotkeysHotstringsHooks()
 			//    Start Menu suppressed unless the keyboard hook is installed.  It's debatable,
 			//    but that seems a small price to pay (esp. given how rare it is just to have
 			//    the mouse hook with no keyboard hook) to avoid the overhead of the keyboard hook.
-		
+
 		// If the hotkey is normal, try to register it.  If the register fails, use the hook to try
 		// to override any other script or program that might have it registered (as documented):
 		if (hot.mType == HK_NORMAL)
@@ -464,7 +464,7 @@ void Hotkey::AllDestructAndExit(int aExitCode)
 #endif
 		SystemParametersInfo(SPI_SETFOREGROUNDLOCKTIMEOUT, 0, (PVOID)g_OriginalTimeout, SPIF_SENDCHANGE);
 #ifdef _MSC_VER
-	#pragma warning( default : 4312 ) 
+	#pragma warning( default : 4312 )
 #endif
 */
 	// I know this isn't the preferred way to exit the program.  However, due to unusual
@@ -703,7 +703,7 @@ void Hotkey::TriggerJoyHotkeys(int aJoystickID, DWORD aButtonsNewlyDown)
 	{
 		Hotkey &hk = *shk[i]; // For performance and convenience.
 		// Fix for v1.0.34: If hotkey isn't enabled, or hotkeys are suspended and this one isn't
-		// exempt, don't fire it.  These checks are necessary only for joystick hotkeys because 
+		// exempt, don't fire it.  These checks are necessary only for joystick hotkeys because
 		// normal hotkeys are completely deactivated when turned off or suspended, but the joystick
 		// is still polled even when some joystick hotkeys are disabled.  UPDATE: In v1.0.42, Suspend
 		// is checked upon receipt of the message, not here upon sending.
@@ -1831,7 +1831,7 @@ ResultType Hotkey::TextToKey(char *aText, char *aHotkeyName, bool aIsModifier, H
 				else if (aThisHotkey)
 				{
 					// If it fails while aThisHotkey!=NULL, that should mean that this was called as
-					// a result of the Hotkey command rather than at loadtime.  This is because at 
+					// a result of the Hotkey command rather than at loadtime.  This is because at
 					// loadtime, the first call here (for validation, i.e. aThisHotkey==NULL) should have
 					// caught the error and converted the line into a non-hotkey (command), which in turn
 					// would make loadtime's second call to create the hotkey always succeed. Also, it's
@@ -2268,7 +2268,7 @@ void Hotstring::DoReplace(LPARAM alParam)
 		if (case_conform_mode == CASE_CONFORM_ALL_CAPS)
 			CharUpper(start_of_replacement);
 		else if (case_conform_mode == CASE_CONFORM_FIRST_CAP)
-			*start_of_replacement = (char)ltoupper(*start_of_replacement);
+			*start_of_replacement = (char)toupper(*start_of_replacement); // naveen removed ltolower, now not locale independent
 	}
 
 	if (*mReplacement && !mOmitEndChar) // The ending character (if present) needs to be sent too.

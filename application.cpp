@@ -19,7 +19,7 @@ GNU General Public License for more details.
 #include "globaldata.h" // for access to g_clip, the "g" global struct, etc.
 #include "window.h" // for serveral MsgBox and window functions
 #include "util.h" // for strlcpy()
-#include "resources\resource.h"  // For ID_TRAY_OPEN.
+#include "resources/resource.h"  // For ID_TRAY_OPEN.
 
 
 bool MsgSleep(int aSleepDuration, MessageMode aMode)
