@@ -19,9 +19,18 @@ GdiplusEnums.h 538: Comment out EmfPlusRecordType (/*(EmfPlusRecordType*/((n)...
 GdiplusImaging.h 156: PixelFormat PixelFormat; -> INT PixelFormat;
 GDiplusHeaders.h 653: friend Graphics; -> friend class Graphics;
 
-
+/usr/i586-mingw32msvc/lib/
 C:\CodeBlocks\MinGW\lib
 C:\CodeBlocks\MinGW\lib\libcomctl32.a;C:\CodeBlocks\MinGW\lib\libwinmm.a;C:\CodeBlocks\MinGW\lib\libgdi32.a;C:\CodeBlocks\MinGW\lib\libole32.a;C:\CodeBlocks\MinGW\lib\liboleaut32.a;C:\CodeBlocks\MinGW\lib\libcomdlg32.a;C:\CodeBlocks\MinGW\lib\libversion.a;C:\CodeBlocks\MinGW\lib\libws2_32.a;C:\CodeBlocks\MinGW\lib\libuuid.a
+
+/usr/i586-mingw32msvc/lib/libcomctl32.a;/usr/i586-mingw32msvc/lib/libwinmm.a;/usr/i586-mingw32msvc/lib/libgdi32.a;/usr/i586-mingw32msvc/lib/libole32.a;/usr/i586-mingw32msvc/lib/liboleaut32.a;/usr/i586-mingw32msvc/lib/libcomdlg32.a;/usr/i586-mingw32msvc/lib/libversion.a;/usr/i586-mingw32msvc/lib/libws2_32.a;/usr/i586-mingw32msvc/lib/libuuid.a
+
+/usr/lib/wine/libcomctl32.dll.so;/usr/lib/wine/libwinmm.dll.so;/usr/lib/wine/libgdi32.dll.so;/usr/lib/wine/libole32.dll.so;/usr/lib/wine/liboleaut32.dll.so;/usr/lib/wine/libcomdlg32.dll.so;/usr/lib/wine/libversion.dll.so;/usr/lib/wine/libws2_32.dll.so;/usr/lib/wine/libuuid.dll.so
+
+
+
+
+
 
 and this one is in YOUR_PROJECT_DIRECTORY\lib
 GdiPlus.lib
