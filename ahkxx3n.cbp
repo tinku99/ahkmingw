@@ -4,37 +4,52 @@
 	<Project>
 		<Option title="ahkxx3n" />
 		<Option pch_mode="2" />
-		<Option compiler="mingw" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/ahkxx3n" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
+				<Option output="bin\Debug\ahkxx3n" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
 				<Option type="1" />
-				<Option compiler="mingw" />
+				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
+					<Add library="GdiPlus.lib" />
+					<Add directory="lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/ahkxx3n" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option output="bin\Release\ahkxx3n" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
 				<Option type="1" />
-				<Option compiler="mingw" />
+				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="/usr/i586-mingw32msvc/lib/libcomctl32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libwinmm.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libgdi32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libole32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/liboleaut32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libcomdlg32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libversion.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libws2_32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libuuid.a" />
-					<Add library="lib/GdiPlus.lib" />
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
+					<Add library="GdiPlus" />
+					<Add directory="C:\user\CodeBlocks\MinGW\lib" />
+					<Add directory="lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,38 +57,38 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="AutoHotkey.cpp" />
-		<Unit filename="MSC_HEADERS/GdiPlus.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusBase.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusBitmap.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusBrush.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusCachedBitmap.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusColor.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusColorMatrix.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusEnums.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusFlat.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusFont.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusFontCollection.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusFontFamily.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusGpStubs.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusGraphics.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusHeaders.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusImageCodec.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusImaging.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusInit.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusLineCaps.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusMatrix.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusMem.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusMetaFile.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusMetaHeader.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusPath.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusPen.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusPixelFormats.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusRegion.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusStringFormat.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusTypes.h" />
-		<Unit filename="MSC_HEADERS/GdiPlusimageAttributes.h" />
-		<Unit filename="MSC_HEADERS/PopPack.h" />
-		<Unit filename="MSC_HEADERS/gdipluseffects.h" />
+		<Unit filename="MSC_HEADERS\GdiPlus.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusBase.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusBitmap.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusBrush.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusCachedBitmap.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusColor.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusColorMatrix.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusEnums.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusFlat.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusFont.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusFontCollection.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusFontFamily.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusGpStubs.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusGraphics.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusHeaders.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusImageCodec.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusImaging.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusInit.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusLineCaps.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusMatrix.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusMem.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusMetaFile.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusMetaHeader.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusPath.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusPen.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusPixelFormats.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusRegion.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusStringFormat.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusTypes.h" />
+		<Unit filename="MSC_HEADERS\GdiPlusimageAttributes.h" />
+		<Unit filename="MSC_HEADERS\PopPack.h" />
+		<Unit filename="MSC_HEADERS\gdipluseffects.h" />
 		<Unit filename="SimpleHeap.cpp" />
 		<Unit filename="SimpleHeap.h" />
 		<Unit filename="WinGroup.cpp" />
@@ -91,82 +106,82 @@
 		<Unit filename="hotkey.h" />
 		<Unit filename="keyboard_mouse.cpp" />
 		<Unit filename="keyboard_mouse.h" />
-		<Unit filename="lib/exearc_read.h" />
-		<Unit filename="lib_pcre/pcre/config.h" />
-		<Unit filename="lib_pcre/pcre/pcre.h" />
-		<Unit filename="lib_pcre/pcre/pcre_chartables.c">
+		<Unit filename="lib\exearc_read.h" />
+		<Unit filename="lib_pcre\pcre\config.h" />
+		<Unit filename="lib_pcre\pcre\pcre.h" />
+		<Unit filename="lib_pcre\pcre\pcre_chartables.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_compile.c">
+		<Unit filename="lib_pcre\pcre\pcre_compile.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_config.c">
+		<Unit filename="lib_pcre\pcre\pcre_config.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_dfa_exec.c">
+		<Unit filename="lib_pcre\pcre\pcre_dfa_exec.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_exec.c">
+		<Unit filename="lib_pcre\pcre\pcre_exec.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_fullinfo.c">
+		<Unit filename="lib_pcre\pcre\pcre_fullinfo.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_get.c">
+		<Unit filename="lib_pcre\pcre\pcre_get.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_globals.c">
+		<Unit filename="lib_pcre\pcre\pcre_globals.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_info.c">
+		<Unit filename="lib_pcre\pcre\pcre_info.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_internal.h" />
-		<Unit filename="lib_pcre/pcre/pcre_maketables.c">
+		<Unit filename="lib_pcre\pcre\pcre_internal.h" />
+		<Unit filename="lib_pcre\pcre\pcre_maketables.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_newline.c">
+		<Unit filename="lib_pcre\pcre\pcre_newline.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_ord2utf8.c">
+		<Unit filename="lib_pcre\pcre\pcre_ord2utf8.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_refcount.c">
+		<Unit filename="lib_pcre\pcre\pcre_refcount.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_study.c">
+		<Unit filename="lib_pcre\pcre\pcre_study.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_tables.c">
+		<Unit filename="lib_pcre\pcre\pcre_tables.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_try_flipped.c">
+		<Unit filename="lib_pcre\pcre\pcre_try_flipped.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_ucp_searchfuncs.c">
+		<Unit filename="lib_pcre\pcre\pcre_ucp_searchfuncs.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_valid_utf8.c">
+		<Unit filename="lib_pcre\pcre\pcre_valid_utf8.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_version.c">
+		<Unit filename="lib_pcre\pcre\pcre_version.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/pcre_xclass.c">
+		<Unit filename="lib_pcre\pcre\pcre_xclass.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="lib_pcre/pcre/ucp.h" />
-		<Unit filename="lib_pcre/pcre/ucpinternal.h" />
-		<Unit filename="lib_pcre/pcre/ucptable.h" />
+		<Unit filename="lib_pcre\pcre\ucp.h" />
+		<Unit filename="lib_pcre\pcre\ucpinternal.h" />
+		<Unit filename="lib_pcre\pcre\ucptable.h" />
 		<Unit filename="mt19937ar-cok.cpp" />
 		<Unit filename="mt19937ar-cok.h" />
 		<Unit filename="os_version.cpp" />
 		<Unit filename="os_version.h" />
 		<Unit filename="qmath.h" />
-		<Unit filename="resources/AutoHotkey.rc">
+		<Unit filename="resources\AutoHotkey.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="resources/resource.h" />
+		<Unit filename="resources\resource.h" />
 		<Unit filename="script.cpp" />
 		<Unit filename="script.h" />
 		<Unit filename="script2.cpp" />
