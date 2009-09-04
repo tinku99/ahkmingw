@@ -54,3 +54,8 @@ removed mscvr70 dependency: libmsvcr70.a
 in util.h, added
 #define _strtoi64 strtoll // ahkgcc to remove msvcrt dep
 #define _strtoui64 strtoull  // ahkgcc to remove msvcrt dep
+
+
+
+
+libcomctl32.a;libwinmm.a;libgdi32.a;libole32.a;liboleaut32.a;libcomdlg32.a;libversion.a;libws2_32.a;libuuid.a;GdiPlus

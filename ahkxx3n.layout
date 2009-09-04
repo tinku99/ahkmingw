@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="defines.h" open="1" top="1" tabpos="6">
+	<File name="defines.h" open="1" top="0" tabpos="6">
 		<Cursor position="1136" topLine="28" />
 	</File>
 	<File name="hook.h" open="1" top="0" tabpos="9">
-		<Cursor position="12914" topLine="197" />
+		<Cursor position="12914" topLine="186" />
 	</File>
 	<File name="hotkey.cpp" open="1" top="0" tabpos="10">
 		<Cursor position="119660" topLine="2261" />
 	</File>
 	<File name="os_version.h" open="1" top="0" tabpos="5">
-		<Cursor position="0" topLine="15" />
+		<Cursor position="0" topLine="3" />
 	</File>
-	<File name="resources/AutoHotkey.rc" open="1" top="0" tabpos="14">
+	<File name="resources\AutoHotkey.rc" open="1" top="0" tabpos="12">
 		<Cursor position="3166" topLine="106" />
 	</File>
 	<File name="script.h" open="1" top="0" tabpos="1">
@@ -26,15 +26,15 @@
 		<Cursor position="181734" topLine="2734" />
 	</File>
 	<File name="stdafx.h" open="1" top="0" tabpos="2">
-		<Cursor position="3741" topLine="83" />
+		<Cursor position="3741" topLine="15" />
 	</File>
-	<File name="util.cpp" open="1" top="0" tabpos="13">
+	<File name="util.cpp" open="1" top="0" tabpos="11">
 		<Cursor position="25050" topLine="558" />
 	</File>
 	<File name="util.h" open="1" top="0" tabpos="3">
 		<Cursor position="15129" topLine="336" />
 	</File>
 	<File name="var.h" open="1" top="0" tabpos="8">
-		<Cursor position="17678" topLine="345" />
+		<Cursor position="17678" topLine="277" />
 	</File>
 </CodeBlocks_layout_file>
