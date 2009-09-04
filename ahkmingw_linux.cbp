@@ -4,53 +4,37 @@
 	<Project>
 		<Option title="ahkxx3n" />
 		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option compiler="mingw" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/ahkxx3n" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="mingw" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add library="libcomctl32.a" />
-					<Add library="libwinmm.a" />
-					<Add library="libgdi32.a" />
-					<Add library="libole32.a" />
-					<Add library="liboleaut32.a" />
-					<Add library="libcomdlg32.a" />
-					<Add library="libversion.a" />
-					<Add library="libws2_32.a" />
-					<Add library="libuuid.a" />
-					<Add library="GdiPlus.lib" />
-					<Add directory="lib" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/ahkxx3n" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="mingw" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="/usr/i586-mingw32msvc/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="libcomctl32.a" />
-					<Add library="libwinmm.a" />
-					<Add library="libgdi32.a" />
-					<Add library="libole32.a" />
-					<Add library="liboleaut32.a" />
-					<Add library="libcomdlg32.a" />
-					<Add library="libversion.a" />
-					<Add library="libws2_32.a" />
-					<Add library="libuuid.a" />
-					<Add library="GdiPlus" />
-					<Add directory="lib" />
-					<Add directory="/usr/i586-mingw32msvc/lib" />
+					<Add library="/usr/i586-mingw32msvc/lib/libcomctl32.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libwinmm.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libgdi32.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libole32.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/liboleaut32.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libcomdlg32.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libversion.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libws2_32.a" />
+					<Add library="/usr/i586-mingw32msvc/lib/libuuid.a" />
+					<Add library="lib/GdiPlus.lib" />
 				</Linker>
 			</Target>
 		</Build>
