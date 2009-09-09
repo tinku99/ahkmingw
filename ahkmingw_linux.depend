@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1251585309 source:/home/naveen/source/ahkmingw/AutoHotkey.cpp
+1252041773 source:/home/naveen/source/ahkmingw/AutoHotkey.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"
 	"window.h"
 
-1251585311 /home/naveen/source/ahkmingw/stdafx.h
+1252041773 /home/naveen/source/ahkmingw/stdafx.h
 	<stdio.h>
 	<stdlib.h>
 	<stdarg.h>
@@ -37,7 +37,7 @@
 1251585311 /home/naveen/source/ahkmingw/keyboard_mouse.h
 	"defines.h"
 
-1251614153 /home/naveen/source/ahkmingw/defines.h
+1252041773 /home/naveen/source/ahkmingw/defines.h
 	"stdafx.h"
 	<pshpack1.h>
 	<pshpack4.h>
@@ -67,7 +67,7 @@
 	"stdafx.h"
 	"defines.h"
 
-1251608814 /home/naveen/source/ahkmingw/util.h
+1252041773 /home/naveen/source/ahkmingw/util.h
 	"stdafx.h"
 	"defines.h"
 
@@ -132,7 +132,7 @@
 	"window.h"
 	"application.h"
 
-1251608938 source:/home/naveen/source/ahkmingw/hotkey.cpp
+1252277527 source:/home/naveen/source/ahkmingw/hotkey.cpp
 	"stdafx.h"
 	"hotkey.h"
 	"globaldata.h"
@@ -307,7 +307,7 @@
 	"window.h"
 	"qmath.h"
 
-1251585310 source:/home/naveen/source/ahkmingw/script_menu.cpp
+1252277527 source:/home/naveen/source/ahkmingw/script_menu.cpp
 	"stdafx.h"
 	"script.h"
 	"globaldata.h"
@@ -431,7 +431,7 @@
 	"var.h"
 	"globaldata.h"
 
-1251585310 source:/home/naveen/source/ahkmingw/window.cpp
+1252277527 source:/home/naveen/source/ahkmingw/window.cpp
 	"stdafx.h"
 	"window.h"
 	"util.h"
@@ -691,4 +691,18 @@
 	<_mingw.h>
 
 1246350751 /usr/i586-mingw32msvc/include/pshpack8.h
+
+1252041773 source:/home/naveen/source/ahkmingw/script2.cpp
+	"stdafx.h"
+	<olectl.h>
+	<winioctl.h>
+	"qmath.h"
+	"mt19937ar-cok.h"
+	"script.h"
+	"window.h"
+	"application.h"
+	"resources/resource.h"
+	"lib_pcre/pcre/pcre.h"
+	<pshpack1.h>
+	<pshpack4.h>
 

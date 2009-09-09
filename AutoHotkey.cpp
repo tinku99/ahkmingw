@@ -68,7 +68,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	// scripts because running a script via AutoHotkey.exe should avoid treating anything after the
 	// filename as switches. This flaw probably occurred because when this part of the program was designed,
 	// there was no plan to have compiled scripts.
-	// 
+	//
 	// Examine command line args.  Rules:
 	// Any special flags (e.g. /force and /restart) must appear prior to the script filespec.
 	// The script filespec (if present) must be the first non-backslash arg.
@@ -145,7 +145,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 // Set up the basics of the script:
 #ifdef AUTOHOTKEYSC
-	if (g_script.Init("", restart_mode) != OK) 
+	if (g_script.Init("", restart_mode) != OK)
 #else
 	if (g_script.Init(script_filespec, restart_mode) != OK)  // Set up the basics of the script, using the above.
 #endif
@@ -314,6 +314,12 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	g.ThreadIsCritical = false;            // v1.0.38.04: Prevent the idle thread from being seen as uninterruptible.
 	g.AllowTimers = true;                  // v1.0.40.01: Similar to above.
 	g.AllowThreadToBeInterrupted = true;   // This is the primary line, the one above is not strictly necessary (just for maintainability).
+    HKL aKeybdLayout = GetKeyboardLayout(0);
+    MsgBox((unsigned int)aKeybdLayout);
+     aKeybdLayout = GetKeyboardLayout(g_MainThreadID);
+    MsgBox((unsigned int)aKeybdLayout);
+    aKeybdLayout = GetKeyboardLayout(g_HookThreadID);
+    MsgBox((unsigned int)aKeybdLayout);
 
 	// Call it in this special mode to kick off the main event loop.
 	// Be sure to pass something >0 for the first param or it will
