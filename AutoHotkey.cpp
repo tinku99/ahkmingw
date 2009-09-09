@@ -314,12 +314,6 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	g.ThreadIsCritical = false;            // v1.0.38.04: Prevent the idle thread from being seen as uninterruptible.
 	g.AllowTimers = true;                  // v1.0.40.01: Similar to above.
 	g.AllowThreadToBeInterrupted = true;   // This is the primary line, the one above is not strictly necessary (just for maintainability).
-    HKL aKeybdLayout = GetKeyboardLayout(0);
-    MsgBox((unsigned int)aKeybdLayout);
-     aKeybdLayout = GetKeyboardLayout(g_MainThreadID);
-    MsgBox((unsigned int)aKeybdLayout);
-    aKeybdLayout = GetKeyboardLayout(g_HookThreadID);
-    MsgBox((unsigned int)aKeybdLayout);
 
 	// Call it in this special mode to kick off the main event loop.
 	// Be sure to pass something >0 for the first param or it will
