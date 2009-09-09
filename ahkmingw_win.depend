@@ -1,9 +1,5 @@
 # depslib dependency file v1.0
-1252477430 source:l:\source\ahkmingw\autohotkey.cpp
-	"stdafx.h"
-	"globaldata.h"
-	"application.h"
-	"window.h"
+1252483436 source:l:\source\ahkmingw\autohotkey.cpp
 
 1252041773 l:\source\ahkmingw\stdafx.h
 	<stdio.h>
@@ -80,7 +76,7 @@
 
 1251585311 l:\source\ahkmingw\lib\exearc_read.h
 
-1252480326 l:\source\ahkmingw\exports.h
+1252485585 l:\source\ahkmingw\exports.h
 
 1251585311 l:\source\ahkmingw\os_version.h
 	<windows.h>
@@ -93,7 +89,7 @@
 	"globaldata.h"
 	"util.h"
 
-1252477588 source:l:\source\ahkmingw\autohotkeyx.cpp
+1252483699 source:l:\source\ahkmingw\autohotkeyx.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"
@@ -128,14 +124,14 @@
 	"application.h"
 	"util.h"
 
-1252478144 source:l:\source\ahkmingw\exports.cpp
+1252483635 source:l:\source\ahkmingw\exports.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"
 	"exports.h"
 	"script.h"
 
-1251585309 source:l:\source\ahkmingw\globaldata.cpp
+1252480327 source:l:\source\ahkmingw\globaldata.cpp
 	"stdafx.h"
 	"hook.h"
 	"clipboard.h"
@@ -306,7 +302,7 @@
 	"application.h"
 	"exports.h"
 
-1252041773 source:l:\source\ahkmingw\script2.cpp
+1252480977 source:l:\source\ahkmingw\script2.cpp
 	"stdafx.h"
 	<olectl.h>
 	<winioctl.h>
