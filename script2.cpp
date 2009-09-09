@@ -1686,7 +1686,7 @@ ResultType Line::PerformShowWindow(ActionTypeType aActionType, char *aTitle, cha
 		// it probably does since there's absolutely no mention to the contrary
 		// anywhere on MS's site or on the web.  But clearly, if it does work, it
 		// does so only because Async() doesn't really post the message to the thread's
-		// queue, instead opting for more aggresive measures.  Thus, it seems best
+		// queue, instead opting for more aggresive s.  Thus, it seems best
 		// to do it this way to have maximum confidence in it:
 		//if (nCmdShow == SW_FORCEMINIMIZE) // Safer not to use ShowWindowAsync() in this case.
 			ShowWindow(target_window, nCmdShow);
@@ -5237,6 +5237,18 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lPar
 		// detects a thread-starting event on the queue.  However, Peek might be a high overhead call in some cases,
 		// such as when/if it yields our timeslice upon returning FALSE (uncertain/unlikely, but in any case
 		// it might do more harm than good).
+		return 0;
+
+	case AHK_EXECUTE:   // sent from dll host # Naveen N9
+		 g_script.mTempLine = (Line *)wParam ;
+		 g_script.mTempLine->ExecUntil(UNTIL_RETURN);
+		 return 0;
+	case AHK_EXECUTE_LABEL:
+		g_script.mTempLabel = (Label *)wParam ;
+		g_script.mTempLabel->Execute();
+		return 0;
+	case AHK_EXECUTE_FUNCTION:
+		callFunc(wParam, lParam);
 		return 0;
 
 	case AHK_RETURN_PID:

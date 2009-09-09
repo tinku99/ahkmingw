@@ -512,11 +512,17 @@ inline char *UTOA(unsigned long value, char *buf)
 // seems best to use the same approach to avoid calling ToAsciiEx() more than once in cases where a
 // script has hotstrings and also uses the Input command. Calling ToAsciiEx() twice in such a case would
 // be likely to aggravate its side effects with dead keys as described at length in the hook/Input code).
+/*
 #define Get_active_window_keybd_layout \
 	HWND active_window;\
 	HKL active_window_keybd_layout = GetKeyboardLayout((active_window = GetForegroundWindow())\
 		? GetWindowThreadProcessId(active_window, NULL) : 0); // When no foreground window, the script's own layout seems like the safest default.
 
+*/
+#define Get_active_window_keybd_layout \
+	HWND active_window = GetForegroundWindow();\
+	HKL active_window_keybd_layout = g_HKL;
+// above added in ahkx
 #define DATE_FORMAT_LENGTH 14 // "YYYYMMDDHHMISS"
 #define IS_LEAP_YEAR(year) ((year) % 4 == 0 && ((year) % 100 != 0 || (year) % 400 == 0))
 

@@ -2328,6 +2328,10 @@ public:  // Naveen made bunch of stuff public
 	UINT mLineCount;                  // The number of lines.
 	Label *mFirstLabel, *mLastLabel;  // The first and last labels in the linked list.
 	Func *mFirstFunc, *mLastFunc;     // The first and last functions in the linked list.
+	Line *mTempLine; // for use with dll Execute # Naveen N9
+	Label *mTempLabel; // for use with dll Execute # Naveen N9
+	Func *mTempFunc; // for use with dll Execute # Naveen N9
+
 	Var **mVar, **mLazyVar; // Array of pointers-to-variable, allocated upon first use and later expanded as needed.
 	int mVarCount, mVarCountMax, mLazyVarCount; // Count of items in the above array as well as the maximum capacity.
 	WinGroup *mFirstGroup, *mLastGroup;  // The first and last variables in the linked list.

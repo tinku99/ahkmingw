@@ -761,3 +761,4 @@ HWND g_HistoryHwndPrev = NULL;
 
 // Also hook related:
 DWORD g_TimeLastInputPhysical = GetTickCount();
+HKL g_HKL = GetKeyboardLayout(0); // ahkx

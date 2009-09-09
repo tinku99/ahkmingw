@@ -20,13 +20,13 @@
 	<ctype.h>
 	<olectl.h>
 
-1251585311 l:\source\ahkmingw\globaldata.h
+1252480327 l:\source\ahkmingw\globaldata.h
 	"hook.h"
 	"clipboard.h"
 	"script.h"
 	"os_version.h"
 
-1251608817 l:\source\ahkmingw\hook.h
+1252480977 l:\source\ahkmingw\hook.h
 	"stdafx.h"
 	"hotkey.h"
 
@@ -34,7 +34,7 @@
 	"keyboard_mouse.h"
 	"script.h"
 
-1251585311 l:\source\ahkmingw\keyboard_mouse.h
+1252480327 l:\source\ahkmingw\keyboard_mouse.h
 	"defines.h"
 
 1252041773 l:\source\ahkmingw\defines.h
@@ -42,7 +42,7 @@
 	<pshpack1.h>
 	<pshpack4.h>
 
-1252477430 l:\source\ahkmingw\script.h
+1252480977 l:\source\ahkmingw\script.h
 	"stdafx.h"
 	"defines.h"
 	"SimpleHeap.h"
@@ -68,7 +68,7 @@
 	"stdafx.h"
 	"defines.h"
 
-1252041773 l:\source\ahkmingw\util.h
+1252480327 l:\source\ahkmingw\util.h
 	"stdafx.h"
 	"defines.h"
 
@@ -80,7 +80,7 @@
 
 1251585311 l:\source\ahkmingw\lib\exearc_read.h
 
-1252475065 l:\source\ahkmingw\exports.h
+1252480326 l:\source\ahkmingw\exports.h
 
 1251585311 l:\source\ahkmingw\os_version.h
 	<windows.h>

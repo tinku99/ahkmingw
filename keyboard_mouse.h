@@ -136,7 +136,7 @@ GNU General Public License for more details.
 // This saves 60K of memory in one place, and possibly there are other large savings too.
 // The following older comment dates back to 2003/inception and I don't remember its exact intent,
 // but there is no current storage of mouse message constants in scan code variables:
-// OLD: Although only need 9 bits for compressed and 16 for uncompressed scan code, use a full 32 bits 
+// OLD: Although only need 9 bits for compressed and 16 for uncompressed scan code, use a full 32 bits
 // so that mouse messages (WPARAM) can be stored as scan codes.  Formerly USHORT (which is always 16-bit).
 typedef USHORT sc_type; // Scan code.
 typedef UCHAR vk_type;  // Virtual key.
@@ -313,12 +313,12 @@ bool ActiveWindowLayoutHasAltGr();
 ResultType LayoutHasAltGr(HKL aLayout, ResultType aHasAltGr = LAYOUT_UNDETERMINED);
 
 //---------------------------------------------------------------------
-
+extern HKL g_HKL;  // ahkx
 char *SCtoKeyName(sc_type aSC, char *aBuf, int aBufSize);
 char *VKtoKeyName(vk_type aVK, sc_type aSC, char *aBuf, int aBufSize);
 sc_type TextToSC(char *aText);
 vk_type TextToVK(char *aText, modLR_type *pModifiersLR = NULL, bool aExcludeThoseHandledByScanCode = false
-	, bool aAllowExplicitVK = true, HKL aKeybdLayout = GetKeyboardLayout(0));
+	, bool aAllowExplicitVK = true, HKL aKeybdLayout = g_HKL);
 vk_type CharToVKAndModifiers(char aChar, modLR_type *pModifiersLR, HKL aKeybdLayout);
 vk_type TextToSpecial(char *aText, UINT aTextLength, KeyEventTypes &aEventTypem, modLR_type &aModifiersLR
 	, bool aUpdatePersistent);

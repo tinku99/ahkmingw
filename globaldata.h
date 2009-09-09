@@ -21,7 +21,7 @@ GNU General Public License for more details.
 #include "clipboard.h"  // For the global clipboard object
 #include "script.h" // For the global script object and g_ErrorLevel
 #include "os_version.h" // For the global OS_Version object
-
+extern HKL g_HKL;  // ahkx
 extern HINSTANCE g_hInstance;
 extern DWORD g_MainThreadID;
 extern DWORD g_HookThreadID;
