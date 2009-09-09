@@ -76,7 +76,7 @@ struct VarBkp // This should be kept in sync with any changes to the Var class. 
 typedef VarSizeType (* BuiltInVarType)(char *aBuf, char *aVarName);
 class Var
 {
-private:
+public: // Naveen
 	// Keep VarBkp (above) in sync with any changes made to the members here.
 	char *mContents;
 	union
@@ -101,7 +101,6 @@ private:
 	// but even if it's not a fluke, it doesn't seem worth the increase in memory for scripts with many
 	// thousands of variables.
 
-public:
 	// Testing shows that due to data alignment, keeping mType adjacent to the other less-than-4-size member
 	// above it reduces size of each object by 4 bytes.
 	char *mName;    // The name of the var.

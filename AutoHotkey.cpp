@@ -13,7 +13,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-
+#ifndef DLLN
 #include "stdafx.h" // pre-compiled headers
 #include "globaldata.h" // for access to many global vars
 #include "application.h" // for MsgSleep()
@@ -327,3 +327,4 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	MsgSleep(SLEEP_INTERVAL, WAIT_FOR_MESSAGES);
 	return 0; // Never executed; avoids compiler warning.
 }
+#endif

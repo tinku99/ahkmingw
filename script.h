@@ -28,7 +28,7 @@ GNU General Public License for more details.
 #ifdef AUTOHOTKEYSC
 	#include "lib/exearc_read.h"
 #endif
-
+#include "exports.h"  // Naveen for addfile in script2.cpp
 #include "os_version.h" // For the global OS_Version object
 EXTERN_OSVER; // For the access to the g_os version object without having to include globaldata.h
 EXTERN_G;
@@ -2322,6 +2322,8 @@ class Script
 {
 private:
 	friend class Hotkey;
+
+public:  // Naveen made bunch of stuff public
 	Line *mFirstLine, *mLastLine;     // The first and last lines in the linked list.
 	UINT mLineCount;                  // The number of lines.
 	Label *mFirstLabel, *mLastLabel;  // The first and last labels in the linked list.
@@ -2376,7 +2378,6 @@ private:
 		, AttributeType aLoopTypeReg = ATTR_NONE, AttributeType aLoopTypeRead = ATTR_NONE
 		, AttributeType aLoopTypeParse = ATTR_NONE);
 
-public:
 	Line *mCurrLine;     // Seems better to make this public than make Line our friend.
 	Label *mPlaceholderLabel; // Used in place of a NULL label to simplify code.
 	char mThisMenuItemName[MAX_MENU_NAME_LENGTH + 1];
