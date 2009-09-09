@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
-	<File name="defines.h" open="1" top="0" tabpos="6">
-		<Cursor position="1136" topLine="28" />
+	<ActiveTarget name="xDebug" />
+	<File name="AutoHotkey.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="hook.h" open="1" top="0" tabpos="9">
-		<Cursor position="12914" topLine="186" />
+	<File name="application.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="112923" topLine="1777" />
 	</File>
-	<File name="hotkey.cpp" open="1" top="0" tabpos="10">
-		<Cursor position="119660" topLine="2261" />
+	<File name="application.h" open="0" top="0" tabpos="0">
+		<Cursor position="6765" topLine="116" />
 	</File>
-	<File name="os_version.h" open="1" top="0" tabpos="5">
-		<Cursor position="0" topLine="3" />
+	<File name="globaldata.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="42026" topLine="740" />
 	</File>
-	<File name="resources/AutoHotkey.rc" open="1" top="0" tabpos="12">
-		<Cursor position="3166" topLine="106" />
+	<File name="globaldata.h" open="0" top="0" tabpos="0">
+		<Cursor position="878" topLine="14" />
 	</File>
-	<File name="script.h" open="1" top="0" tabpos="1">
-		<Cursor position="60711" topLine="1179" />
+	<File name="hook.h" open="0" top="0" tabpos="0">
+		<Cursor position="2564" topLine="25" />
 	</File>
-	<File name="script2.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="203676" topLine="4412" />
+	<File name="keyboard_mouse.h" open="0" top="0" tabpos="0">
+		<Cursor position="15424" topLine="308" />
 	</File>
-	<File name="script_expression.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="181734" topLine="2734" />
+	<File name="script.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="349040" topLine="6908" />
 	</File>
-	<File name="stdafx.h" open="1" top="0" tabpos="2">
-		<Cursor position="2231" topLine="41" />
+	<File name="script.h" open="0" top="0" tabpos="0">
+		<Cursor position="136" topLine="0" />
 	</File>
-	<File name="util.cpp" open="1" top="0" tabpos="11">
-		<Cursor position="25050" topLine="558" />
+	<File name="script2.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="248717" topLine="5231" />
 	</File>
-	<File name="util.h" open="1" top="0" tabpos="3">
-		<Cursor position="15129" topLine="336" />
+	<File name="util.h" open="0" top="0" tabpos="0">
+		<Cursor position="24330" topLine="505" />
 	</File>
-	<File name="var.h" open="1" top="0" tabpos="8">
-		<Cursor position="17678" topLine="277" />
+	<File name="var.h" open="0" top="0" tabpos="0">
+		<Cursor position="4337" topLine="84" />
+	</File>
+	<File name="window.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="80229" topLine="1522" />
 	</File>
 </CodeBlocks_layout_file>

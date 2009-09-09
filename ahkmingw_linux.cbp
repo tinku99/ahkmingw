@@ -2,46 +2,138 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="ahkxx3n" />
+		<Option title="ahkx" />
 		<Option pch_mode="2" />
-		<Option compiler="mingw" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/ahkxx3n" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="mingw" />
+				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
+					<Add library="GdiPlus.lib" />
+					<Add directory="lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/ahkxx3n" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
-				<Option compiler="mingw" />
+				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="/usr/i586-mingw32msvc/lib/libcomctl32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libwinmm.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libgdi32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libole32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/liboleaut32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libcomdlg32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libversion.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libws2_32.a" />
-					<Add library="/usr/i586-mingw32msvc/lib/libuuid.a" />
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
+					<Add library="GdiPlus" />
+					<Add directory="C:/user/CodeBlocks/MinGW/lib" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+			<Target title="DebugDll">
+				<Option output="bin/ahkx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-g" />
+					<Add option="-DDLLN" />
+				</Compiler>
+				<Linker>
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
 					<Add library="lib/GdiPlus.lib" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+			<Target title="XDebugDll">
+				<Option output="bin/ahkx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="mingw" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-g" />
+					<Add option="-DDLLN" />
+				</Compiler>
+				<Linker>
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
+					<Add library="lib/GdiPlus.lib" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+			<Target title="xDebug">
+				<Option output="bin/ahkx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="mingw" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="libcomctl32.a" />
+					<Add library="libwinmm.a" />
+					<Add library="libgdi32.a" />
+					<Add library="libole32.a" />
+					<Add library="liboleaut32.a" />
+					<Add library="libcomdlg32.a" />
+					<Add library="libversion.a" />
+					<Add library="libws2_32.a" />
+					<Add library="libuuid.a" />
+					<Add library="lib/GdiPlus.lib" />
+					<Add directory="lib" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-w" />
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="AutoHotkey.cpp" />
+		<Unit filename="AutoHotkeyx.cpp" />
 		<Unit filename="MSC_HEADERS/GdiPlus.h" />
 		<Unit filename="MSC_HEADERS/GdiPlusBase.h" />
 		<Unit filename="MSC_HEADERS/GdiPlusBitmap.h" />
@@ -83,6 +175,8 @@
 		<Unit filename="clipboard.cpp" />
 		<Unit filename="clipboard.h" />
 		<Unit filename="defines.h" />
+		<Unit filename="exports.cpp" />
+		<Unit filename="exports.h" />
 		<Unit filename="globaldata.cpp" />
 		<Unit filename="globaldata.h" />
 		<Unit filename="hook.cpp" />
@@ -158,6 +252,7 @@
 		<Unit filename="lib_pcre/pcre/ucp.h" />
 		<Unit filename="lib_pcre/pcre/ucpinternal.h" />
 		<Unit filename="lib_pcre/pcre/ucptable.h" />
+		<Unit filename="lowlevel.cpp" />
 		<Unit filename="mt19937ar-cok.cpp" />
 		<Unit filename="mt19937ar-cok.h" />
 		<Unit filename="os_version.cpp" />

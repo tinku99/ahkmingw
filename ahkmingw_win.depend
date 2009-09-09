@@ -16,11 +16,15 @@
 	<ctype.h>
 	<olectl.h>
 
+1251585311 
+
 1252480327 l:\source\ahkmingw\globaldata.h
 	"hook.h"
 	"clipboard.h"
 	"script.h"
 	"os_version.h"
+
+1251585310 n.h"
 
 1252480977 l:\source\ahkmingw\hook.h
 	"stdafx.h"
@@ -33,10 +37,14 @@
 1252480327 l:\source\ahkmingw\keyboard_mouse.h
 	"defines.h"
 
+1252477430 "
+
 1252041773 l:\source\ahkmingw\defines.h
 	"stdafx.h"
 	<pshpack1.h>
 	<pshpack4.h>
+
+1252480977 h>
 
 1252480977 l:\source\ahkmingw\script.h
 	"stdafx.h"
@@ -60,6 +68,8 @@
 	"clipboard.h"
 	"util.h"
 
+1251585310 
+
 1251585311 l:\source\ahkmingw\clipboard.h
 	"stdafx.h"
 	"defines.h"
@@ -72,6 +82,8 @@
 	"defines.h"
 	"SimpleHeap.h"
 
+1251585310 p.h"
+
 1251585311 l:\source\ahkmingw\resources\resource.h
 
 1251585311 l:\source\ahkmingw\lib\exearc_read.h
@@ -80,6 +92,8 @@
 
 1251585311 l:\source\ahkmingw\os_version.h
 	<windows.h>
+
+1251585311 >
 
 1251585311 l:\source\ahkmingw\application.h
 	"defines.h"
@@ -102,12 +116,16 @@
 	"SimpleHeap.h"
 	"globaldata.h"
 
+1251585310 a.h"
+
 1251585309 source:l:\source\ahkmingw\wingroup.cpp
 	"stdafx.h"
 	"WinGroup.h"
 	"window.h"
 	"globaldata.h"
 	"application.h"
+
+1252277527 on.h"
 
 1251585309 source:l:\source\ahkmingw\application.cpp
 	"stdafx.h"
@@ -116,6 +134,8 @@
 	"window.h"
 	"util.h"
 	"resources/resource.h"
+
+1251585309 /resource.h"
 
 1251585309 source:l:\source\ahkmingw\clipboard.cpp
 	"stdafx.h"
@@ -164,6 +184,8 @@
 	"config.h"
 	"pcre_internal.h"
 
+1251583818 rnal.h"
+
 1251585311 l:\source\ahkmingw\lib_pcre\pcre\config.h
 
 1251585311 l:\source\ahkmingw\lib_pcre\pcre\pcre_internal.h
@@ -188,6 +210,8 @@
 	"config.h"
 	"pcre_internal.h"
 	"pcre_printint.src"
+
+1251583818 tint.src"
 
 1251583818 l:\source\ahkmingw\lib_pcre\pcre\pcre_printint.src
 
@@ -254,6 +278,8 @@
 	"ucpinternal.h"
 	"ucptable.h"
 
+1251583818 h"
+
 1251585311 l:\source\ahkmingw\lib_pcre\pcre\ucpinternal.h
 
 1251585311 l:\source\ahkmingw\lib_pcre\pcre\ucptable.h
@@ -280,6 +306,8 @@
 1251585310 source:l:\source\ahkmingw\mt19937ar-cok.cpp
 	"stdafx.h"
 	"mt19937ar-cok.h"
+
+1251585310 -cok.h"
 
 1251585311 l:\source\ahkmingw\mt19937ar-cok.h
 
@@ -468,6 +496,484 @@
 	"globaldata.h"
 
 1252277527 source:l:\source\ahkmingw\window.cpp
+	"stdafx.h"
+	"window.h"
+	"util.h"
+	"application.h"
+
+1252537421 source:/home/naveen/source/ahkmingw/AutoHotkey.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+
+1252041773 /home/naveen/source/ahkmingw/stdafx.h
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<limits.h>
+	<malloc.h>
+	<windows.h>
+	<commctrl.h>
+	<shellapi.h>
+	<shlobj.h>
+	<mmsystem.h>
+	<commdlg.h>
+	<ctype.h>
+	<olectl.h>
+
+1252537421 /home/naveen/source/ahkmingw/globaldata.h
+	"hook.h"
+	"clipboard.h"
+	"script.h"
+	"os_version.h"
+
+1252537421 /home/naveen/source/ahkmingw/hook.h
+	"stdafx.h"
+	"hotkey.h"
+
+1251585311 /home/naveen/source/ahkmingw/hotkey.h
+	"keyboard_mouse.h"
+	"script.h"
+
+1252537421 /home/naveen/source/ahkmingw/keyboard_mouse.h
+	"defines.h"
+
+1252041773 /home/naveen/source/ahkmingw/defines.h
+	"stdafx.h"
+	<pshpack1.h>
+	<pshpack4.h>
+
+1252537421 /home/naveen/source/ahkmingw/script.h
+	"stdafx.h"
+	"defines.h"
+	"SimpleHeap.h"
+	"keyboard_mouse.h"
+	"var.h"
+	"WinGroup.h"
+	"util.h"
+	"resources/resource.h"
+	"lib/exearc_read.h"
+	"exports.h"
+	"os_version.h"
+
+1251585310 /home/naveen/source/ahkmingw/SimpleHeap.h
+	"stdafx.h"
+
+1252537421 /home/naveen/source/ahkmingw/var.h
+	"defines.h"
+	"SimpleHeap.h"
+	"clipboard.h"
+	"util.h"
+
+1251585311 /home/naveen/source/ahkmingw/clipboard.h
+	"stdafx.h"
+	"defines.h"
+
+1252537421 /home/naveen/source/ahkmingw/util.h
+	"stdafx.h"
+	"defines.h"
+
+1251585310 /home/naveen/source/ahkmingw/WinGroup.h
+	"defines.h"
+	"SimpleHeap.h"
+
+1251585311 /home/naveen/source/ahkmingw/resources/resource.h
+
+1251585311 /home/naveen/source/ahkmingw/lib/exearc_read.h
+
+1252537421 /home/naveen/source/ahkmingw/exports.h
+
+1251585311 /home/naveen/source/ahkmingw/os_version.h
+	<windows.h>
+
+1251585311 /home/naveen/source/ahkmingw/application.h
+	"defines.h"
+
+1251585312 /home/naveen/source/ahkmingw/window.h
+	"defines.h"
+	"globaldata.h"
+	"util.h"
+
+1252537421 source:/home/naveen/source/ahkmingw/AutoHotkeyx.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+	"exports.h"
+	<process.h>
+
+1251585309 source:/home/naveen/source/ahkmingw/SimpleHeap.cpp
+	"stdafx.h"
+	"SimpleHeap.h"
+	"globaldata.h"
+
+1251585309 source:/home/naveen/source/ahkmingw/WinGroup.cpp
+	"stdafx.h"
+	"WinGroup.h"
+	"window.h"
+	"globaldata.h"
+	"application.h"
+
+1251585309 source:/home/naveen/source/ahkmingw/application.cpp
+	"stdafx.h"
+	"application.h"
+	"globaldata.h"
+	"window.h"
+	"util.h"
+	"resources/resource.h"
+
+1251585309 source:/home/naveen/source/ahkmingw/clipboard.cpp
+	"stdafx.h"
+	"clipboard.h"
+	"globaldata.h"
+	"application.h"
+	"util.h"
+
+1252537421 source:/home/naveen/source/ahkmingw/exports.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"exports.h"
+	"script.h"
+
+1252537421 source:/home/naveen/source/ahkmingw/globaldata.cpp
+	"stdafx.h"
+	"hook.h"
+	"clipboard.h"
+	"script.h"
+	"os_version.h"
+
+1251585310 source:/home/naveen/source/ahkmingw/hook.cpp
+	"stdafx.h"
+	"hook.h"
+	"globaldata.h"
+	"util.h"
+	"window.h"
+	"application.h"
+
+1252277527 source:/home/naveen/source/ahkmingw/hotkey.cpp
+	"stdafx.h"
+	"hotkey.h"
+	"globaldata.h"
+	"window.h"
+
+1251585310 source:/home/naveen/source/ahkmingw/keyboard_mouse.cpp
+	"stdafx.h"
+	"keyboard_mouse.h"
+	"globaldata.h"
+	"application.h"
+	"util.h"
+	"window.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_chartables.c
+	"config.h"
+	"pcre_internal.h"
+
+1251585311 /home/naveen/source/ahkmingw/lib_pcre/pcre/config.h
+
+1251585311 /home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_internal.h
+	<ctype.h>
+	<limits.h>
+	<setjmp.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"config.h"
+	"pcre.h"
+	"ucp.h"
+
+1251585311 /home/naveen/source/ahkmingw/lib_pcre/pcre/pcre.h
+	<stdlib.h>
+
+1251585311 /home/naveen/source/ahkmingw/lib_pcre/pcre/ucp.h
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_compile.c
+	"config.h"
+	"pcre_internal.h"
+	"pcre_printint.src"
+
+1251583818 /home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_printint.src
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_config.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_dfa_exec.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_exec.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_fullinfo.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_get.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_globals.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_info.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_maketables.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_newline.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_ord2utf8.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_refcount.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_study.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_tables.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_try_flipped.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_ucp_searchfuncs.c
+	"config.h"
+	"pcre_internal.h"
+	"ucp.h"
+	"ucpinternal.h"
+	"ucptable.h"
+
+1251585311 /home/naveen/source/ahkmingw/lib_pcre/pcre/ucpinternal.h
+
+1251585311 /home/naveen/source/ahkmingw/lib_pcre/pcre/ucptable.h
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_valid_utf8.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_version.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:/home/naveen/source/ahkmingw/lib_pcre/pcre/pcre_xclass.c
+	"config.h"
+	"pcre_internal.h"
+
+1252537421 source:/home/naveen/source/ahkmingw/lowlevel.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"exports.h"
+	"script.h"
+
+1251585310 source:/home/naveen/source/ahkmingw/mt19937ar-cok.cpp
+	"stdafx.h"
+	"mt19937ar-cok.h"
+
+1251585311 /home/naveen/source/ahkmingw/mt19937ar-cok.h
+
+1251585310 source:/home/naveen/source/ahkmingw/os_version.cpp
+	"stdafx.h"
+	<windows.h>
+	"os_version.h"
+
+1251585310 source:/home/naveen/source/ahkmingw/resources/AutoHotkey.rc
+	"resource.h"
+	<winresrc.h>
+
+1252537421 source:/home/naveen/source/ahkmingw/script.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"util.h"
+	"mt19937ar-cok.h"
+	"window.h"
+	"application.h"
+	"exports.h"
+
+1252537421 source:/home/naveen/source/ahkmingw/script2.cpp
+	"stdafx.h"
+	<olectl.h>
+	<winioctl.h>
+	"qmath.h"
+	"mt19937ar-cok.h"
+	"script.h"
+	"window.h"
+	"application.h"
+	"resources/resource.h"
+	"lib_pcre/pcre/pcre.h"
+	<pshpack1.h>
+	<pshpack4.h>
+
+1251585311 /home/naveen/source/ahkmingw/qmath.h
+	<math.h>
+
+1251585310 source:/home/naveen/source/ahkmingw/script_autoit.cpp
+	"stdafx.h"
+	<winsock.h>
+	<tlhelp32.h>
+	<wininet.h>
+	"script.h"
+	"globaldata.h"
+	"window.h"
+	"application.h"
+
+1251609483 source:/home/naveen/source/ahkmingw/script_expression.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"qmath.h"
+
+1251585310 source:/home/naveen/source/ahkmingw/script_gui.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+	"qmath.h"
+
+1252277527 source:/home/naveen/source/ahkmingw/script_menu.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+
+1251585310 source:/home/naveen/source/ahkmingw/script_registry.cpp
+	"stdafx.h"
+	"script.h"
+	"util.h"
+	"globaldata.h"
+
+1251585311 source:/home/naveen/source/ahkmingw/stdafx.cpp
+	"stdafx.h"
+
+1251609668 source:/home/naveen/source/ahkmingw/util.cpp
+	"stdafx.h"
+	<olectl.h>
+	"msc_headers/GdiPlus.h"
+	"util.h"
+	"globaldata.h"
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlus.h
+	<pshpack8.h>
+	"GdiPlusMem.h"
+	"GdiPlusBase.h"
+	"GdiPlusEnums.h"
+	"GdiplusTypes.h"
+	"GdiPlusInit.h"
+	"GdiPlusPixelFormats.h"
+	"GdiPlusColor.h"
+	"GdiPlusMetaHeader.h"
+	"GdiPlusImaging.h"
+	"GdiPlusColorMatrix.h"
+	"gdipluseffects.h"
+	"GdiPlusGpStubs.h"
+	"GdiplusHeaders.h"
+	"GdiplusFlat.h"
+	"GdiPlusimageAttributes.h"
+	"GdiPlusMatrix.h"
+	"GdiPlusBrush.h"
+	"GdiPlusPen.h"
+	"GdiPlusStringFormat.h"
+	"GdiPlusPath.h"
+	"GdiPlusLineCaps.h"
+	"GdiPlusGraphics.h"
+	"GdiPlusMetaFile.h"
+	"GdiPlusCachedBitmap.h"
+	"GdiPlusRegion.h"
+	"GdiPlusFontCollection.h"
+	"GdiplusFontFamily.h"
+	"GdiPlusFont.h"
+	"GdiPlusBitmap.h"
+	"GdiPlusImageCodec.h"
+	<poppack.h>
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusMem.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusBase.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusEnums.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiplusTypes.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusInit.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusPixelFormats.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusColor.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusMetaHeader.h
+	<pshpack2.h>
+	<poppack.h>
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusImaging.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusColorMatrix.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/gdipluseffects.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusGpStubs.h
+
+1251609681 /home/naveen/source/ahkmingw/msc_headers/GdiplusHeaders.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiplusFlat.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusimageAttributes.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusMatrix.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusBrush.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusPen.h
+
+1251609749 /home/naveen/source/ahkmingw/msc_headers/GdiPlusStringFormat.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusPath.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusLineCaps.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusGraphics.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusMetaFile.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusCachedBitmap.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusRegion.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusFontCollection.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiplusFontFamily.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusFont.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusBitmap.h
+
+1251585311 /home/naveen/source/ahkmingw/msc_headers/GdiPlusImageCodec.h
+
+1251585310 source:/home/naveen/source/ahkmingw/var.cpp
+	"stdafx.h"
+	"var.h"
+	"globaldata.h"
+
+1252277527 source:/home/naveen/source/ahkmingw/window.cpp
 	"stdafx.h"
 	"window.h"
 	"util.h"
