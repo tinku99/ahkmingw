@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1252041773 source:/home/naveen/source/ahkmingw/AutoHotkey.cpp
+1252539185 source:/home/naveen/source/ahkmingw/AutoHotkey.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"
@@ -42,7 +42,7 @@
 	<pshpack1.h>
 	<pshpack4.h>
 
-1252537421 /home/naveen/source/ahkmingw/script.h
+1252882618 /home/naveen/source/ahkmingw/script.h
 	"stdafx.h"
 	"defines.h"
 	"SimpleHeap.h"
@@ -710,7 +710,7 @@
 
 1252537421 /home/naveen/source/ahkmingw/exports.h
 
-1252537421 source:/home/naveen/source/ahkmingw/exports.cpp
+1252882617 source:/home/naveen/source/ahkmingw/exports.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"
@@ -723,4 +723,12 @@
 	"application.h"
 	"exports.h"
 	"script.h"
+
+1252539185 source:/home/naveen/source/ahkmingw/AutoHotkeyx.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+	"exports.h"
+	<process.h>
 

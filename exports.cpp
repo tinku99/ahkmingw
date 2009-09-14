@@ -17,6 +17,12 @@ if (   !(var = g_script.FindOrAddVar(name, strlen(name)))   )
 			var->Assign(value);
 			return 0; // success
 }
+
+EXPORT int ximportfunc(ahkx_int_str func)
+{
+    g_script.xifwinactive = func ;
+    return 0;
+}
 EXPORT unsigned int ahkFindFunc(char *funcname)
 {
 return (unsigned int)g_script.FindFunc(funcname);
