@@ -495,6 +495,15 @@ HWND WinActive(global_struct &aSettings, char *aTitle, char *aText, char *aExclu
 // In addition, it must not change the value of anything in aSettings except when aUpdateLastUsed==true.
 {
 	HWND target_window;
+    if (g_script.xifwinactive)
+        {
+         int xwin = g_script.xifwinactive(aTitle);
+         if (xwin)
+         {
+             printf("found %s", aTitle); // ahkx N11
+            return (HWND)xwin;
+         }
+        }
 	if (USE_FOREGROUND_WINDOW(aTitle, aText, aExcludeTitle, aExcludeText))
 	{
 		// User asked us if the "active" window is active, which is true if it's not a

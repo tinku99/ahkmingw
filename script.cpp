@@ -9546,14 +9546,8 @@ ResultType Line::EvaluateCondition() // __forceinline on this reduces benchmarks
 		if_condition = !WinExist(g, FOUR_ARGS, false, true); // Seems best to update last-used even here.
 		break;
 	case ACT_IFWINACTIVE:
-        {
 		if_condition = (WinActive(g, FOUR_ARGS, true) != NULL);
-        if (!if_condition) // ahkx N11
-            if (g_script.xifwinactive)
-                if_condition = g_script.xifwinactive(ARG1);
-
 		break;
-        }
 	case ACT_IFWINNOTACTIVE:
 		if_condition = !WinActive(g, FOUR_ARGS, true);
 		break;
