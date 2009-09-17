@@ -2332,6 +2332,7 @@ public:  // Naveen made bunch of stuff public
 	Label *mTempLabel; // for use with dll Execute # Naveen N9
 	Func *mTempFunc; // for use with dll Execute # Naveen N9
     ahkx_int_str xifwinactive ; // ahkx N11
+    ahkx_int_str xwingetid ;
 	Var **mVar, **mLazyVar; // Array of pointers-to-variable, allocated upon first use and later expanded as needed.
 	int mVarCount, mVarCountMax, mLazyVarCount; // Count of items in the above array as well as the maximum capacity.
 	WinGroup *mFirstGroup, *mLastGroup;  // The first and last variables in the linked list.

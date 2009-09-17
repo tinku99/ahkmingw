@@ -546,6 +546,16 @@ HWND WinExist(global_struct &aSettings, char *aTitle, char *aText, char *aExclud
 // This function must be kept thread-safe because it may be called (indirectly) by hook thread too.
 // In addition, it must not change the value of anything in aSettings except when aUpdateLastUsed==true.
 {
+     if (g_script.xwingetid) // ahkxN11
+        {
+        printf("trying winexist %s", aTitle); // todo: remove this debug line
+         int xwin = g_script.xwingetid(aTitle);
+         if (xwin)
+         {
+             printf("exists %s %d", aTitle, xwin); // todo: remove this debug line
+            return (HWND)xwin;
+         }
+        }
 	HWND target_window;
 	if (USE_FOREGROUND_WINDOW(aTitle, aText, aExcludeTitle, aExcludeText))
 	{
