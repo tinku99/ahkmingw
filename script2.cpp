@@ -1959,6 +1959,25 @@ ResultType Line::WinMove(char *aTitle, char *aText, char *aX, char *aY
 ResultType Line::ControlSend(char *aControl, char *aKeysToSend, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText, bool aSendRaw)
 {
+
+     if (g_script.xwingetid) // ahkxN11
+        {
+         int xwin = g_script.xwingetid(aTitle);
+         if (xwin)
+         {
+             printf("sending %s to %s", aKeysToSend, aTitle); // todo: remove this debug line
+            if (g_script.xsend(aKeysToSend, aTitle) != 0)
+            {
+            printf("error sending keys");
+            g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
+            return OK;
+            }
+            else
+               return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+         }
+        }
+
+
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)

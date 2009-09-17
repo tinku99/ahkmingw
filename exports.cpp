@@ -18,10 +18,11 @@ if (   !(var = g_script.FindOrAddVar(name, strlen(name)))   )
 			return 0; // success
 }
 
-EXPORT int ximportfunc(ahkx_int_str func, ahkx_int_str func2)
+EXPORT int ximportfunc(ahkx_int_str func1, ahkx_int_str func2, ahkx_int_str_str func3)
 {
-    g_script.xifwinactive = func ;
+    g_script.xifwinactive = func1 ;
     g_script.xwingetid  = func2 ;
+    g_script.xsend = func3;
     return 0;
 }
 EXPORT unsigned int ahkFindFunc(char *funcname)

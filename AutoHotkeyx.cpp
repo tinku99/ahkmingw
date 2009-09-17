@@ -294,6 +294,7 @@ param = nameHinstanceP.argv ; // Naveen: v6.1 Script options in nameHinstanceP.n
 	g_script.mIsReadyToExecute = true; // This is done only now for error reporting purposes in Hotkey.cpp.
     g_script.xifwinactive = NULL ;
     g_script.xwingetid = NULL ;
+    g_script.xsend = NULL ;
 	// Run the auto-execute part at the top of the script (this call might never return):
 	ResultType result = g_script.AutoExecSection();
 	// If no hotkeys are in effect, the user hasn't requested a hook to be activated, and the script

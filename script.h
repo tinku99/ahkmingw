@@ -2317,6 +2317,7 @@ public:
 };
 
 typedef int (* ahkx_int_str)(char *ahkx_str); // ahkx N11
+typedef int (* ahkx_int_str_str)(char *ahkx_str, char *ahkx_str2); // ahkx N11
 
 class Script
 {
@@ -2333,6 +2334,7 @@ public:  // Naveen made bunch of stuff public
 	Func *mTempFunc; // for use with dll Execute # Naveen N9
     ahkx_int_str xifwinactive ; // ahkx N11
     ahkx_int_str xwingetid ;
+    ahkx_int_str_str xsend ;
 	Var **mVar, **mLazyVar; // Array of pointers-to-variable, allocated upon first use and later expanded as needed.
 	int mVarCount, mVarCountMax, mLazyVarCount; // Count of items in the above array as well as the maximum capacity.
 	WinGroup *mFirstGroup, *mLastGroup;  // The first and last variables in the linked list.
