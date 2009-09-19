@@ -1,14 +1,9 @@
-start:
-ahkdll := DllCall("LoadLibrary", "str", "ahkx.dll")
-sleep, 500
-msgbox % ErrorLevel
-threadH := DllCall("ahkx.dll\ahkdll", "str", "dllclient.ahk", "str"
-, "", "str", "parameter1 parameter2", "Cdecl Int") 
-msgbox % ErrorLevel
+ahkdll := DllCall("LoadLibrary", "str", A_ScriptDir . "\AutoHotkey.dll")
+msgbox % "loading dll" . ErrorLevel
+result := DllCall(A_ScriptDir . "\AutoHotkey.dll\ahkdll", "str", "msgbox.ahk", "str"
+, "", "str", "", "cdecl") 
 return
 
-!r::
-Reload
 
-!q::
-ExitApp
+q::ExitApp
+
