@@ -1,0 +1,7 @@
+!*.ahk
+*.exe
+*.dll
+*.so
+ahkmingw
+Release
+Debug

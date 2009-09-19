@@ -4,7 +4,6 @@
 \#*
 *.gch
 *.obj
-bin
 obj
 MSC_HEADERS
 \.svn
