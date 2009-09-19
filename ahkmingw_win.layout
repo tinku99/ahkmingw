@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="DebugDll" />
-	<File name="AutoHotkey.cpp" open="1" top="0" tabpos="1">
+	<File name="AutoHotkey.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="AutoHotkeyx.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="2099" topLine="50" />
 	</File>
 	<File name="application.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="112923" topLine="1777" />
@@ -10,8 +13,14 @@
 	<File name="application.h" open="0" top="0" tabpos="0">
 		<Cursor position="6765" topLine="116" />
 	</File>
+	<File name="exports.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="637" topLine="18" />
+	</File>
+	<File name="exports.h" open="0" top="0" tabpos="0">
+		<Cursor position="1004" topLine="0" />
+	</File>
 	<File name="globaldata.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="42026" topLine="740" />
+		<Cursor position="8561" topLine="170" />
 	</File>
 	<File name="globaldata.h" open="0" top="0" tabpos="0">
 		<Cursor position="878" topLine="14" />
@@ -22,14 +31,17 @@
 	<File name="keyboard_mouse.h" open="0" top="0" tabpos="0">
 		<Cursor position="15424" topLine="308" />
 	</File>
-	<File name="script.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="349040" topLine="6908" />
+	<File name="script.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="19210" topLine="368" />
 	</File>
 	<File name="script.h" open="0" top="0" tabpos="0">
-		<Cursor position="136" topLine="0" />
+		<Cursor position="118959" topLine="2316" />
 	</File>
 	<File name="script2.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="248717" topLine="5231" />
+		<Cursor position="532574" topLine="11404" />
+	</File>
+	<File name="script_gui.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="68252" topLine="1352" />
 	</File>
 	<File name="util.h" open="0" top="0" tabpos="0">
 		<Cursor position="24330" topLine="505" />
