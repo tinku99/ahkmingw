@@ -38,7 +38,7 @@
 	"keyboard_mouse.h"
 	"script.h"
 
-1252480327 l:\source\ahkmingw\keyboard_mouse.h
+1253394325 l:\source\ahkmingw\keyboard_mouse.h
 	"defines.h"
 
 1252477430 "
@@ -105,7 +105,7 @@
 	"globaldata.h"
 	"util.h"
 
-1253342788 source:l:\source\ahkmingw\autohotkeyx.cpp
+1253342847 source:l:\source\ahkmingw\autohotkeyx.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"

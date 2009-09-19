@@ -2,10 +2,10 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="DebugDll" />
 	<File name="AutoHotkey.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="0" topLine="22" />
 	</File>
-	<File name="AutoHotkeyx.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="2099" topLine="50" />
+	<File name="AutoHotkeyx.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="13732" topLine="373" />
 	</File>
 	<File name="application.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="112923" topLine="1777" />
@@ -13,8 +13,8 @@
 	<File name="application.h" open="0" top="0" tabpos="0">
 		<Cursor position="6765" topLine="116" />
 	</File>
-	<File name="exports.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="637" topLine="18" />
+	<File name="exports.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="2089" topLine="46" />
 	</File>
 	<File name="exports.h" open="0" top="0" tabpos="0">
 		<Cursor position="1004" topLine="0" />
@@ -28,17 +28,20 @@
 	<File name="hook.h" open="0" top="0" tabpos="0">
 		<Cursor position="2564" topLine="25" />
 	</File>
+	<File name="keyboard_mouse.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="55560" topLine="866" />
+	</File>
 	<File name="keyboard_mouse.h" open="0" top="0" tabpos="0">
-		<Cursor position="15424" topLine="308" />
+		<Cursor position="10657" topLine="231" />
 	</File>
 	<File name="script.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="19210" topLine="368" />
+		<Cursor position="541098" topLine="10839" />
 	</File>
 	<File name="script.h" open="0" top="0" tabpos="0">
-		<Cursor position="118959" topLine="2316" />
+		<Cursor position="119762" topLine="2325" />
 	</File>
 	<File name="script2.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="532574" topLine="11404" />
+		<Cursor position="88110" topLine="1957" />
 	</File>
 	<File name="script_gui.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="68252" topLine="1352" />
@@ -50,6 +53,6 @@
 		<Cursor position="4337" topLine="84" />
 	</File>
 	<File name="window.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="80229" topLine="1522" />
+		<Cursor position="28394" topLine="537" />
 	</File>
 </CodeBlocks_layout_file>
