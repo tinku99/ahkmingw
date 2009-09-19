@@ -56,6 +56,7 @@ int WINAPI OldWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 {
 	// Init any globals not in "struct g" that need it:
 	g_hInstance = hInstance;
+	// MsgBox((UINT)g_hInstance);
 	InitializeCriticalSection(&g_CriticalRegExCache); // v1.0.45.04: Must be done early so that it's unconditional, so that DeleteCriticalSection() in the script destructor can also be unconditional (deleting when never initialized can crash, at least on Win 9x).
 
 	if (!GetCurrentDirectory(sizeof(g_WorkingDir), g_WorkingDir)) // Needed for the FileSelectFile() workaround.
@@ -67,27 +68,10 @@ int WINAPI OldWinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmd
 	// Set defaults, to be overridden by command line args we receive:
 	bool restart_mode = false;
 
-#ifndef AUTOHOTKEYSC
-	#ifdef _DEBUG
-		//char *script_filespec = "C:\\Util\\AutoHotkey.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\GUI Demo.ahk";
-		char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\MAIN.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\Expressions.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\Line Continuation.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\DllCall.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\RegExMatch & RegExReplace.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\Win commands, all cases.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\GUI Date.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\GUI ListView.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\OnMessage.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\TEST SUITES\\Send command.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Ref\\ImageSearch\\TEST SUITE\\MAIN.ahk";
-		//char *script_filespec = "C:\\A-Source\\AutoHotkey\\Test\\New Text Document.ahk";
-	#else
-			char *script_filespec = lpCmdLine ; // Naveen changed from NULL;
-	#endif
-#endif
 
+	char *script_filespec = lpCmdLine ; // Naveen changed from NULL;
+
+   // MsgBox(script_filespec); // Naveen debugging
 	// The problem of some command line parameters such as /r being "reserved" is a design flaw (one that
 	// can't be fixed without breaking existing scripts).  Fortunately, I think it affects only compiled
 	// scripts because running a script via AutoHotkey.exe should avoid treating anything after the
@@ -385,6 +369,8 @@ switch(fwdReason)
  case DLL_PROCESS_ATTACH:
 	 {
 	nameHinstanceP.hInstanceP = hInstance;
+//	MsgBox((UINT)hInstance);
+
 #ifdef AUTODLL
 	ahkdll("autoload.ahk", "", "");	  // used for remoteinjection of dll
 #endif

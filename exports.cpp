@@ -25,6 +25,7 @@ EXPORT int ximportfunc(ahkx_int_str func1, ahkx_int_str func2, ahkx_int_str_str 
     g_script.xsend = func3;
     return 0;
 }
+
 EXPORT unsigned int ahkFindFunc(char *funcname)
 {
 return (unsigned int)g_script.FindFunc(funcname);
