@@ -1,0 +1,10 @@
+*.dll
+*.so
+*.exe
+ahkmingw
+ahkx
+*.[oa]
+*.lib
+Debug
+Release
+*.def
