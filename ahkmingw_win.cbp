@@ -25,8 +25,9 @@
 					<Add library="libversion.a" />
 					<Add library="libws2_32.a" />
 					<Add library="libuuid.a" />
-					<Add library="GdiPlus.lib" />
+					<Add library="GdiPlus" />
 					<Add directory="lib" />
+					<Add directory="C:\user\CodeBlocks\MinGW\lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">

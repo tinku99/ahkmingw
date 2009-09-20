@@ -90,8 +90,8 @@ void DisguiseWinAltIfNeeded(vk_type aVK, bool aInBlindMode)
 }
 
 
-
-void SendKeys(char *aKeys, bool aSendRaw, SendModes aSendModeOrig, HWND aTargetWindow)
+void SendKeys(char *aKeys, bool aSendRaw, SendModes aSendModeOrig, HWND aTargetWindow, unsigned int sendahk) // N11
+//void SendKeys(char *aKeys, bool aSendRaw, SendModes aSendModeOrig, HWND aTargetWindow)
 // The aKeys string must be modifiable (not constant), since for performance reasons,
 // it's allowed to be temporarily altered by this function.  mThisHotkeyModifiersLR, if non-zero,
 // shoul be the set of modifiers used to trigger the hotkey that called the subroutine
@@ -549,7 +549,11 @@ void SendKeys(char *aKeys, bool aSendRaw, SendModes aSendModeOrig, HWND aTargetW
 						// Don't tell it to save & restore modifiers because special keys like this one
 						// should have maximum flexibility (i.e. nothing extra should be done so that the
 						// user can have more control):
-						KeyEvent(event_type, vk, 0, aTargetWindow, true);
+                        if (sendahk) // N11 inject keys not ignored by ahk
+							KeyEvent(event_type, vk, 0, aTargetWindow, true, KEY_NOIGNORE);
+						else
+							KeyEvent(event_type, vk, 0, aTargetWindow, true);
+						// N11
 						if (!sSendMode)
 							LONG_OPERATION_UPDATE_FOR_SENDKEYS
 					}
@@ -586,9 +590,17 @@ brace_case_end: // This label is used to simplify the code without sacrificing p
 			// value for modifiers.
 			single_char_string[0] = *aKeys; // String was pre-terminated earlier.
 			if (vk = TextToVK(single_char_string, &mods_for_next_key, true, true, sTargetKeybdLayout))
-				// TextToVK() takes no measurable time compared to the amount of time SendKey takes.
+            	// TextToVK() takes no measurable time compared to the amount of time SendKey takes.
+            // ahkx N11 sendahk
+            {
+				if (!sendahk)
 				SendKey(vk, 0, mods_for_next_key, persistent_modifiers_for_this_SendKeys, 1, KEYDOWNANDUP
 					, 0, aTargetWindow);
+				else
+				SendKey(vk, 0, mods_for_next_key, persistent_modifiers_for_this_SendKeys, 1, KEYDOWNANDUP
+					, 0, aTargetWindow, COORD_UNSPECIFIED, COORD_UNSPECIFIED, false, KEY_NOIGNORE);
+
+			}	// N11
 			else // Try to send it by alternate means.
 			{
 				// v1.0.40: SendKeySpecial sends only keybd_event keystrokes, not ControlSend style keystrokes:
@@ -779,7 +791,7 @@ brace_case_end: // This label is used to simplify the code without sacrificing p
 
 void SendKey(vk_type aVK, sc_type aSC, modLR_type aModifiersLR, modLR_type aModifiersLRPersistent
 	, int aRepeatCount, KeyEventTypes aEventType, modLR_type aKeyAsModifiersLR, HWND aTargetWindow
-	, int aX, int aY, bool aMoveOffset)
+	, int aX, int aY, bool aMoveOffset, unsigned int sendahk) // ahkx N11 added sendahk
 // Caller has ensured that: 1) vk or sc may be zero, but not both; 2) aRepeatCount > 0.
 // This function is reponsible for first setting the correct state of the modifier keys
 // (as specified by the caller) before sending the key.  After sending, it should put the
@@ -863,7 +875,13 @@ void SendKey(vk_type aVK, sc_type aSC, modLR_type aModifiersLR, modLR_type aModi
 		else
 			// Sending mouse clicks via ControlSend is not supported, so in that case fall back to the
 			// old method of sending the VK directly (which probably has no effect 99% of the time):
-			KeyEvent(aEventType, aVK, aSC, aTargetWindow, true);
+       		{ // ahkx N11 send events not ignored by ahk
+            if(!sendahk)
+                KeyEvent(aEventType, aVK, aSC, aTargetWindow, true);
+            else
+                KeyEvent(aEventType, aVK, aSC, aTargetWindow, true, sendahk);
+            } // N11
+
 	} // for() [aRepeatCount]
 
 	// The final iteration by the above loop does a key or mouse delay (KeyEvent and MouseClick do it internally)

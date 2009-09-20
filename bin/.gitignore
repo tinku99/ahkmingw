@@ -1,7 +1,10 @@
-!*.ahk
-*.exe
 *.dll
 *.so
+*.exe
 ahkmingw
-Release
+ahkx
+*.[oa]
+*.lib
 Debug
+Release
+*.def

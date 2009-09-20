@@ -18,7 +18,7 @@ if (   !(var = g_script.FindOrAddVar(name, strlen(name)))   )
 			return 0; // success
 }
 
-EXPORT int ximportfunc(ahkx_int_str func1, ahkx_int_str func2, ahkx_int_str_str func3)
+EXPORT int ximportfunc(ahkx_int_str func1, ahkx_int_str func2, ahkx_int_str_str func3) // Naveen ahkx N11
 {
     g_script.xifwinactive = func1 ;
     g_script.xwingetid  = func2 ;
@@ -55,19 +55,12 @@ EXPORT int ahkLabel(char *aLabelName)
 		return -1;
 }
 
-EXPORT int ahkKey(char *keyname) // WPARAM key, PKBDLLHOOKSTRUCT event
+EXPORT int ahkKey(char *keys) // N11 sendahk
 {
-//	modLR_type modifiersLR_now = -; // sSendMode ? sEventModifiersLR : GetModifierLRState();
-//	SetModifierLRState((modifiersLR_now | MOD_LALT) & ~(MOD_RALT | MOD_LCONTROL | MOD_RCONTROL | MOD_LSHIFT | MOD_RSHIFT)
-//		, modifiersLR_now, NULL, false // Pass false because there's no need to disguise the down-event of LALT.
-//		, true, KEY_IGNORE); // Pass true so that any release of RALT is disguised (Win is never released here).
-
-	sc_type aSC = TextToSC(keyname);
-	vk_type aVK = TextToVK(keyname);
-	// KeyEvent(KEYDOWNANDUP, aVK, 0, 0, false, 0);
-	 keybd_event((byte)aVK, (byte)aSC, 0, 0);
-		return 0;
+SendKeys(keys, false, SM_EVENT, 0, 1);
+return 0;
 }
+
 
 // Naveen: v6 addFile()
 // Todo: support for #Directives, and proper treatment of mIsReadytoExecute
