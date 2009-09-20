@@ -43,7 +43,7 @@
 
 1252477430 "
 
-1252041773 l:\source\ahkmingw\defines.h
+1253396502 l:\source\ahkmingw\defines.h
 	"stdafx.h"
 	<pshpack1.h>
 	<pshpack4.h>
@@ -146,7 +146,7 @@
 	"application.h"
 	"util.h"
 
-1253340158 source:l:\source\ahkmingw\exports.cpp
+1253394324 source:l:\source\ahkmingw\exports.cpp
 	"stdafx.h"
 	"globaldata.h"
 	"application.h"
@@ -174,7 +174,7 @@
 	"globaldata.h"
 	"window.h"
 
-1251585310 source:l:\source\ahkmingw\keyboard_mouse.cpp
+1253394324 source:l:\source\ahkmingw\keyboard_mouse.cpp
 	"stdafx.h"
 	"keyboard_mouse.h"
 	"globaldata.h"
@@ -322,7 +322,7 @@
 	"resource.h"
 	<winresrc.h>
 
-1252485585 source:l:\source\ahkmingw\script.cpp
+1253396817 source:l:\source\ahkmingw\script.cpp
 	"stdafx.h"
 	"script.h"
 	"globaldata.h"
@@ -497,7 +497,7 @@
 	"var.h"
 	"globaldata.h"
 
-1253337172 source:l:\source\ahkmingw\window.cpp
+1253394325 source:l:\source\ahkmingw\window.cpp
 	"stdafx.h"
 	"window.h"
 	"util.h"

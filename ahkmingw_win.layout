@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="DebugDll" />
+	<ActiveTarget name="Debug" />
 	<File name="AutoHotkey.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="22" />
 	</File>
-	<File name="AutoHotkeyx.cpp" open="1" top="1" tabpos="1">
+	<File name="AutoHotkeyx.cpp" open="1" top="0" tabpos="1">
 		<Cursor position="13732" topLine="373" />
 	</File>
 	<File name="application.cpp" open="0" top="0" tabpos="0">
@@ -12,6 +12,9 @@
 	</File>
 	<File name="application.h" open="0" top="0" tabpos="0">
 		<Cursor position="6765" topLine="116" />
+	</File>
+	<File name="defines.h" open="1" top="0" tabpos="2">
+		<Cursor position="15316" topLine="235" />
 	</File>
 	<File name="exports.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="2089" topLine="46" />
@@ -34,8 +37,8 @@
 	<File name="keyboard_mouse.h" open="0" top="0" tabpos="0">
 		<Cursor position="10657" topLine="231" />
 	</File>
-	<File name="script.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="541098" topLine="10839" />
+	<File name="script.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="541199" topLine="10839" />
 	</File>
 	<File name="script.h" open="0" top="0" tabpos="0">
 		<Cursor position="119762" topLine="2325" />

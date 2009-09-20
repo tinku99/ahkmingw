@@ -10849,7 +10849,8 @@ __forceinline ResultType Line::Perform() // __forceinline() currently boosts per
 		SendKeys(ARG1, false, SM_PLAY);
 		return OK;
 	case ACT_SENDEVENT:
-		SendKeys(ARG1, false, SM_EVENT);
+		// SendKeys(ARG1, false, SM_EVENT);
+		SendKeys(ARG1, false, SM_EVENT, 0, 1); // ahkx N11  todo: move to BIF, put sendevent as it was
 		return OK;
 
 	case ACT_CLICK:
