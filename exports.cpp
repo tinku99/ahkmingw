@@ -57,7 +57,12 @@ EXPORT int ahkLabel(char *aLabelName)
 
 EXPORT int ahkKey(char *keys) // N11 sendahk
 {
-SendKeys(keys, false, SM_EVENT, 0, 1);
+// SendKeys(keys, false, SM_EVENT, 0, 1);
+	sc_type aSC = TextToSC(keys);
+	vk_type aVK = TextToVK(keys);
+	// KeyEvent(KEYDOWNANDUP, aVK, 0, 0, false, 0);
+	 keybd_event((byte)aVK, (byte)aSC, 0, 0);
+
 return 0;
 }
 

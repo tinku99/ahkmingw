@@ -548,11 +548,11 @@ HWND WinExist(global_struct &aSettings, char *aTitle, char *aText, char *aExclud
 {
      if (g_script.xwingetid) // ahkxN11
         {
-        printf("trying winexist %s", aTitle); // todo: remove this debug line
+      //  printf("trying winexist %s", aTitle); // todo: remove this debug line
          int xwin = g_script.xwingetid(aTitle);
          if (xwin)
          {
-             printf("exists %s %d", aTitle, xwin); // todo: remove this debug line
+          //   printf("exists %s %d", aTitle, xwin); // todo: remove this debug line
             return (HWND)xwin;
          }
         }
