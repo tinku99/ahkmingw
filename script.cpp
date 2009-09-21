@@ -6915,6 +6915,14 @@ Func *Script::FindFunc(char *aFuncName, size_t aFuncNameLength)
 		min_params = 2;
 		max_params = 3;
 	}
+
+	else if (!stricmp(func_name, "sendahk"))  // N11
+	{
+		bif = BIF_sendahk;
+		min_params = 1;
+		max_params = 1;
+	}
+
 			else if (!stricmp(func_name, "Import"))  // addFile() Naveen v8.
 	{
 		bif = BIF_Import;
