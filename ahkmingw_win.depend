@@ -981,3 +981,467 @@
 	"util.h"
 	"application.h"
 
+1251585309 source:l:\source\ahkgcc\simpleheap.cpp
+	"stdafx.h"
+	"SimpleHeap.h"
+	"globaldata.h"
+
+1252041773 l:\source\ahkgcc\stdafx.h
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<limits.h>
+	<malloc.h>
+	<windows.h>
+	<commctrl.h>
+	<shellapi.h>
+	<shlobj.h>
+	<mmsystem.h>
+	<commdlg.h>
+	<ctype.h>
+	<olectl.h>
+
+1251585310 l:\source\ahkgcc\simpleheap.h
+	"stdafx.h"
+
+1252480327 l:\source\ahkgcc\globaldata.h
+	"hook.h"
+	"clipboard.h"
+	"script.h"
+	"os_version.h"
+
+1252480977 l:\source\ahkgcc\hook.h
+	"stdafx.h"
+	"hotkey.h"
+
+1251585311 l:\source\ahkgcc\hotkey.h
+	"keyboard_mouse.h"
+	"script.h"
+
+1253394325 l:\source\ahkgcc\keyboard_mouse.h
+	"defines.h"
+
+1253396502 l:\source\ahkgcc\defines.h
+	"stdafx.h"
+	<pshpack1.h>
+	<pshpack4.h>
+
+1253337172 l:\source\ahkgcc\script.h
+	"stdafx.h"
+	"defines.h"
+	"SimpleHeap.h"
+	"keyboard_mouse.h"
+	"var.h"
+	"WinGroup.h"
+	"util.h"
+	"resources/resource.h"
+	"lib/exearc_read.h"
+	"exports.h"
+	"os_version.h"
+
+1252477430 l:\source\ahkgcc\var.h
+	"defines.h"
+	"SimpleHeap.h"
+	"clipboard.h"
+	"util.h"
+
+1251585311 l:\source\ahkgcc\clipboard.h
+	"stdafx.h"
+	"defines.h"
+
+1252480327 l:\source\ahkgcc\util.h
+	"stdafx.h"
+	"defines.h"
+
+1251585310 l:\source\ahkgcc\wingroup.h
+	"defines.h"
+	"SimpleHeap.h"
+
+1251585311 l:\source\ahkgcc\resources\resource.h
+
+1251585311 l:\source\ahkgcc\lib\exearc_read.h
+
+1252485585 l:\source\ahkgcc\exports.h
+
+1251585311 l:\source\ahkgcc\os_version.h
+	<windows.h>
+
+1251585309 source:l:\source\ahkgcc\wingroup.cpp
+	"stdafx.h"
+	"WinGroup.h"
+	"window.h"
+	"globaldata.h"
+	"application.h"
+
+1251585312 l:\source\ahkgcc\window.h
+	"defines.h"
+	"globaldata.h"
+	"util.h"
+
+1251585311 l:\source\ahkgcc\application.h
+	"defines.h"
+
+1251585309 source:l:\source\ahkgcc\application.cpp
+	"stdafx.h"
+	"application.h"
+	"globaldata.h"
+	"window.h"
+	"util.h"
+	"resources/resource.h"
+
+1251585309 source:l:\source\ahkgcc\clipboard.cpp
+	"stdafx.h"
+	"clipboard.h"
+	"globaldata.h"
+	"application.h"
+	"util.h"
+
+1253394324 source:l:\source\ahkgcc\exports.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"exports.h"
+	"script.h"
+
+1252480327 source:l:\source\ahkgcc\globaldata.cpp
+	"stdafx.h"
+	"hook.h"
+	"clipboard.h"
+	"script.h"
+	"os_version.h"
+
+1251585310 source:l:\source\ahkgcc\hook.cpp
+	"stdafx.h"
+	"hook.h"
+	"globaldata.h"
+	"util.h"
+	"window.h"
+	"application.h"
+
+1252277527 source:l:\source\ahkgcc\hotkey.cpp
+	"stdafx.h"
+	"hotkey.h"
+	"globaldata.h"
+	"window.h"
+
+1253394324 source:l:\source\ahkgcc\keyboard_mouse.cpp
+	"stdafx.h"
+	"keyboard_mouse.h"
+	"globaldata.h"
+	"application.h"
+	"util.h"
+	"window.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_chartables.c
+	"config.h"
+	"pcre_internal.h"
+
+1251585311 l:\source\ahkgcc\lib_pcre\pcre\config.h
+
+1251585311 l:\source\ahkgcc\lib_pcre\pcre\pcre_internal.h
+	<ctype.h>
+	<limits.h>
+	<setjmp.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"config.h"
+	"pcre.h"
+	"ucp.h"
+
+1251585311 l:\source\ahkgcc\lib_pcre\pcre\pcre.h
+	<stdlib.h>
+
+1251585311 l:\source\ahkgcc\lib_pcre\pcre\ucp.h
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_compile.c
+	"config.h"
+	"pcre_internal.h"
+	"pcre_printint.src"
+
+1251583818 l:\source\ahkgcc\lib_pcre\pcre\pcre_printint.src
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_config.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_dfa_exec.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_exec.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_fullinfo.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_get.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_globals.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_info.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_maketables.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_newline.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_ord2utf8.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_refcount.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_study.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_tables.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_try_flipped.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_ucp_searchfuncs.c
+	"config.h"
+	"pcre_internal.h"
+	"ucp.h"
+	"ucpinternal.h"
+	"ucptable.h"
+
+1251585311 l:\source\ahkgcc\lib_pcre\pcre\ucpinternal.h
+
+1251585311 l:\source\ahkgcc\lib_pcre\pcre\ucptable.h
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_valid_utf8.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_version.c
+	"config.h"
+	"pcre_internal.h"
+
+1251583818 source:l:\source\ahkgcc\lib_pcre\pcre\pcre_xclass.c
+	"config.h"
+	"pcre_internal.h"
+
+1252478278 source:l:\source\ahkgcc\lowlevel.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"exports.h"
+	"script.h"
+
+1251585310 source:l:\source\ahkgcc\mt19937ar-cok.cpp
+	"stdafx.h"
+	"mt19937ar-cok.h"
+
+1251585311 l:\source\ahkgcc\mt19937ar-cok.h
+
+1251585310 source:l:\source\ahkgcc\os_version.cpp
+	"stdafx.h"
+	<windows.h>
+	"os_version.h"
+
+1251585310 source:l:\source\ahkgcc\resources\autohotkey.rc
+	"resource.h"
+	<winresrc.h>
+
+1253396817 source:l:\source\ahkgcc\script.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"util.h"
+	"mt19937ar-cok.h"
+	"window.h"
+	"application.h"
+	"exports.h"
+
+1253341862 source:l:\source\ahkgcc\script2.cpp
+	"stdafx.h"
+	<olectl.h>
+	<winioctl.h>
+	"qmath.h"
+	"mt19937ar-cok.h"
+	"script.h"
+	"window.h"
+	"application.h"
+	"resources/resource.h"
+	"lib_pcre/pcre/pcre.h"
+	<pshpack1.h>
+	<pshpack4.h>
+
+1251585311 l:\source\ahkgcc\qmath.h
+	<math.h>
+
+1251585310 source:l:\source\ahkgcc\script_autoit.cpp
+	"stdafx.h"
+	<winsock.h>
+	<tlhelp32.h>
+	<wininet.h>
+	"script.h"
+	"globaldata.h"
+	"window.h"
+	"application.h"
+
+1251609483 source:l:\source\ahkgcc\script_expression.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"qmath.h"
+
+1251585310 source:l:\source\ahkgcc\script_gui.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+	"qmath.h"
+
+1252277527 source:l:\source\ahkgcc\script_menu.cpp
+	"stdafx.h"
+	"script.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+
+1251585310 source:l:\source\ahkgcc\script_registry.cpp
+	"stdafx.h"
+	"script.h"
+	"util.h"
+	"globaldata.h"
+
+1251585311 source:l:\source\ahkgcc\stdafx.cpp
+	"stdafx.h"
+
+1251609668 source:l:\source\ahkgcc\util.cpp
+	"stdafx.h"
+	<olectl.h>
+	"msc_headers/GdiPlus.h"
+	"util.h"
+	"globaldata.h"
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplus.h
+	<pshpack8.h>
+	"GdiPlusMem.h"
+	"GdiPlusBase.h"
+	"GdiPlusEnums.h"
+	"GdiplusTypes.h"
+	"GdiPlusInit.h"
+	"GdiPlusPixelFormats.h"
+	"GdiPlusColor.h"
+	"GdiPlusMetaHeader.h"
+	"GdiPlusImaging.h"
+	"GdiPlusColorMatrix.h"
+	"gdipluseffects.h"
+	"GdiPlusGpStubs.h"
+	"GdiplusHeaders.h"
+	"GdiplusFlat.h"
+	"GdiPlusimageAttributes.h"
+	"GdiPlusMatrix.h"
+	"GdiPlusBrush.h"
+	"GdiPlusPen.h"
+	"GdiPlusStringFormat.h"
+	"GdiPlusPath.h"
+	"GdiPlusLineCaps.h"
+	"GdiPlusGraphics.h"
+	"GdiPlusMetaFile.h"
+	"GdiPlusCachedBitmap.h"
+	"GdiPlusRegion.h"
+	"GdiPlusFontCollection.h"
+	"GdiplusFontFamily.h"
+	"GdiPlusFont.h"
+	"GdiPlusBitmap.h"
+	"GdiPlusImageCodec.h"
+	<poppack.h>
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusmem.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusbase.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusenums.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplustypes.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusinit.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluspixelformats.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluscolor.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusmetaheader.h
+	<pshpack2.h>
+	<poppack.h>
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusimaging.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluscolormatrix.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluseffects.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusgpstubs.h
+
+1251609681 l:\source\ahkgcc\msc_headers\gdiplusheaders.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusflat.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusimageattributes.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusmatrix.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusbrush.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluspen.h
+
+1251609749 l:\source\ahkgcc\msc_headers\gdiplusstringformat.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluspath.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluslinecaps.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusgraphics.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusmetafile.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdipluscachedbitmap.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusregion.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusfontcollection.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusfontfamily.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusfont.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusbitmap.h
+
+1251585311 l:\source\ahkgcc\msc_headers\gdiplusimagecodec.h
+
+1251585310 source:l:\source\ahkgcc\var.cpp
+	"stdafx.h"
+	"var.h"
+	"globaldata.h"
+
+1253394325 source:l:\source\ahkgcc\window.cpp
+	"stdafx.h"
+	"window.h"
+	"util.h"
+	"application.h"
+
