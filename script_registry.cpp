@@ -31,6 +31,7 @@
 
 ResultType Line::IniRead(char *aFilespec, char *aSection, char *aKey, char *aDefault)
 {
+    /*
 	if (!aDefault || !*aDefault)
 		aDefault = "ERROR";  // This mirrors what AutoIt2 does for its default value.
 	char	szFileTemp[_MAX_PATH+1];
@@ -44,19 +45,22 @@ ResultType Line::IniRead(char *aFilespec, char *aSection, char *aKey, char *aDef
 	return OUTPUT_VAR->Assign(szBuffer); // Avoid using the length the API reported because it might be inaccurate if the data contains any binary zeroes, or if the data is double-terminated, etc.
 	// Note: ErrorLevel is not changed by this command since the aDefault value is returned
 	// whenever there's an error.
+*/
 }
 
 
 
 ResultType Line::IniWrite(char *aValue, char *aFilespec, char *aSection, char *aKey)
 {
+    /*
 	char	szFileTemp[_MAX_PATH+1];
 	char	*szFilePart;
-	// Get the fullpathname (ini functions need a full path) 
+	// Get the fullpathname (ini functions need a full path)
 	GetFullPathName(aFilespec, _MAX_PATH, szFileTemp, &szFilePart);
 	BOOL result = WritePrivateProfileString(aSection, aKey, aValue, szFileTemp);  // Returns zero on failure.
 	WritePrivateProfileString(NULL, NULL, NULL, szFileTemp);	// Flush
 	return g_script.mIsAutoIt2 ? OK : g_ErrorLevel->Assign(result ? ERRORLEVEL_NONE : ERRORLEVEL_ERROR);
+*/
 }
 
 
@@ -64,19 +68,22 @@ ResultType Line::IniWrite(char *aValue, char *aFilespec, char *aSection, char *a
 ResultType Line::IniDelete(char *aFilespec, char *aSection, char *aKey)
 // Note that aKey can be NULL, in which case the entire section will be deleted.
 {
+    /*
 	char	szFileTemp[_MAX_PATH+1];
 	char	*szFilePart;
-	// Get the fullpathname (ini functions need a full path) 
+	// Get the fullpathname (ini functions need a full path)
 	GetFullPathName(aFilespec, _MAX_PATH, szFileTemp, &szFilePart);
 	BOOL result = WritePrivateProfileString(aSection, aKey, NULL, szFileTemp);  // Returns zero on failure.
 	WritePrivateProfileString(NULL, NULL, NULL, szFileTemp);	// Flush
 	return g_script.mIsAutoIt2 ? OK : g_ErrorLevel->Assign(result ? ERRORLEVEL_NONE : ERRORLEVEL_ERROR);
+*/
 }
 
 
 
 ResultType Line::RegRead(HKEY aRootKey, char *aRegSubkey, char *aValueName)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	output_var.Assign(); // Init.  Tell it not to free the memory by not calling with "".
@@ -225,6 +232,7 @@ ResultType Line::RegRead(HKEY aRootKey, char *aRegSubkey, char *aValueName)
 
 	// Since above didn't return, this is an unsupported value type.
 	return OK;  // Let ErrorLevel tell the story.
+*/
 } // RegRead()
 
 
@@ -232,6 +240,7 @@ ResultType Line::RegRead(HKEY aRootKey, char *aRegSubkey, char *aValueName)
 ResultType Line::RegWrite(DWORD aValueType, HKEY aRootKey, char *aRegSubkey, char *aValueName, char *aValue)
 // If aValueName is the empty string, the key's default value is used.
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 
 	HKEY	hRegKey;
@@ -276,7 +285,7 @@ ResultType Line::RegWrite(DWORD aValueType, HKEY aRootKey, char *aRegSubkey, cha
 			g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
 		RegCloseKey(hRegKey);
 		return OK;
-	
+
 	case REG_MULTI_SZ:
 	{
 		// Don't allow values over 64K for this type because aValue might not be a writable
@@ -320,7 +329,7 @@ ResultType Line::RegWrite(DWORD aValueType, HKEY aRootKey, char *aRegSubkey, cha
 	{
 		int nLen = (int)strlen(aValue);
 
-		// Stringlength must be a multiple of 2 
+		// Stringlength must be a multiple of 2
 		if (nLen % 2)
 		{
 			RegCloseKey(hRegKey);
@@ -353,7 +362,7 @@ ResultType Line::RegWrite(DWORD aValueType, HKEY aRootKey, char *aRegSubkey, cha
 		if (RegSetValueEx(hRegKey, aValueName, 0, REG_BINARY, (CONST BYTE *)szRegBuffer, (DWORD)j) == ERROR_SUCCESS)
 			g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
 		// else keep the default failure value for ErrorLevel
-	
+
 		RegCloseKey(hRegKey);
 		return OK;
 	}
@@ -363,12 +372,14 @@ ResultType Line::RegWrite(DWORD aValueType, HKEY aRootKey, char *aRegSubkey, cha
 	// Let ErrorLevel tell the story.
 	RegCloseKey(hRegKey);
 	return OK;
+*/
 } // RegWrite()
 
 
 
 bool Line::RegRemoveSubkeys(HKEY hRegKey)
 {
+    /*
 	// Removes all subkeys to the given key.  Will not touch the given key.
 	CHAR Name[256];
 	DWORD dwNameSize;
@@ -376,14 +387,14 @@ bool Line::RegRemoveSubkeys(HKEY hRegKey)
 	HKEY hSubKey;
 	bool Success;
 
-	for (;;) 
-	{ // infinite loop 
+	for (;;)
+	{ // infinite loop
 		dwNameSize=255;
 		if (RegEnumKeyEx(hRegKey, 0, Name, &dwNameSize, NULL, NULL, NULL, &ftLastWrite) == ERROR_NO_MORE_ITEMS)
 			break;
 		if (RegOpenKeyEx(hRegKey, Name, 0, KEY_READ, &hSubKey) != ERROR_SUCCESS)
 			return false;
-		
+
 		Success=RegRemoveSubkeys(hSubKey);
 		RegCloseKey(hSubKey);
 		if (!Success)
@@ -392,12 +403,14 @@ bool Line::RegRemoveSubkeys(HKEY hRegKey)
 			return false;
 	}
 	return true;
+*/
 }
 
 
 
 ResultType Line::RegDelete(HKEY aRootKey, char *aRegSubkey, char *aValueName)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 
 	HKEY	hRegKey;
@@ -416,7 +429,7 @@ ResultType Line::RegDelete(HKEY aRootKey, char *aRegSubkey, char *aValueName)
 		RegCloseKey(hRegKey); // Close parent key.  Not sure if this needs to be done only after the above.
 		if (!success)
 			return OK;  // Let ErrorLevel tell the story.
-		if (RegDeleteKey(aRootKey, aRegSubkey) != ERROR_SUCCESS) 
+		if (RegDeleteKey(aRootKey, aRegSubkey) != ERROR_SUCCESS)
 			return OK;  // Let ErrorLevel tell the story.
 	}
 	else
@@ -431,4 +444,5 @@ ResultType Line::RegDelete(HKEY aRootKey, char *aRegSubkey, char *aValueName)
 	}
 
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 } // RegDelete()
