@@ -24,6 +24,7 @@ GNU General Public License for more details.
 
 ResultType Script::PerformGui(char *aCommand, char *aParam2, char *aParam3, char *aParam4)
 {
+/*
 	int window_index = g.GuiDefaultWindowIndex; // Which window to operate upon.  Initialized to thread's default.
 	char *options; // This will contain something that is meaningful only when gui_command == GUI_CMD_OPTIONS.
 	GuiCommands gui_command = Line::ConvertGuiCommand(aCommand, &window_index, &options);
@@ -308,12 +309,14 @@ ResultType Script::PerformGui(char *aCommand, char *aParam2, char *aParam3, char
 	} // switch()
 
 	return FAIL;  // Should never be reached, but avoids compiler warning and improves bug detection.
+*/
 }
 
 
 
 ResultType Line::GuiControl(char *aCommand, char *aControlID, char *aParam3)
 {
+   /*
 	char *options; // This will contain something that is meaningful only when gui_command == GUICONTROL_CMD_OPTIONS.
 	int window_index = g.GuiDefaultWindowIndex; // Which window to operate upon.  Initialized to thread's default.
 	GuiControlCmds guicontrol_cmd = Line::ConvertGuiControlCmd(aCommand, &window_index, &options);
@@ -1069,12 +1072,14 @@ ResultType Line::GuiControl(char *aCommand, char *aControlID, char *aParam3)
 		//InvalidateRect(tab_control->hwnd, NULL, TRUE);
 	}
 	return OK;
+*/
 }
 
 
 
 ResultType Line::GuiControlGet(char *aCommand, char *aControlID, char *aParam3)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	int window_index = g.GuiDefaultWindowIndex; // Which window to operate upon.  Initialized to thread's default.
 	GuiControlGetCmds guicontrolget_cmd = Line::ConvertGuiControlGetCmd(aCommand, &window_index);
@@ -1198,6 +1203,7 @@ ResultType Line::GuiControlGet(char *aCommand, char *aControlID, char *aParam3)
 	} // switch()
 
 	return FAIL;  // Should never be reached, but avoids compiler warning and improves bug detection.
+*/
 }
 
 
@@ -1216,6 +1222,7 @@ ResultType GuiType::Destroy(GuiIndexType aWindowIndex)
 // Rather than deal with the confusion of an object destroying itself, this method is static
 // and designed to deal with one particular window index in the g_gui array.
 {
+/*
 	if (aWindowIndex >= MAX_GUI_WINDOWS)
 		return FAIL;
 	if (!g_gui[aWindowIndex]) // It's already in the right state.
@@ -1316,6 +1323,7 @@ ResultType GuiType::Destroy(GuiIndexType aWindowIndex)
 	// only when the program terminates.  Another reason for this is that sometimes a destroyed window
 	// is soon recreated to use the same fonts it did before.
 	return OK;
+*/
 }
 
 
@@ -1324,6 +1332,7 @@ void GuiType::DestroyIconIfUnused(HICON ahIcon)
 // Caller has ensured that the GUI window previously using ahIcon has been destroyed prior to calling
 // this function.
 {
+    /*
 	if (!ahIcon) // Caller relies on this check.
 		return;
 	int i, gui_count;
@@ -1340,12 +1349,14 @@ void GuiType::DestroyIconIfUnused(HICON ahIcon)
 	// Since above didn't return, this icon is not currently in use by a GUI window.  The caller has
 	// authorized us to destroy it.
 	DestroyIcon(ahIcon);
+*/
 }
 
 
 
 ResultType GuiType::Create()
 {
+    /*
 	if (mHwnd) // It already exists
 		return FAIL;  // Seems best for now, since it shouldn't really be called this way.
 
@@ -1411,6 +1422,7 @@ ResultType GuiType::Create()
 	SendMessage(mHwnd, WM_SETICON, ICON_BIG, (LPARAM)main_icon);   // i.e. there is no previous icon to destroy in this case.
 
 	return OK;
+*/
 }
 
 
@@ -1425,6 +1437,7 @@ void GuiType::SetLabels(char *aLabelPrefix)
 // Caller must ensure that mExStyle is up-to-date if mHwnd is an existing window.  In addition, caller must
 // apply any changes to mExStyle that we make here.
 {
+    /*
 	mLabelsHaveBeenSet = true; // Although it's value only matters in some contexts, it's set unconditionally for simplicity.
 
 	#define MAX_GUI_PREFIX_LENGTH 255
@@ -1464,6 +1477,7 @@ void GuiType::SetLabels(char *aLabelPrefix)
 	else
 		mExStyle &= ~WS_EX_ACCEPTFILES;
 	// It is not necessary to apply any style change made above because the caller detects changes and applies them.
+*/
 }
 
 
@@ -1473,6 +1487,7 @@ void GuiType::UpdateMenuBars(HMENU aMenu)
 // use aMenu as a menu bar.  For example, if a menu item has been disabled, the grey-color
 // won't show up immediately unless the window is refreshed.
 {
+/*
 	int i, gui_count;
 	for (i = 0, gui_count = 0; i < MAX_GUI_WINDOWS; ++i)
 	{
@@ -1500,6 +1515,7 @@ void GuiType::UpdateMenuBars(HMENU aMenu)
 				break;
 		}
 	}
+*/
 }
 
 
@@ -1507,6 +1523,7 @@ void GuiType::UpdateMenuBars(HMENU aMenu)
 ResultType GuiType::AddControl(GuiControls aControlType, char *aOptions, char *aText)
 // Caller must have ensured that mHwnd is non-NULL (i.e. that the parent window already exists).
 {
+/*
 	#define TOO_MANY_CONTROLS "Too many controls." ERR_ABORT // Short msg since so rare.
 	if (mControlCount >= MAX_CONTROLS_PER_GUI)
 		return g_script.ScriptError(TOO_MANY_CONTROLS);
@@ -3467,6 +3484,7 @@ ResultType GuiType::AddControl(GuiControls aControlType, char *aOptions, char *a
 	}
 
 	return OK;
+*/
 }
 
 
@@ -3476,6 +3494,7 @@ ResultType GuiType::ParseOptions(char *aOptions, bool &aSetLastFoundWindow, Togg
 // Caller must have already initialized aSetLastFoundWindow/, bool &aOwnDialogs with desired starting values.
 // Caller must ensure that aOptions is a modifiable string, since this method temporarily alters it.
 {
+/*
 	int owner_window_index;
 	LONG nc_width, nc_height;
 
@@ -3792,6 +3811,7 @@ ResultType GuiType::ParseOptions(char *aOptions, bool &aSetLastFoundWindow, Togg
 	}
 
 	return OK;
+*/
 }
 
 
@@ -3805,6 +3825,7 @@ void GuiType::GetNonClientArea(LONG &aWidth, LONG &aHeight)
 // controls require in the client area, but would find it inconvenient to have to take into account
 // the height of the title bar and menu bar (which vary depending on theme and other settings).
 {
+/*
 	if (mGuiShowHasNeverBeenDone) // In this case, the script might not yet have added the menu bar and other styles that affect the size of the non-client area.  So caller wants to do these calculations later.
 	{
 		aWidth = 0;
@@ -3817,6 +3838,7 @@ void GuiType::GetNonClientArea(LONG &aWidth, LONG &aHeight)
 	GetClientRect(mHwnd, &client_rect); // Client rect's left & top are always zero.
 	aWidth = (rect.right - rect.left) - client_rect.right;
 	aHeight = (rect.bottom - rect.top) - client_rect.bottom;
+*/
 }
 
 
@@ -3826,6 +3848,7 @@ void GuiType::GetTotalWidthAndHeight(LONG &aWidth, LONG &aHeight)
 // Yields total width and height of entire window.
 // If the window hasn't been shown for the first time, the caller wants COORD_CENTERED.
 {
+    /*
 	if (mGuiShowHasNeverBeenDone)
 	{
 		aWidth = COORD_CENTERED;
@@ -3837,6 +3860,7 @@ void GuiType::GetTotalWidthAndHeight(LONG &aWidth, LONG &aHeight)
 	GetWindowRect(mHwnd, &rect);
 	aWidth = rect.right - rect.left;
 	aHeight = rect.bottom - rect.top;
+*/
 }
 
 
@@ -3846,6 +3870,7 @@ ResultType GuiType::ControlParseOptions(char *aOptions, GuiControlOptionsType &a
 // Caller must have already initialized aOpt with zeroes or any other desired starting values.
 // Caller must ensure that aOptions is a modifiable string, since this method temporarily alters it.
 {
+	/*
 	// If control type uses aControl's union for something other than color, communicate the chosen color
 	// back through a means that doesn't corrupt the union:
 	COLORREF &color_main = (aControl.type == GUI_CONTROL_LISTVIEW || aControl.type == GUI_CONTROL_PIC)
@@ -5419,6 +5444,7 @@ ResultType GuiType::ControlParseOptions(char *aOptions, GuiControlOptionsType &a
 	} // aControl.hwnd is not NULL
 
 	return OK;
+*/
 }
 
 
@@ -5426,6 +5452,7 @@ ResultType GuiType::ControlParseOptions(char *aOptions, GuiControlOptionsType &a
 void GuiType::ControlInitOptions(GuiControlOptionsType &aOpt, GuiControlType &aControl)
 // Not done as class to avoid code-size overhead of initializer list, etc.
 {
+    /*
 	ZeroMemory(&aOpt, sizeof(GuiControlOptionsType));
 	if (aControl.type == GUI_CONTROL_LISTVIEW) // Since this doesn't have the _add and _remove components, must initialize.
 	{
@@ -5442,6 +5469,7 @@ void GuiType::ControlInitOptions(GuiControlOptionsType &aOpt, GuiControlType &aC
 	// but to save memory, background color is not.  In addition, there is no good way to ask a
 	// progress control what its background color currently is.
 	aOpt.color_listview = CLR_DEFAULT; // But this one uses DEFAULT vs. INVALID because it has simpler logic.
+*/
 }
 
 
@@ -5452,6 +5480,7 @@ void GuiType::ControlAddContents(GuiControlType &aControl, char *aContent, int a
 // Caller must ensure that aContent is a writable memory area, since this function temporarily
 // alters the string.
 {
+    /*
 	if (!*aContent)
 		return;
 
@@ -5594,12 +5623,14 @@ void GuiType::ControlAddContents(GuiControlType &aControl, char *aContent, int a
 		SendMessage(aControl.hwnd, msg_select, (WPARAM)TRUE, (LPARAM)aChoice);
 	else
 		SendMessage(aControl.hwnd, msg_select, (WPARAM)aChoice, 0);  // Select this item.
+*/
 }
 
 
 
 ResultType GuiType::Show(char *aOptions, char *aText)
 {
+    /*
 	if (!mHwnd)
 		return OK;  // Make this a harmless attempt.
 
@@ -6096,6 +6127,7 @@ ResultType GuiType::Show(char *aOptions, char *aText)
 	// the above because it ensures that our message queue is empty prior to returning to our caller.
 
 	return OK;
+*/
 }
 
 
@@ -6111,9 +6143,11 @@ ResultType GuiType::Clear() // Not implemented yet.
 
 ResultType GuiType::Cancel()
 {
+/*
 	if (mHwnd)
 		ShowWindow(mHwnd, SW_HIDE);
 	return OK;
+*/
 }
 
 
@@ -6124,12 +6158,14 @@ ResultType GuiType::Close()
 // if it wants to.
 // If there is no label, treat it the same as Cancel().
 {
+    /*
 	if (!mLabelForClose)
 		return Cancel();
 	POST_AHK_GUI_ACTION(mHwnd, NO_CONTROL_INDEX, GUI_EVENT_CLOSE, NO_EVENT_INFO);
 	// MsgSleep() is not done because "case AHK_GUI_ACTION" in GuiWindowProc() takes care of it.
 	// See its comments for why.
 	return OK;
+*/
 }
 
 
@@ -6140,6 +6176,7 @@ ResultType GuiType::Escape() // Similar to close, except typically called when t
 // if it wants to.
 // If there is no label, treat it the same as Cancel().
 {
+    /*
 	if (!mLabelForEscape) // The user preference (via votes on forum poll) is to do nothing by default.
 		return OK;
 	// See lengthy comments in Event() about this section:
@@ -6147,6 +6184,7 @@ ResultType GuiType::Escape() // Similar to close, except typically called when t
 	// MsgSleep() is not done because "case AHK_GUI_ACTION" in GuiWindowProc() takes care of it.
 	// See its comments for why.
 	return OK;
+	*/
 }
 
 
@@ -6154,6 +6192,7 @@ ResultType GuiType::Escape() // Similar to close, except typically called when t
 ResultType GuiType::Submit(bool aHideIt)
 // Caller has ensured that all controls have valid, non-NULL hwnds:
 {
+    /*
 	if (!mHwnd) // Operating on a non-existent GUI has no effect.
 		return OK;
 
@@ -6236,6 +6275,7 @@ ResultType GuiType::Submit(bool aHideIt)
 	if (aHideIt)
 		ShowWindow(mHwnd, SW_HIDE);
 	return OK;
+*/
 }
 
 
@@ -6244,6 +6284,7 @@ VarSizeType GuiType::ControlGetName(GuiIndexType aGuiWindowIndex, GuiIndexType a
 // Caller has ensured that aGuiWindowIndex is less than MAX_GUI_WINDOWS.
 // We're returning the length of the var's contents, not the size.
 {
+    /*
 	GuiType *pgui;
 	// Relies on short-circuit boolean order:
 	if (aControlIndex >= MAX_CONTROLS_PER_GUI // Must check this first due to short-circuit boolean.  A non-GUI thread or one triggered by GuiClose/Escape or Gui menu bar.
@@ -6272,12 +6313,14 @@ VarSizeType GuiType::ControlGetName(GuiIndexType aGuiWindowIndex, GuiIndexType a
 	// Otherwise: Fall back to getting the leading characters of its caption (most often used for buttons)
 	VarSizeType length = GetWindowTextLength(control.hwnd);
 	return (length > A_GUICONTROL_TEXT_LENGTH) ? A_GUICONTROL_TEXT_LENGTH : length;
+*/
 }
 
 
 
 ResultType GuiType::ControlGetContents(Var &aOutputVar, GuiControlType &aControl, char *aMode)
 {
+    /*
 	char *cp, buf[1024]; // For various uses.
 	bool submit_mode = !stricmp(aMode, "Submit");
 	int pos;
@@ -6598,6 +6641,7 @@ ResultType GuiType::ControlGetContents(Var &aOutputVar, GuiControlType &aControl
 		aOutputVar.Length() = (VarSizeType)strlen(aOutputVar.Contents());
 	}
 	return aOutputVar.Close();  // In case it's the clipboard.
+*/
 }
 
 
@@ -6609,6 +6653,7 @@ GuiIndexType GuiType::FindControl(char *aControlID)
 // 3) Control's title/caption.
 // Returns -1 if not found.
 {
+	/*
 	// v1.0.44.08: Added the following check.  Without it, ControlExist() (further below) would retrieve the
 	// topmost child, which isn't very useful or intuitive.  This currently affects only the following commands:
 	// 1) GuiControl (but not GuiControlGet because it has special handling for a blank ControlID).
@@ -6653,6 +6698,7 @@ GuiIndexType GuiType::FindControl(char *aControlID)
 			return u;  // Match found.
 	// Otherwise: No match found.  At this stage, should be impossible if design is correct.
 	return -1;
+*/
 }
 
 
@@ -6667,6 +6713,7 @@ int GuiType::FindGroup(GuiIndexType aControlIndex, GuiIndexType &aGroupStart, Gu
 // to contain non-radio type controls.  Thus, the caller should check each control inside the
 // returned range to make sure it's a radio before operating upon it.
 {
+    /*
 	// Work backwards in the control array until the first member of the group is found or the
 	// first array index, whichever comes first (the first array index is the top control in the
 	// Z-Order and thus treated by the OS as an implicit start of a new group):
@@ -6690,12 +6737,14 @@ int GuiType::FindGroup(GuiIndexType aControlIndex, GuiIndexType &aGroupStart, Gu
 			++group_radios;
 	}
 	return group_radios;
+*/
 }
 
 
 
 ResultType GuiType::SetCurrentFont(char *aOptions, char *aFontName)
 {
+    /*
 	COLORREF color;
 	int font_index = FindOrCreateFont(aOptions, aFontName, &sFont[mCurrentFontIndex], &color);
 	if (color != CLR_NONE) // Even if the above call failed, it returns a color if one was specified.
@@ -6708,6 +6757,7 @@ ResultType GuiType::SetCurrentFont(char *aOptions, char *aFontName)
 	// Failure of the above is rare because it falls back to default typeface if the one specified
 	// isn't found.  It will have already displayed the error:
 	return FAIL;
+*/
 }
 
 
@@ -6722,6 +6772,7 @@ int GuiType::FindOrCreateFont(char *aOptions, char *aFontName, FontType *aFounda
 // the specified font already exists within the array of fonts.  If not found, a new font will
 // be added to the array.
 {
+    /*
 	// Set default output parameter in case of early return:
 	if (aColor) // Caller wanted color returned in an output parameter.
 		*aColor = CLR_NONE; // Because we want CLR_DEFAULT to indicate a real color.
@@ -6917,12 +6968,14 @@ int GuiType::FindOrCreateFont(char *aOptions, char *aFontName, FontType *aFounda
 
 	sFont[sFontCount++] = font; // Copy the newly created font's attributes into the next array element.
 	return sFontCount - 1; // The index of the newly created font.
+*/
 }
 
 
 
 int GuiType::FindFont(FontType &aFont)
 {
+    /*
 	for (int i = 0; i < sFontCount; ++i)
 		if (!stricmp(sFont[i].name, aFont.name) // lstrcmpi() is not used: 1) avoids breaking exisitng scripts; 2) provides consistent behavior across multiple locales.
 			&& sFont[i].point_size == aFont.point_size
@@ -6932,12 +6985,14 @@ int GuiType::FindFont(FontType &aFont)
 			&& sFont[i].strikeout == aFont.strikeout) // Match found.
 			return i;
 	return -1;  // Indicate failure.
+*/
 }
 
 
 
 LRESULT CALLBACK GuiWindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
+
 	// If a message pump other than our own is running -- such as that of a dialog like MsgBox -- it will
 	// dispatch messages directly here.  This is detected by means of g.CalledByIsDialogMessageOrDispatch==false.
 	// Such messages need to be checked here because MsgSleep hasn't seen the message and thus hasn't
@@ -7988,6 +8043,7 @@ void GuiType::Event(GuiIndexType aControlIndex, UINT aNotifyCode, USHORT aGuiEve
 // This function handles events within a GUI window that caused one of its controls to change in a meaningful
 // way, or that is an event that could trigger an external action, such as clicking a button or icon.
 {
+    /*
 	if (aControlIndex >= mControlCount) // Caller probably already checked, but just to be safe.
 		return;
 	GuiControlType &control = mControl[aControlIndex];
@@ -8239,6 +8295,7 @@ void GuiType::Event(GuiIndexType aControlIndex, UINT aNotifyCode, USHORT aGuiEve
 	// GetNonChildParent), it's probably not feasible because if some other message pump is running, it would
 	// route AHK_GUI_ACTION messages to the window proc. of the control rather than the parent window, which
 	// would prevent them from being re-posted back to the queue (see "case AHK_GUI_ACTION" in GuiWindowProc()).
+*/
 }
 
 
@@ -8363,6 +8420,7 @@ char *GuiType::HotkeyToText(WORD aHotkey, char *aBuf)
 
 void GuiType::ControlCheckRadioButton(GuiControlType &aControl, GuiIndexType aControlIndex, WPARAM aCheckType)
 {
+    /*
 	GuiIndexType radio_start, radio_end;
 	FindGroup(aControlIndex, radio_start, radio_end); // Even if the return value is 1, do the below because it ensures things like tabstop are in the right state.
 	if (aCheckType == BST_CHECKED)
@@ -8397,13 +8455,16 @@ void GuiType::ControlCheckRadioButton(GuiControlType &aControl, GuiIndexType aCo
 		if (first_radio_in_group) // Apply the tabstop style to it.
 			SetWindowLong(first_radio_in_group, GWL_STYLE, WS_TABSTOP | GetWindowLong(first_radio_in_group, GWL_STYLE));
 	}
+*/
 }
+
 
 
 
 void GuiType::ControlSetUpDownOptions(GuiControlType &aControl, GuiControlOptionsType &aOpt)
 // Caller has ensured that aControl.type is an UpDown.
 {
+    /*
 	if (aOpt.range_changed)
 	{
 		// MSDN implies that UDM_SETPOS should not be used on a control with a 32-bit range.
@@ -8427,12 +8488,14 @@ void GuiType::ControlSetUpDownOptions(GuiControlType &aControl, GuiControlOption
 			SendMessage(aControl.hwnd, UDM_SETRANGE, 0, (LPARAM)MAKELONG((short)aOpt.range_max, (short)aOpt.range_min));
 		}
 	}
+*/
 }
 
 
 
 int GuiType::ControlGetDefaultSliderThickness(DWORD aStyle, int aThumbThickness)
 {
+    /*
 	if (aThumbThickness < 1)
 		aThumbThickness = 20;  // Set default.
 	// Provide a small margin on both sides, otherwise the bar is sometimes truncated.
@@ -8442,6 +8505,7 @@ int GuiType::ControlGetDefaultSliderThickness(DWORD aStyle, int aThumbThickness)
 	if (aStyle & TBS_BOTH)
 		return aThumbThickness + 16;
 	return aThumbThickness + 8;
+*/
 }
 
 
@@ -8449,9 +8513,11 @@ int GuiType::ControlGetDefaultSliderThickness(DWORD aStyle, int aThumbThickness)
 int GuiType::ControlInvertSliderIfNeeded(GuiControlType &aControl, int aPosition)
 // Caller has ensured that aControl.type is slider.
 {
+    /*
 	return (aControl.attrib & GUI_CONTROL_ATTRIB_ALTBEHAVIOR)
 		? ((int)SendMessage(aControl.hwnd, TBM_GETRANGEMAX, 0, 0) - aPosition) + (int)SendMessage(aControl.hwnd, TBM_GETRANGEMIN, 0, 0)
 		: aPosition;  // No inversion necessary.
+*/
 }
 
 
@@ -8459,6 +8525,7 @@ int GuiType::ControlInvertSliderIfNeeded(GuiControlType &aControl, int aPosition
 void GuiType::ControlSetSliderOptions(GuiControlType &aControl, GuiControlOptionsType &aOpt)
 // Caller has ensured that aControl.type is slider.
 {
+    /*
 	if (aOpt.range_changed)
 	{
 		// Don't use TBM_SETRANGE because then only 16-bit values are supported:
@@ -8496,6 +8563,7 @@ void GuiType::ControlSetSliderOptions(GuiControlType &aControl, GuiControlOption
 		SendMessage(aControl.hwnd, TBM_SETBUDDY, TRUE, (LPARAM)aOpt.buddy1->hwnd);  // Left/top
 	if (aOpt.buddy2)
 		SendMessage(aControl.hwnd, TBM_SETBUDDY, FALSE, (LPARAM)aOpt.buddy2->hwnd); // Right/bottom
+*/
 }
 
 
@@ -8505,6 +8573,7 @@ void GuiType::ControlSetListViewOptions(GuiControlType &aControl, GuiControlOpti
 // Caller has ensured that aOpt.color_bk is CLR_INVALID if no change should be made to the
 // current background color.
 {
+    /*
 	if (aOpt.limit)
 	{
 		if (ListView_GetItemCount(aControl.hwnd) > 0)
@@ -8535,6 +8604,7 @@ void GuiType::ControlSetListViewOptions(GuiControlType &aControl, GuiControlOpti
 		// doesn't get updated:
 		InvalidateRect(aControl.hwnd, NULL, TRUE);
 	}
+	*/
 }
 
 
@@ -8544,6 +8614,7 @@ void GuiType::ControlSetTreeViewOptions(GuiControlType &aControl, GuiControlOpti
 // Caller has ensured that aOpt.color_bk is CLR_INVALID if no change should be made to the
 // current background color.
 {
+    /*
 	if (aOpt.color_changed)
 		TreeView_SetTextColor(aControl.hwnd, aControl.union_color);
 	if (aOpt.color_bk != CLR_INVALID) // Explicit color change was requested.
@@ -8559,6 +8630,7 @@ void GuiType::ControlSetTreeViewOptions(GuiControlType &aControl, GuiControlOpti
 
 	// Unlike ListView, seems not to be needed:
 	//InvalidateRect(aControl.hwnd, NULL, TRUE);
+*/
 }
 
 
@@ -8568,6 +8640,7 @@ void GuiType::ControlSetProgressOptions(GuiControlType &aControl, GuiControlOpti
 // Caller has ensured that aOpt.color_bk is CLR_INVALID if no change should be made to the
 // bar's current background color.
 {
+    /*
 	// If any options are present that cannot be manifest while a visual theme is in effect, ensure any
 	// such theme is removed from the control (currently, once removed it is never put back on):
 	// Override the default so that colors/smooth can be manifest even when non-classic theme is in effect.
@@ -8605,6 +8678,7 @@ void GuiType::ControlSetProgressOptions(GuiControlType &aControl, GuiControlOpti
 	default: // Custom background color.  In this case, theme would already have been stripped above.
 		SendMessage(aControl.hwnd, PBM_SETBKCOLOR, 0, aOpt.color_bk);
 	}
+*/
 }
 
 
@@ -8613,6 +8687,7 @@ bool GuiType::ControlOverrideBkColor(GuiControlType &aControl)
 // Caller has ensured that aControl.type is something for which the window's or tab control's background
 // should apply (e.g. Progress or Text).
 {
+    /*
 	GuiControlType *ptab_control;
 	if (!mTabControlCount || !(ptab_control = FindTabControl(aControl.tab_control_index))
 		|| !(ptab_control->attrib & GUI_CONTROL_ATTRIB_BACKGROUND_DEFAULT)) // Relies on short-circuit boolean order.
@@ -8626,6 +8701,7 @@ bool GuiType::ControlOverrideBkColor(GuiControlType &aControl)
 	// Returns true if more than 50% of control's area is inside the tab:
 	return (overlap_rect.right - overlap_rect.left) * (overlap_rect.bottom - overlap_rect.top)
 		> 0.5 * (control_rect.right - control_rect.left) * (control_rect.bottom - control_rect.top);
+*/
 }
 
 
@@ -8633,6 +8709,7 @@ bool GuiType::ControlOverrideBkColor(GuiControlType &aControl)
 void GuiType::ControlUpdateCurrentTab(GuiControlType &aTabControl, bool aFocusFirstControl)
 // Handles the selection of a new tab in a tab control.
 {
+    /*
 	int curr_tab_index = TabCtrl_GetCurSel(aTabControl.hwnd);
 	if (curr_tab_index == -1) // No tab is selected.  Maybe only happens if the tab control has no tabs at all.
 		return;
@@ -8820,12 +8897,15 @@ void GuiType::ControlUpdateCurrentTab(GuiControlType &aTabControl, bool aFocusFi
 			InvalidateRect(mHwnd, &tab_rect, TRUE); // Seems safer to use TRUE, not knowing all possible overlaps, etc.
 		}
 	}
+*/
 }
+
 
 
 
 GuiControlType *GuiType::FindTabControl(TabControlIndexType aTabControlIndex)
 {
+    /*
 	if (aTabControlIndex == MAX_TAB_CONTROLS)
 		// This indicates it's not a member of a tab control. Callers rely on this check.
 		return NULL;
@@ -8837,6 +8917,7 @@ GuiControlType *GuiType::FindTabControl(TabControlIndexType aTabControlIndex)
 			else
 				++tab_control_index;
 	return NULL; // Since above didn't return, indicate failure.
+*/
 }
 
 
@@ -8845,6 +8926,7 @@ int GuiType::FindTabIndexByName(GuiControlType &aTabControl, char *aName, bool a
 // Find the first tab in this tab control whose leading-part-of-name matches aName.
 // Return int vs. TabIndexType so that failure can be indicated.
 {
+    /*
 	int tab_count = TabCtrl_GetItemCount(aTabControl.hwnd);
 	if (!tab_count)
 		return -1; // No match.
@@ -8881,17 +8963,21 @@ int GuiType::FindTabIndexByName(GuiControlType &aTabControl, char *aName, bool a
 
 	// Since above didn't return, no match found.
 	return -1;
+*/
 }
+
 
 
 
 int GuiType::GetControlCountOnTabPage(TabControlIndexType aTabControlIndex, TabIndexType aTabIndex)
 {
+    /*
 	int count = 0;
 	for (GuiIndexType u = 0; u < mControlCount; ++u)
 		if (mControl[u].tab_index == aTabIndex && mControl[u].tab_control_index == aTabControlIndex) // This boolean order helps performance.
 			++count;
 	return count;
+*/
 }
 
 
@@ -8899,6 +8985,7 @@ int GuiType::GetControlCountOnTabPage(TabControlIndexType aTabControlIndex, TabI
 POINT GuiType::GetPositionOfTabClientArea(GuiControlType &aTabControl)
 // Gets position of tab control relative to parent window's client area.
 {
+    /*
 	RECT rect, entire_rect;
 	GetWindowRect(aTabControl.hwnd, &entire_rect);
 	POINT pt = {entire_rect.left, entire_rect.top};
@@ -8919,6 +9006,7 @@ POINT GuiType::GetPositionOfTabClientArea(GuiControlType &aTabControl)
 	pt.x += rect.left - 2;  // -2 because testing shows that X (but not Y) is off by exactly 2.
 	pt.y += rect.top;
 	return pt;
+*/
 }
 
 
@@ -8926,6 +9014,7 @@ POINT GuiType::GetPositionOfTabClientArea(GuiControlType &aTabControl)
 ResultType GuiType::SelectAdjacentTab(GuiControlType &aTabControl, bool aMoveToRight, bool aFocusFirstControl
 	, bool aWrapAround)
 {
+    /*
 	int tab_count = TabCtrl_GetItemCount(aTabControl.hwnd);
 	if (!tab_count)
 		return FAIL;
@@ -8974,6 +9063,7 @@ ResultType GuiType::SelectAdjacentTab(GuiControlType &aTabControl, bool aMoveToR
 		Event(GUI_HWND_TO_INDEX(aTabControl.hwnd), TCN_SELCHANGE);
 
 	return OK;
+*/
 }
 
 
@@ -8985,6 +9075,7 @@ void GuiType::ControlGetPosOfFocusedItem(GuiControlType &aControl, POINT &aPoint
 // returned (in screen coords) If the control has no focused item, the position of the
 // control's caret (which seems to work okay on all control types, even pictures) is returned.
 {
+    /*
 	LRESULT index;
 	RECT rect;
 	rect.left = COORD_UNSPECIFIED; // Init to detect whether rect has been set yet.
@@ -9064,6 +9155,7 @@ void GuiType::ControlGetPosOfFocusedItem(GuiControlType &aControl, POINT &aPoint
 	aPoint.y = rect.top + 2 + (rect.bottom - rect.top)/2;  // +2 to shift it down a tad, revealing more of the selected item.
 	// Above: Moving it down a little by default seems desirable 95% of the time to prevent it
 	// from covering up the focused row, the slider's thumb, a datetime's single row, etc.
+*/
 }
 
 
@@ -9085,6 +9177,7 @@ struct LV_SortType
 int CALLBACK LV_GeneralSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 // ListView sorting by field's text or something derived from the text for each call.
 {
+    /*
 	LV_SortType &lvs = *(LV_SortType *)lParamSort;
 
 	// v1.0.44.12: Testing shows that LVM_GETITEMW automatically converts the ANSI contents of our ListView
@@ -9175,15 +9268,18 @@ int CALLBACK LV_GeneralSort(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 		result = (f1 > f2) ? 1 : (f1 == f2 ? 0 : -1);
 	}
 	return lvs.sort_ascending ? result : -result;
+*/
 }
 
 
 
 int CALLBACK LV_Int32Sort(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 {
+    /*
 	// Caller-provided value of lParamSort is TRUE (non-zero) when ascending order is desired.
 	// MSDN: "return a negative value if the first item should precede the second"
 	return (int)(lParamSort ? (lParam1 - lParam2) : (lParam2 - lParam1));
+*/
 }
 
 
@@ -9192,6 +9288,7 @@ void GuiType::LV_Sort(GuiControlType &aControl, int aColumnIndex, bool aSortOnly
 // aForceDirection should be 'A' to force ascending, 'D' to force ascending, or '\0' to use the column's
 // current default direction.
 {
+    /*
 	if (aColumnIndex < 0 || aColumnIndex >= LV_MAX_COLUMNS) // Invalid (avoids array access violation).
 		return;
 	lv_attrib_type &lv_attrib = *aControl.union_lv_attrib;
@@ -9293,6 +9390,7 @@ void GuiType::LV_Sort(GuiControlType &aControl, int aColumnIndex, bool aSortOnly
 	// realistically fail.  Just update things to indicate the current sort-column and direction:
 	lv_attrib.sorted_by_col = aColumnIndex;
 	lv_attrib.is_now_sorted_ascending = lvs.sort_ascending;
+*/
 }
 
 
@@ -9306,8 +9404,10 @@ DWORD GuiType::ControlGetListViewMode(HWND aWnd)
 // LV_VIEW_LIST        0x0003 (LVS_LIST also equals 0x0003)
 // LV_VIEW_TILE        0x0004
 {
+    /*
 	// On XP or later, use the new method of finding the view so that tile-view can be detected.
 	// Also, the following relies on the fact that LV_VIEW_ICON==LVS_ICON, LV_VIEW_DETAILS==LVS_REPORT,
 	// LVS_SMALLICON==LV_VIEW_SMALLICON, and LVS_LIST==LV_VIEW_LIST.
 	return g_os.IsWinXPorLater() ? ListView_GetView(aWnd) : (GetWindowLong(aWnd, GWL_STYLE) & LVS_TYPEMASK);
+*/
 }

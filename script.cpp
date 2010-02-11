@@ -72,14 +72,14 @@ Script::Script()
 	mNIC.hWnd = NULL;  // Set this as an indicator that it tray icon is not installed.
 
 	// Lastly (after the above have been initialized), anything that can fail:
-	if (   !(mTrayMenu = AddMenu("Tray"))   ) // realistically never happens
+/*	if (   !(mTrayMenu = AddMenu("Tray"))   ) // realistically never happens
 	{
 		ScriptError("No tray mem");
 		ExitApp(EXIT_CRITICAL);
 	}
 	else
 		mTrayMenu->mIncludeStandardItems = true;
-
+*/
 #ifdef _DEBUG
 	if (ID_FILE_EXIT < ID_MAIN_FIRST) // Not a very thorough check.
 		ScriptError("DEBUG: ID_FILE_EXIT is too large (conflicts with IDs reserved via ID_USER_FIRST).");

@@ -1307,7 +1307,7 @@
 	"globaldata.h"
 	"qmath.h"
 
-1251585310 source:l:\source\ahkgcc\script_gui.cpp
+1265868350 source:l:\source\ahkgcc\script_gui.cpp
 	"stdafx.h"
 	"script.h"
 	"globaldata.h"
@@ -1315,7 +1315,7 @@
 	"window.h"
 	"qmath.h"
 
-1252277527 source:l:\source\ahkgcc\script_menu.cpp
+1265868671 source:l:\source\ahkgcc\script_menu.cpp
 	"stdafx.h"
 	"script.h"
 	"globaldata.h"
@@ -1444,4 +1444,18 @@
 	"window.h"
 	"util.h"
 	"application.h"
+
+1253418326 source:l:\source\ahkgcc\autohotkey.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+
+1253418326 source:l:\source\ahkgcc\autohotkeyx.cpp
+	"stdafx.h"
+	"globaldata.h"
+	"application.h"
+	"window.h"
+	"exports.h"
+	<process.h>
 

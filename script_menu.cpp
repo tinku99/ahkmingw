@@ -23,6 +23,7 @@ GNU General Public License for more details.
 
 ResultType Script::PerformMenu(char *aMenu, char *aCommand, char *aParam3, char *aParam4, char *aOptions)
 {
+    /*
 	if (mMenuUseErrorLevel)
 		g_ErrorLevel->Assign(ERRORLEVEL_NONE);  // Set default, which is "none" for the Menu command.
 
@@ -417,6 +418,7 @@ ResultType Script::PerformMenu(char *aMenu, char *aCommand, char *aParam3, char 
 		return menu->DeleteItem(menu_item, menu_item_prev);
 	} // switch()
 	return FAIL;  // Should never be reached, but avoids compiler warning and improves bug detection.
+*/
 }
 
 
@@ -424,11 +426,13 @@ ResultType Script::PerformMenu(char *aMenu, char *aCommand, char *aParam3, char 
 UserMenu *Script::FindMenu(char *aMenuName)
 // Returns the UserMenu whose name matches aMenuName, or NULL if not found.
 {
+    /*
 	if (!aMenuName || !*aMenuName) return NULL;
 	for (UserMenu *menu = mFirstMenu; menu != NULL; menu = menu->mNextMenu)
 		if (!lstrcmpi(menu->mName, aMenuName)) // Match found.
 			return menu;
 	return NULL; // No match found.
+*/
 }
 
 
@@ -437,6 +441,7 @@ UserMenu *Script::AddMenu(char *aMenuName)
 // Caller must have already ensured aMenuName doesn't exist yet in the list.
 // Returns the newly created UserMenu object.
 {
+    /*
 	if (!aMenuName || !*aMenuName) return NULL;
 	size_t length = strlen(aMenuName);
 	if (length > MAX_MENU_NAME_LENGTH)
@@ -462,6 +467,7 @@ UserMenu *Script::AddMenu(char *aMenuName)
 	}
 	++mMenuCount;  // Only after memory has been successfully allocated.
 	return menu;
+*/
 }
 
 
@@ -474,6 +480,7 @@ ResultType Script::ScriptDeleteMenu(UserMenu *aMenu)
 // aMenu as one of their submenus will have that menu item deleted from their
 // menus to avoid any chance of problems due to non-existent or NULL submenus.
 {
+    /*
 	// Delete any other menu's menu item that has aMenu as its attached submenu:
 	UserMenuItem *mi, *mi_prev, *mi_to_delete;
 	for (UserMenu *m = mFirstMenu; m; m = m->mNextMenu)
@@ -507,6 +514,7 @@ ResultType Script::ScriptDeleteMenu(UserMenu *aMenu)
 	delete aMenu;
 	--mMenuCount;
 	return OK;
+*/
 }
 
 
@@ -553,6 +561,7 @@ ResultType UserMenu::AddItem(char *aName, UINT aMenuID, Label *aLabel, UserMenu 
 // Caller must have already ensured that aName does not yet exist as a user-defined menu item
 // in this->mMenu.
 {
+    /*
 	size_t length = strlen(aName);
 	if (length > MAX_MENU_NAME_LENGTH)
 		return FAIL;  // Caller should show error if desired.
@@ -585,6 +594,7 @@ ResultType UserMenu::AddItem(char *aName, UINT aMenuID, Label *aLabel, UserMenu 
 	if (*aOptions)
 		UpdateOptions(menu_item, aOptions);
 	return OK;
+*/
 }
 
 
@@ -595,6 +605,7 @@ UserMenuItem::UserMenuItem(char *aName, size_t aNameCapacity, UINT aMenuID, Labe
 	, mPriority(0) // default priority = 0
 	, mEnabled(true), mChecked(false), mNextMenuItem(NULL)
 {
+    /*
 	if (aMenu->mMenu)
 	{
 		if (aSubmenu) // Ensure the menu is created so that AppendMenu() will function properly.
@@ -603,12 +614,14 @@ UserMenuItem::UserMenuItem(char *aName, size_t aNameCapacity, UINT aMenuID, Labe
 			, aSubmenu ? (UINT_PTR)aSubmenu->mMenu : aMenuID, aName);
 		UPDATE_GUI_MENU_BARS(aMenu->mMenuType, aMenu->mMenu)
 	}
+	*/
 }
 
 
 
 ResultType UserMenu::DeleteItem(UserMenuItem *aMenuItem, UserMenuItem *aMenuItemPrev)
 {
+    /*
 	// Remove this menu item from the linked list:
 	if (aMenuItem == mLastMenuItem)
 		mLastMenuItem = aMenuItemPrev; // Can be NULL if the list will now be empty.
@@ -625,12 +638,14 @@ ResultType UserMenu::DeleteItem(UserMenuItem *aMenuItem, UserMenuItem *aMenuItem
 	--mMenuItemCount;
 	UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary.
 	return OK;
+*/
 }
 
 
 
 ResultType UserMenu::DeleteAllItems()
 {
+    /*
 	if (!mFirstMenuItem)
 		return OK;  // If there are no user-defined menu items, it's already in the correct state.
 	// Remove all menu items from the linked list and from the menu.  First destroy the menu since
@@ -661,6 +676,7 @@ ResultType UserMenu::DeleteAllItems()
 	mMenuItemCount = 0;
 	mDefault = NULL;  // i.e. there can't be a *user-defined* default item anymore, even if this is the tray.
 	return OK;
+*/
 }
 
 
@@ -671,6 +687,7 @@ ResultType UserMenu::ModifyItem(UserMenuItem *aMenuItem, Label *aLabel, UserMenu
 // If a menu item becomes a submenu, we don't relinquish its ID in case it's ever made a normal item
 // again (avoids the need to re-lookup a unique ID).
 {
+    /*
 	if (*aOptions)
 		UpdateOptions(aMenuItem, aOptions);
 	if (!aLabel && !aSubmenu) // We were called only to update this item's options.
@@ -726,14 +743,17 @@ ResultType UserMenu::ModifyItem(UserMenuItem *aMenuItem, Label *aLabel, UserMenu
 	// else no error msg and return OK so that the thread will continue.  This may help catch
 	// bugs in the course of normal use of this feature.
 	return OK;
+*/
 }
 
 
 
 void UserMenu::UpdateOptions(UserMenuItem *aMenuItem, char *aOptions)
 {
+    /*
 	if (toupper(*aOptions) == 'P')
 		aMenuItem->mPriority = atoi(aOptions + 1);
+*/
 }
 
 
@@ -742,6 +762,7 @@ ResultType UserMenu::RenameItem(UserMenuItem *aMenuItem, char *aNewName)
 // Caller should specify "" for aNewName to convert aMenuItem into a separator.
 // Returns FAIL if the new name conflicts with an existing name.
 {
+    /*
 	if (strlen(aNewName) > MAX_MENU_NAME_LENGTH)
 		return FAIL; // Caller should diplay error if desired.
 
@@ -778,6 +799,7 @@ ResultType UserMenu::RenameItem(UserMenuItem *aMenuItem, char *aNewName)
 	BOOL result = SetMenuItemInfo(mMenu, aMenuItem_ID, aMenuItem->mSubmenu != NULL, &mii);
 	UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary.
 	return result ? UpdateName(aMenuItem, aNewName) : FAIL;
+*/
 }
 
 
@@ -785,6 +807,7 @@ ResultType UserMenu::RenameItem(UserMenuItem *aMenuItem, char *aNewName)
 ResultType UserMenu::UpdateName(UserMenuItem *aMenuItem, char *aNewName)
 // Caller should already have ensured that aMenuItem is not too long.
 {
+    /*
 	size_t new_length = strlen(aNewName);
 	if (new_length)
 	{
@@ -809,6 +832,7 @@ ResultType UserMenu::UpdateName(UserMenuItem *aMenuItem, char *aNewName)
 		aMenuItem->mMenuID = 0; // Free up an ID since separators currently can't be converted back into items.
 	}
 	return OK;
+*/
 }
 
 
@@ -818,36 +842,43 @@ ResultType UserMenu::CheckItem(UserMenuItem *aMenuItem)
 // UPDATE_GUI_MENU_BARS here or in the next few functions below.
 
 {
+    /*
 	aMenuItem->mChecked = true;
 	if (mMenu)
 		CheckMenuItem(mMenu, aMenuItem_ID, aMenuItem_MF_BY | MF_CHECKED);
 	return OK;
+	*/
 }
 
 
 
 ResultType UserMenu::UncheckItem(UserMenuItem *aMenuItem)
 {
+    /*
 	aMenuItem->mChecked = false;
 	if (mMenu)
 		CheckMenuItem(mMenu, aMenuItem_ID, aMenuItem_MF_BY | MF_UNCHECKED);
 	return OK;
+*/
 }
 
 
 
 ResultType UserMenu::ToggleCheckItem(UserMenuItem *aMenuItem)
 {
+    /*
 	aMenuItem->mChecked = !aMenuItem->mChecked;
 	if (mMenu)
 		CheckMenuItem(mMenu, aMenuItem_ID, aMenuItem_MF_BY | (aMenuItem->mChecked ? MF_CHECKED : MF_UNCHECKED));
 	return OK;
+*/
 }
 
 
 
 ResultType UserMenu::EnableItem(UserMenuItem *aMenuItem)
 {
+    /*
 	aMenuItem->mEnabled = true;
 	if (mMenu)
 	{
@@ -855,13 +886,14 @@ ResultType UserMenu::EnableItem(UserMenuItem *aMenuItem)
 		UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary.
 	}
 	return OK;
-
+*/
 }
 
 
 
 ResultType UserMenu::DisableItem(UserMenuItem *aMenuItem)
 {
+    /*
 	aMenuItem->mEnabled = false;
 	if (mMenu)
 	{
@@ -869,12 +901,14 @@ ResultType UserMenu::DisableItem(UserMenuItem *aMenuItem)
 		UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary.
 	}
 	return OK;
+*/
 }
 
 
 
 ResultType UserMenu::ToggleEnableItem(UserMenuItem *aMenuItem)
 {
+    /*
 	aMenuItem->mEnabled = !aMenuItem->mEnabled;
 	if (mMenu)
 	{
@@ -883,12 +917,14 @@ ResultType UserMenu::ToggleEnableItem(UserMenuItem *aMenuItem)
 		UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary.
 	}
 	return OK;
+*/
 }
 
 
 
 ResultType UserMenu::SetDefault(UserMenuItem *aMenuItem)
 {
+    /*
 	if (mDefault == aMenuItem)
 		return OK;
 	mDefault = aMenuItem;
@@ -912,12 +948,14 @@ ResultType UserMenu::SetDefault(UserMenuItem *aMenuItem)
 	}
 	UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Testing shows that menu bars themselves can have default items, and that this is necessary.
 	return OK;
+*/
 }
 
 
 
 ResultType UserMenu::IncludeStandardItems()
 {
+    /*
 	if (mIncludeStandardItems)
 		return OK;
 	// In this case, immediately create the menu to support having the standard menu items on the
@@ -927,16 +965,19 @@ ResultType UserMenu::IncludeStandardItems()
 	if (!Create()) // It may already exist, in which case this returns OK.
 		return FAIL; // No error msg since so rare.
 	return AppendStandardItems();
+*/
 }
 
 
 
 ResultType UserMenu::ExcludeStandardItems()
 {
+    /*
 	if (!mIncludeStandardItems)
 		return OK;
 	mIncludeStandardItems = false;
 	return Destroy(); // It will be recreated automatically the next time the user displays it.
+*/
 }
 
 
@@ -949,6 +990,7 @@ ResultType UserMenu::Create(MenuTypeType aMenuType)
 // Note that a menu bar's submenus can be (perhaps must be) of the popup type, so we only need
 // to worry about the distinction for the menu bar itself.  The caller tells us which is which.
 {
+    /*
 	if (mMenu)
 	{
 		// Since menu already exists, check if it's the right type.  If caller left the type unspecified,
@@ -1015,12 +1057,14 @@ ResultType UserMenu::Create(MenuTypeType aMenuType)
 	ApplyColor(false);
 
 	return OK;
+*/
 }
 
 
 
 void UserMenu::SetColor(char *aColorName, bool aApplyToSubmenus)
 {
+    /*
 	// Avoid the overhead of creating HBRUSH's on OSes that don't support SetMenuInfo().
 	// Perhaps there is some other way to change menu background color on Win95/NT?
 	if (g_os.IsWin95() || g_os.IsWinNT4())
@@ -1038,6 +1082,7 @@ void UserMenu::SetColor(char *aColorName, bool aApplyToSubmenus)
 		ApplyColor(aApplyToSubmenus);
 		UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary.
 	}
+	*/
 }
 
 
@@ -1048,16 +1093,18 @@ void UserMenu::ApplyColor(bool aApplyToSubmenus)
 // testing shows that the OS sets the color to white if the HBRUSH becomes invalid.
 // The caller is also responsible for calling UPDATE_GUI_MENU_BARS if desired.
 {
+    /*
 	// Must fetch function address dynamically or program won't launch at all on Win95/NT:
 	typedef BOOL (WINAPI *MySetMenuInfoType)(HMENU, LPCMENUINFO);
 	static MySetMenuInfoType MySetMenuInfo = (MySetMenuInfoType)GetProcAddress(GetModuleHandle("user32"), "SetMenuInfo");
 	if (!MySetMenuInfo)
 		return;
-	MENUINFO mi = {0}; 
+	MENUINFO mi = {0};
 	mi.cbSize = sizeof(MENUINFO);
 	mi.fMask = MIM_BACKGROUND|(aApplyToSubmenus ? MIM_APPLYTOSUBMENUS : 0);
 	mi.hbrBack = mBrush;
 	MySetMenuInfo(mMenu, &mi);
+*/
 }
 
 
@@ -1065,6 +1112,7 @@ void UserMenu::ApplyColor(bool aApplyToSubmenus)
 ResultType UserMenu::AppendStandardItems()
 // Caller must ensure that this->mMenu exists if it wants the items to be added immediately.
 {
+    /*
 	mIncludeStandardItems = true; // even if the menu doesn't exist.
 	if (!mMenu)
 		return OK;
@@ -1091,6 +1139,7 @@ ResultType UserMenu::AppendStandardItems()
 	AppendMenu(mMenu, MF_STRING, ID_TRAY_EXIT, "E&xit");
 	UPDATE_GUI_MENU_BARS(mMenuType, mMenu)  // Verified as being necessary (though it would be rare anyone would want the menu bar containing the std items).
 	return OK;  // For caller convenience.
+*/
 }
 
 
@@ -1100,6 +1149,7 @@ ResultType UserMenu::Destroy()
 // is successfully destroyed, if the indirect destructions resulting from it don't succeed, this
 // method returns FAIL.
 {
+    /*
 	if (!mMenu)  // For performance.
 		return OK;
 	// I think DestroyMenu() can fail if an attempt is made to destroy the menu while it is being
@@ -1171,6 +1221,7 @@ ResultType UserMenu::Destroy()
 					if (!m->Destroy())  // Attempt to destroy any menu that contains this menu as a submenu (will fail if m is a menu bar).
 						result = FAIL; // Seems best to consider even one failure is considered a total failure.
 	return result;
+*/
 }
 
 
@@ -1184,6 +1235,7 @@ ResultType UserMenu::Display(bool aForceToForeground, int aX, int aY)
 // resistence.  This is done because if the main window is *not* successfully activated prior to
 // displaying the menu, it might be impossible to dismiss the menu by clicking outside of it.
 {
+    /*
 	if (!mMenuItemCount && !mIncludeStandardItems)
 		return OK;  // Consider the display of an empty menu to be a success.
 	//if (!IsMenu(mMenu))
@@ -1302,7 +1354,7 @@ ResultType UserMenu::Display(bool aForceToForeground, int aX, int aY)
 	// in v1.0.38.04, namely the line "g_script.mLastPeekTime = tick_now;" in IsCycleComplete().
 	// The root problem here is that it would not be intuitive to allow the command after
 	// "Menu, MyMenu, Show" should to run before the menu item's subroutine launches as a new thread.
-	// 
+	//
 	// You could argue that selecting a menu item should immediately Gosub the selected menu item's
 	// subroutine rather than queuing it up as a new thread.  However, even if that is a better method,
 	// it would break existing scripts that rely on new-thread behavior (such as fresh default for
@@ -1316,6 +1368,7 @@ ResultType UserMenu::Display(bool aForceToForeground, int aX, int aY)
 	// ExitApp
 	MsgSleep(-1);
 	return OK;
+*/
 }
 
 
@@ -1333,6 +1386,7 @@ UINT UserMenu::GetSubmenuPos(HMENU ahMenu)
 // InsertMenu() (if that is ever allowed), etc. -- just loop through the menu to find the
 // right item, then return that to the caller so that it can modify the submenu based on position:
 {
+    /*
 	if (!ahMenu || !mMenu)
 		return UINT_MAX;
 	int menu_item_count = GetMenuItemCount(mMenu);
@@ -1340,6 +1394,7 @@ UINT UserMenu::GetSubmenuPos(HMENU ahMenu)
 		if (GetSubMenu(mMenu, i) == ahMenu)
 			return i;
 	return UINT_MAX;
+*/
 }
 
 
@@ -1348,6 +1403,7 @@ UINT UserMenu::GetItemPos(char *aMenuItemName)
 // aMenuItemName will be searched for in this->mMenu.
 // Returns UINT_MAX if this->mMenu is NULL or if aMenuItemName can't be found in this->mMenu.
 {
+    /*
 	if (!mMenu)
 		return UINT_MAX;
 	int menu_item_count = GetMenuItemCount(mMenu);
@@ -1357,12 +1413,14 @@ UINT UserMenu::GetItemPos(char *aMenuItemName)
 			if (!lstrcmpi(buf, aMenuItemName))  // A case insensitive match was found.
 				return i;
 	return UINT_MAX;  // No match found.
+*/
 }
 
 
 
 bool UserMenu::ContainsMenu(UserMenu *aMenu)
 {
+    /*
 	if (!aMenu)
 		return false;
 	// For each submenu in mMenu: Check if it or any of its submenus equals aMenu.
@@ -1372,4 +1430,5 @@ bool UserMenu::ContainsMenu(UserMenu *aMenu)
 				return true;
 			//else keep searching
 	return false;
+*/
 }
