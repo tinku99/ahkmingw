@@ -29,6 +29,7 @@ ResultType Script::DoRunAs(char *aCommandLine, char *aWorkingDir, bool aDisplayE
 	, Var *aOutputVar, PROCESS_INFORMATION &aPI, bool &aSuccess // Output parameters we set for caller, but caller must have initialized aSuccess to false.
 	, HANDLE &aNewProcess, char *aSystemErrorText)              // Same.  Caller must ensure aSystemErrorText is at least 512 in size.
 {
+/*
 	typedef BOOL (WINAPI *MyCreateProcessWithLogonW)(
 		LPCWSTR lpUsername,                 // user's name
 		LPCWSTR lpDomain,                   // user's domain
@@ -93,12 +94,14 @@ ResultType Script::DoRunAs(char *aCommandLine, char *aWorkingDir, bool aDisplayE
 		GetLastErrorText(aSystemErrorText, 512, aUpdateLastError);  // Caller has ensured that aSystemErrorText is at least this size.
 	FreeLibrary(hinstLib);
 	return OK;
+*/
 }
 
 
 
 VarSizeType BIV_IPAddress(char *aBuf, char *aVarName)
 {
+    /*
 	// aaa.bbb.ccc.ddd = 15, but allow room for larger IP's in the future.
 	#define IP_ADDRESS_SIZE 32 // The maximum size of any of the strings we return, including terminator.
 	if (!aBuf)
@@ -132,12 +135,14 @@ VarSizeType BIV_IPAddress(char *aBuf, char *aVarName)
 
 	WSACleanup();
 	return (VarSizeType)strlen(aBuf);
+*/
 }
 
 
 
 VarSizeType BIV_IsAdmin(char *aBuf, char *aVarName)
 {
+    /*
 	if (!aBuf)
 		return 1;  // The length of the string "1" or "0".
 	char result = '0';  // Default.
@@ -166,12 +171,14 @@ VarSizeType BIV_IsAdmin(char *aBuf, char *aVarName)
 	aBuf[0] = result;
 	aBuf[1] = '\0';
 	return 1; // Length of aBuf.
+*/
 }
 
 
 
 ResultType Line::PixelGetColor(int aX, int aY, char *aOptions)
 {
+    /*
 	if (strcasestr(aOptions, "Slow")) // New mode for v1.0.43.10.  Takes precedence over Alt mode.
 		return PixelSearch(aX, aY, aX, aY, 0, 0, aOptions, true); // It takes care of setting ErrorLevel and the output-var.
 	Var &output_var = *OUTPUT_VAR;
@@ -208,12 +215,14 @@ ResultType Line::PixelGetColor(int aX, int aY, char *aOptions)
 	sprintf(buf, "0x%06X", strcasestr(aOptions, "RGB") ? bgr_to_rgb(color) : color);
 	g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
 	return output_var.Assign(buf);
+*/
 }
 
 
 
 ResultType Line::SplashTextOn(int aWidth, int aHeight, char *aTitle, char *aText)
 {
+    /*
 	// Add some caption and frame size to window:
 	aWidth += GetSystemMetrics(SM_CXFIXEDFRAME) * 2;
 	int min_height = GetSystemMetrics(SM_CYCAPTION) + (GetSystemMetrics(SM_CXFIXEDFRAME) * 2);
@@ -281,6 +290,7 @@ ResultType Line::SplashTextOn(int aWidth, int aHeight, char *aTitle, char *aText
 	// UpdateWindow() would probably achieve the same effect as the above, but it feels safer to do
 	// the above because it ensures that our message queue is empty prior to returning to our caller.
 	return OK;
+*/
 }
 
 
@@ -289,6 +299,7 @@ ResultType Line::WinMenuSelectItem(char *aTitle, char *aText, char *aMenu1, char
 	, char *aMenu3, char *aMenu4, char *aMenu5, char *aMenu6, char *aMenu7
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	// Set up a temporary array make it easier to traverse nested menus & submenus
 	// in a loop.  Also add a NULL at the end to simplify the loop a little:
 	char *menu_param[] = {aMenu1, aMenu2, aMenu3, aMenu4, aMenu5, aMenu6, aMenu7, NULL};
@@ -305,7 +316,7 @@ ResultType Line::WinMenuSelectItem(char *aTitle, char *aText, char *aMenu1, char
 	int menu_item_count = GetMenuItemCount(hMenu);
 	if (menu_item_count < 1) // Menu bar has no menus.
 		return OK;  // Let ErrorLevel tell the story.
-	
+
 #define MENU_ITEM_IS_SUBMENU 0xFFFFFFFF
 #define UPDATE_MENU_VARS(menu_pos) \
 menu_id = GetMenuItemID(hMenu, menu_pos);\
@@ -385,6 +396,7 @@ else\
 	// Since the above didn't return, the specified search hierarchy was completely found.
 	PostMessage(target_window, WM_COMMAND, (WPARAM)menu_id, 0);
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -395,6 +407,7 @@ ResultType Line::Control(char *aCmd, char *aValue, char *aControl, char *aTitle,
 // in MSIE (whose Internet Explorer_TridentCmboBx2 does not respond to "Control Choose" but
 // does respond to "Control Focus").  But it didn't help.
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR);  // Set default since there are many points of return.
 	ControlCmds control_cmd = ConvertControlCmd(aCmd);
 	// Since command names are validated at load-time, this only happens if the command name
@@ -465,7 +478,7 @@ ResultType Line::Control(char *aCmd, char *aValue, char *aControl, char *aTitle,
 	case CONTROL_CMD_EXSTYLE:
 	{
 		if (!*aValue)
-			return OK; // Seems best not to treat an explicit blank as zero.  Let ErrorLevel tell the story. 
+			return OK; // Seems best not to treat an explicit blank as zero.  Let ErrorLevel tell the story.
 		int style_index = (control_cmd == CONTROL_CMD_STYLE) ? GWL_STYLE : GWL_EXSTYLE;
 		DWORD new_style, orig_style = GetWindowLong(control_window, style_index);
 		// +/-/^ are used instead of |&^ because the latter is confusing, namely that & really means &=~style, etc.
@@ -676,6 +689,7 @@ ResultType Line::Control(char *aCmd, char *aValue, char *aControl, char *aTitle,
 
 	DoControlDelay;  // Seems safest to do this for all of these commands.
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -683,6 +697,7 @@ ResultType Line::Control(char *aCmd, char *aValue, char *aControl, char *aTitle,
 ResultType Line::ControlGet(char *aCmd, char *aValue, char *aControl, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR);  // Set default since there are many points of return.
 	ControlGetCmds control_cmd = ConvertControlGetCmd(aCmd);
@@ -963,12 +978,14 @@ ResultType Line::ControlGet(char *aCmd, char *aValue, char *aControl, char *aTit
 
 	// Note that ControlDelay is not done for the Get type commands, because it seems unnecessary.
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
 
 ResultType Line::URLDownloadToFile(char *aURL, char *aFilespec)
 {
+    /*
 	// Check that we have IE3 and access to wininet.dll
 	HINSTANCE hinstLib = LoadLibrary("wininet");
 	if (!hinstLib)
@@ -1078,12 +1095,14 @@ ResultType Line::URLDownloadToFile(char *aURL, char *aFilespec)
 		DeleteFile(aFilespec);  // delete damaged/incomplete file
 		return g_ErrorLevel->Assign(ERRORLEVEL_ERROR);
 	}
+*/
 }
 
 
 
 int CALLBACK FileSelectFolderCallback(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
 {
+    /*
 	if (uMsg == BFFM_INITIALIZED) // Caller has ensured that lpData isn't NULL by having set a valid lParam value.
 		SendMessage(hwnd, BFFM_SETSELECTION, TRUE, lpData);
 	// In spite of the quote below, the behavior does not seem to vary regardless of what value is returned
@@ -1093,6 +1112,7 @@ int CALLBACK FileSelectFolderCallback(HWND hwnd, UINT uMsg, LPARAM lParam, LPARA
 	// MSDN: "Returns zero except in the case of BFFM_VALIDATEFAILED. For that flag, returns zero to dismiss
 	// the dialog or nonzero to keep the dialog displayed."
 	return uMsg == BFFM_VALIDATEFAILED; // i.e. zero should be returned in almost every case.
+*/
 }
 
 
@@ -1102,6 +1122,7 @@ ResultType Line::FileSelectFolder(char *aRootDir, char *aOptions, char *aGreetin
 // the command not refer to sArgDeref[] and sArgVar[] anytime after an interruption becomes possible.
 // This is because an interrupting thread usually changes the values to something inappropriate for this thread.
 {
+    /*
 	Var &output_var = *OUTPUT_VAR; // Must be resolved early.  See comment above.
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	if (!output_var.Assign())  // Initialize the output variable.
@@ -1201,13 +1222,15 @@ ResultType Line::FileSelectFolder(char *aRootDir, char *aOptions, char *aGreetin
 
 	g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
 	return output_var.Assign(Result);
+*/
 }
 
 
 
 ResultType Line::FileGetShortcut(char *aShortcutFile) // Credited to Holger <Holger.Kotsch at GMX de>.
 {
-	Var *output_var_target = ARGVAR2; // These might be omitted in the parameter list, so it's okay if 
+    /*
+	Var *output_var_target = ARGVAR2; // These might be omitted in the parameter list, so it's okay if
 	Var *output_var_dir = ARGVAR3;    // they resolve to NULL.
 	Var *output_var_arg = ARGVAR4;
 	Var *output_var_desc = ARGVAR5;
@@ -1296,6 +1319,7 @@ ResultType Line::FileGetShortcut(char *aShortcutFile) // Credited to Holger <Hol
 	CoUninitialize();
 
 	return OK;  // ErrorLevel might still indicate failture if one of the above calls failed.
+*/
 }
 
 
@@ -1303,6 +1327,7 @@ ResultType Line::FileGetShortcut(char *aShortcutFile) // Credited to Holger <Hol
 ResultType Line::FileCreateShortcut(char *aTargetFile, char *aShortcutFile, char *aWorkingDir, char *aArgs
 	, char *aDescription, char *aIconFile, char *aHotkey, char *aIconNumber, char *aRunState)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	CoInitialize(NULL);
 	IShellLink *psl;
@@ -1345,12 +1370,14 @@ ResultType Line::FileCreateShortcut(char *aTargetFile, char *aShortcutFile, char
 
 	CoUninitialize();
 	return OK; // ErrorLevel indicates whether or not it succeeded.
+*/
 }
 
 
 
 ResultType Line::FileRecycle(char *aFilePattern)
 {
+    /*
 	if (!aFilePattern || !*aFilePattern)
 		return g_ErrorLevel->Assign(ERRORLEVEL_ERROR);  // Since this is probably not what the user intended.
 
@@ -1361,7 +1388,7 @@ ResultType Line::FileRecycle(char *aFilePattern)
 	Util_GetFullPathName(aFilePattern, szFileTemp);
 
 	// au3: We must also make it a double nulled string *sigh*
-	szFileTemp[strlen(szFileTemp)+1] = '\0';	
+	szFileTemp[strlen(szFileTemp)+1] = '\0';
 
 	// au3: set to known values - Corrects crash
 	FileOp.hNameMappings = NULL;
@@ -1376,12 +1403,14 @@ ResultType Line::FileRecycle(char *aFilePattern)
 
 	// SHFileOperation() returns 0 on success:
 	return g_ErrorLevel->Assign(SHFileOperation(&FileOp) ? ERRORLEVEL_ERROR : ERRORLEVEL_NONE);
+*/
 }
 
 
 
 ResultType Line::FileRecycleEmpty(char *aDriveLetter)
 {
+    /*
 	// Not using GetModuleHandle() because there is doubt that SHELL32 (unlike USER32/KERNEL32), is
 	// always automatically present in every process (e.g. if shell is something other than Explorer):
 	HINSTANCE hinstLib = LoadLibrary("shell32");
@@ -1403,12 +1432,14 @@ ResultType Line::FileRecycleEmpty(char *aDriveLetter)
 	}
 	FreeLibrary(hinstLib);
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE);
+*/
 }
 
 
 
 ResultType Line::FileGetVersion(char *aFilespec)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default
 	OUTPUT_VAR->Assign(); // Init to be blank, in case of failure.
 
@@ -1444,12 +1475,14 @@ ResultType Line::FileGetVersion(char *aFilespec)
 
     g_ErrorLevel->Assign(ERRORLEVEL_NONE);  // Indicate success.
 	return OUTPUT_VAR->Assign(version_string);
+*/
 }
 
 
 
 bool Line::Util_CopyDir(const char *szInputSource, const char *szInputDest, bool bOverwrite)
 {
+    /*
 	// Get the fullpathnames and strip trailing \s
 	char szSource[_MAX_PATH+2];
 	char szDest[_MAX_PATH+2];
@@ -1478,8 +1511,8 @@ bool Line::Util_CopyDir(const char *szInputSource, const char *szInputDest, bool
 	strcat(szSource, "\\*.*");
 
 	// We must also make source\dest double nulled strings for the SHFileOp API
-	szSource[strlen(szSource)+1] = '\0';	
-	szDest[strlen(szDest)+1] = '\0';	
+	szSource[strlen(szSource)+1] = '\0';
+	szDest[strlen(szDest)+1] = '\0';
 
 	// Setup the struct
 	SHFILEOPSTRUCT FileOp = {0};
@@ -1494,12 +1527,14 @@ bool Line::Util_CopyDir(const char *szInputSource, const char *szInputDest, bool
 	//FileOp.hwnd					= NULL;
 
 	return !SHFileOperation(&FileOp);
+*/
 }
 
 
 
 bool Line::Util_MoveDir(const char *szInputSource, const char *szInputDest, int OverwriteMode)
 {
+    /*
 	// Get the fullpathnames and strip trailing \s
 	char szSource[_MAX_PATH+2];
 	char szDest[_MAX_PATH+2];
@@ -1552,12 +1587,14 @@ bool Line::Util_MoveDir(const char *szInputSource, const char *szInputDest, int 
 	//FileOp.hwnd					= NULL;
 
 	return !SHFileOperation(&FileOp);
+*/
 }
 
 
 
 bool Line::Util_RemoveDir(const char *szInputSource, bool bRecurse)
 {
+    /*
 	SHFILEOPSTRUCT	FileOp;
 	char			szSource[_MAX_PATH+2];
 
@@ -1591,8 +1628,9 @@ bool Line::Util_RemoveDir(const char *szInputSource, bool bRecurse)
 
 	FileOp.wFunc	= FO_DELETE;
 	FileOp.fFlags	= FOF_SILENT | FOF_NOCONFIRMMKDIR | FOF_NOCONFIRMATION | FOF_NOERRORUI;
-	
+
 	return !SHFileOperation(&FileOp);
+*/
 }
 
 
@@ -1604,6 +1642,7 @@ bool Line::Util_RemoveDir(const char *szInputSource, bool bRecurse)
 ///////////////////////////////////////////////////////////////////////////////
 int Line::Util_CopyFile(const char *szInputSource, const char *szInputDest, bool bOverwrite, bool bMove)
 {
+    /*
 	char			szSource[_MAX_PATH+1];
 	char			szDest[_MAX_PATH+1];
 	char			szExpandedDest[MAX_PATH+1];
@@ -1703,12 +1742,14 @@ int Line::Util_CopyFile(const char *szInputSource, const char *szInputDest, bool
 
 	FindClose(hSearch);
 	return failure_count;
+*/
 }
 
 
 
 void Line::Util_ExpandFilenameWildcard(const char *szSource, const char *szDest, char *szExpandedDest)
 {
+    /*
 	// copy one.two.three  *.txt     = one.two   .txt
 	// copy one.two.three  *.*.txt   = one.two   .three  .txt
 	// copy one.two.three  *.*.*.txt = one.two   .three  ..txt
@@ -1756,7 +1797,7 @@ void Line::Util_ExpandFilenameWildcard(const char *szSource, const char *szDest,
 	if (szExtTemp[0] != '\0')
 	{
 		strcat(szFileTemp, ".");
-		strcat(szFileTemp, szExtTemp);	
+		strcat(szFileTemp, szExtTemp);
 	}
 	else
 	{
@@ -1764,19 +1805,20 @@ void Line::Util_ExpandFilenameWildcard(const char *szSource, const char *szDest,
 		if (szSrcExt[0] != '\0')
 		{
 			strcat(szFileTemp, ".");
-			strcat(szFileTemp, szSrcExt);	
+			strcat(szFileTemp, szSrcExt);
 		}
 	}
 
 	// Now add the drive and directory bit back onto the dest
 	strcat(szExpandedDest, szFileTemp);
-
+*/
 }
 
 
 
 void Line::Util_ExpandFilenameWildcardPart(const char *szSource, const char *szDest, char *szExpandedDest)
 {
+    /*
 	char	*lpTemp;
 	int		i, j, k;
 
@@ -1807,12 +1849,14 @@ void Line::Util_ExpandFilenameWildcardPart(const char *szSource, const char *szD
 		// No wildcard, straight copy of destext
 		strcpy(szExpandedDest, szDest);
 	}
+	*/
 }
 
 
 
 bool Line::Util_CreateDir(const char *szDirName) // Recursive directory creation function.
 {
+    /*
 	DWORD	dwTemp;
 	char	*szTemp = NULL;
 	char	*psz_Loc = NULL;
@@ -1820,7 +1864,7 @@ bool Line::Util_CreateDir(const char *szDirName) // Recursive directory creation
 
 	dwTemp = GetFileAttributes(szDirName);
 
-	if (dwTemp == 0xffffffff) 
+	if (dwTemp == 0xffffffff)
 	{	// error getting attribute - what was the error?
 		switch (GetLastError())
 		{
@@ -1831,10 +1875,10 @@ bool Line::Util_CreateDir(const char *szDirName) // Recursive directory creation
 				return false;
 			szTemp = (char *)_alloca(length+1); // Faster, and also avoids need to delete it afterward.
 			strcpy(szTemp, szDirName);
-			psz_Loc = strrchr(szTemp, '\\');	/* find last \ */
+			psz_Loc = strrchr(szTemp, '\\');	// find last
 			if (psz_Loc == NULL)				// not found
 				return false;
-			else 
+			else
 			{
 				*psz_Loc = '\0';				// remove \ and everything after
 				if (!Util_CreateDir(szTemp))
@@ -1852,9 +1896,9 @@ bool Line::Util_CreateDir(const char *szDirName) // Recursive directory creation
 		if (dwTemp & FILE_ATTRIBUTE_DIRECTORY) // Fixed for v1.0.36.01 (previously it used == vs &).
 			return true;							// Directory exists, yay!
 		//else it exists, but it's a file! Not allowed, so fall through and report failure.
-			
-	return false;
 
+	return false;
+*/
 }
 
 
@@ -1915,8 +1959,8 @@ bool Line::Util_IsDifferentVolumes(const char *szPath1, const char *szPath2)
 	char			szDir[_MAX_DIR+1];
 	char			szFile[_MAX_FNAME+1];
 	char			szExt[_MAX_EXT+1];
-	
-	char			szP1[_MAX_PATH+1];	
+
+	char			szP1[_MAX_PATH+1];
 	char			szP2[_MAX_PATH+1];
 
 	// Get full pathnames
@@ -1940,40 +1984,40 @@ bool Util_Shutdown(int nFlag)
 // Shutdown or logoff the system.
 // Returns false if the function could not get the rights to shutdown.
 {
-/* 
-flags can be a combination of:
-#define EWX_LOGOFF           0
-#define EWX_SHUTDOWN         0x00000001
-#define EWX_REBOOT           0x00000002
-#define EWX_FORCE            0x00000004
-#define EWX_POWEROFF         0x00000008 */
+ /*
+// flags can be a combination of:
+// #define EWX_LOGOFF           0
+// #define EWX_SHUTDOWN         0x00000001
+// #define EWX_REBOOT           0x00000002
+// #define EWX_FORCE            0x00000004
+// #define EWX_POWEROFF         0x00000008
 
-	HANDLE				hToken; 
-	TOKEN_PRIVILEGES	tkp; 
+	HANDLE				hToken;
+	TOKEN_PRIVILEGES	tkp;
 
 	// If we are running NT/2k/XP, make sure we have rights to shutdown
 	if (g_os.IsWinNT()) // NT/2k/XP/2003 and family
 	{
 		// Get a token for this process.
- 		if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken)) 
+ 		if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
 			return false;						// Don't have the rights
- 
+
 		// Get the LUID for the shutdown privilege.
- 		LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid); 
- 
-		tkp.PrivilegeCount = 1;  /* one privilege to set */
-		tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED; 
- 
+ 		LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME, &tkp.Privileges[0].Luid);
+
+		tkp.PrivilegeCount = 1; //
+		tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+
 		// Get the shutdown privilege for this process.
- 		AdjustTokenPrivileges(hToken, FALSE, &tkp, 0, (PTOKEN_PRIVILEGES)NULL, 0); 
- 
+ 		AdjustTokenPrivileges(hToken, FALSE, &tkp, 0, (PTOKEN_PRIVILEGES)NULL, 0);
+
 		// Cannot test the return value of AdjustTokenPrivileges.
- 		if (GetLastError() != ERROR_SUCCESS) 
+ 		if (GetLastError() != ERROR_SUCCESS)
 			return false;						// Don't have the rights
 	}
 
 	// if we are forcing the issue, AND this is 95/98 terminate all windows first
-	if ( g_os.IsWin9x() && (nFlag & EWX_FORCE) ) 
+	if ( g_os.IsWin9x() && (nFlag & EWX_FORCE) )
 	{
 		nFlag ^= EWX_FORCE;	// remove this flag - not valid in 95
 		EnumWindows((WNDENUMPROC) Util_ShutdownHandler, 0);
@@ -1985,25 +2029,28 @@ flags can be a combination of:
 	else
 		return false;
 
+*/
 }
 
 
 
 BOOL Util_ShutdownHandler(HWND hwnd, DWORD lParam)
 {
+    /*
 	// if the window is me, don't terminate!
 	if (hwnd != g_hWnd && hwnd != g_hWndSplash)
 		Util_WinKill(hwnd);
 
 	// Continue the enumeration.
 	return TRUE;
-
+*/
 }
 
 
 
 void Util_WinKill(HWND hWnd)
 {
+    /*
 	DWORD dwResult;
 	// Use WM_CLOSE vs. SC_CLOSE in this case, since the target window is slightly more likely to
 	// respond to that:
@@ -2018,6 +2065,7 @@ void Util_WinKill(HWND hWnd)
 			CloseHandle(hProcess);
 		}
 	}
+*/
 }
 
 
@@ -2026,6 +2074,7 @@ void DoIncrementalMouseMove(int aX1, int aY1, int aX2, int aY2, int aSpeed)
 // aX1 and aY1 are the starting coordinates, and "2" are the destination coordinates.
 // Caller has ensured that aSpeed is in the range 0 to 100, inclusive.
 {
+    /*
 	// AutoIt3: So, it's a more gradual speed that is needed :)
 	int delta;
 	#define INCR_MOUSE_MIN_SPEED 32
@@ -2041,8 +2090,8 @@ void DoIncrementalMouseMove(int aX1, int aY1, int aX2, int aY2, int aSpeed)
 				aX1 = aX2;
 			else
 				aX1 += delta;
-		} 
-		else 
+		}
+		else
 			if (aX1 > aX2)
 			{
 				delta = (aX1 - aX2) / aSpeed;
@@ -2063,8 +2112,8 @@ void DoIncrementalMouseMove(int aX1, int aY1, int aX2, int aY2, int aSpeed)
 				aY1 = aY2;
 			else
 				aY1 += delta;
-		} 
-		else 
+		}
+		else
 			if (aY1 > aY2)
 			{
 				delta = (aY1 - aY2) / aSpeed;
@@ -2082,6 +2131,7 @@ void DoIncrementalMouseMove(int aX1, int aY1, int aX2, int aY2, int aSpeed)
 		// feature was originally designed in AutoIt v3.  It may in fact improve reliability in some cases,
 		// especially with the mouse_event() method vs. SendInput/Play.
 	} // while()
+*/
 }
 
 
@@ -2092,6 +2142,7 @@ void DoIncrementalMouseMove(int aX1, int aY1, int aX2, int aY2, int aSpeed)
 
 DWORD ProcessExist9x2000(char *aProcess, char *aProcessName)
 {
+    /*
 	if (aProcessName) // Init this output variable in case of early return.
 		*aProcessName = '\0';
 
@@ -2146,12 +2197,14 @@ DWORD ProcessExist9x2000(char *aProcess, char *aProcessName)
 	}
 	CloseHandle(snapshot);
 	return 0;  // Not found.
+*/
 }
 
 
 
 DWORD ProcessExistNT4(char *aProcess, char *aProcessName)
 {
+    /*
 	if (aProcessName) // Init this output variable in case of early return.
 		*aProcessName = '\0';
 	//BOOL EnumProcesses(
@@ -2252,4 +2305,5 @@ DWORD ProcessExistNT4(char *aProcess, char *aProcessName)
 	}
 	FreeLibrary(hinstLib);
 	return 0;  // Not found.
+*/
 }
