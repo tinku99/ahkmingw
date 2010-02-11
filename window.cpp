@@ -23,6 +23,7 @@ GNU General Public License for more details.
 HWND WinActivate(global_struct &aSettings, char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText
 	, bool aFindLastMatch, HWND aAlreadyVisited[], int aAlreadyVisitedCount)
 {
+    /*
 	// If window is already active, be sure to leave it that way rather than activating some
 	// other window that may match title & text also.  NOTE: An explicit check is done
 	// for this rather than just relying on EnumWindows() to obey the z-order because
@@ -50,12 +51,12 @@ HWND WinActivate(global_struct &aSettings, char *aTitle, char *aText, char *aExc
 	}
 	else
 	{
-		/*
+
 		// Might not help avg. perfomance any?
 		if (!aFindLastMatch) // Else even if the windows is already active, we want the bottomost one.
 			if (hwnd = WinActive(aTitle, aText, aExcludeTitle, aExcludeText)) // Already active.
 				return target_window;
-		*/
+
 		// Don't activate in this case, because the top-most window might be an
 		// always-on-top but not-meant-to-be-activated window such as AutoIt's
 		// splash text:
@@ -67,6 +68,7 @@ HWND WinActivate(global_struct &aSettings, char *aTitle, char *aText, char *aExc
 	// it is eligible due to g.DetectHiddenWindows being true or the window not being hidden
 	// (or being one of the script's GUI windows).
 	return SetForegroundWindowEx(target_window);
+*/
 }
 
 
@@ -80,6 +82,8 @@ HWND AttemptSetForeground(HWND aTargetWindow, HWND aForeWindow)
 // Returns NULL if aTargetWindow or its owned-window couldn't be brought to the foreground.
 // Otherwise, on success, it returns either aTargetWindow or an HWND owned by aTargetWindow.
 {
+    /*
+
 	// Probably best not to trust its return value.  It's been shown to be unreliable at times.
 	// Example: I've confirmed that SetForegroundWindow() sometimes (perhaps about 10% of the time)
 	// indicates failure even though it succeeds.  So we specifically check to see if it worked,
@@ -129,6 +133,7 @@ HWND AttemptSetForeground(HWND aTargetWindow, HWND aForeWindow)
 	}
 #endif
 	return NULL;
+*/
 }
 
 
@@ -137,6 +142,7 @@ HWND SetForegroundWindowEx(HWND aTargetWindow)
 // Caller must have ensured that aTargetWindow is a valid window or NULL, since we
 // don't call IsWindow() here.
 {
+    /*
 	if (!aTargetWindow)
 		return NULL;  // When called this way (as it is sometimes), do nothing.
 
@@ -372,6 +378,7 @@ HWND SetForegroundWindowEx(HWND aTargetWindow)
 	}
 	else
 		return NULL;
+*/
 }
 
 
@@ -381,6 +388,7 @@ HWND WinClose(global_struct &aSettings, char *aTitle, char *aText, int aTimeToWa
 // Return the HWND of any found-window to the caller so that it has the option of waiting
 // for it to become an invalid (closed) window.
 {
+    /*
 	HWND target_window;
 	IF_USE_FOREGROUND_WINDOW(aSettings.DetectHiddenWindows, aTitle, aText, aExcludeTitle, aExcludeText)
 		// Close topmost (better than !F4 since that uses the alt key, effectively resetting
@@ -404,12 +412,14 @@ HWND WinClose(global_struct &aSettings, char *aTitle, char *aText, int aTimeToWa
 		target_window = GetValidLastUsedWindow(aSettings);
 
 	return target_window ? WinClose(target_window, aTimeToWaitForClose, aKillIfHung) : NULL;
+*/
 }
 
 
 
 HWND WinClose(HWND aWnd, int aTimeToWaitForClose, bool aKillIfHung)
 {
+    /*
 	if (aKillIfHung) // This part is based on the AutoIt3 source.
 		// Update: Another reason not to wait a long time with the below is that WinKill
 		// is normally only used when the target window is suspected of being hung.  It
@@ -485,6 +495,7 @@ HWND WinClose(HWND aWnd, int aTimeToWaitForClose, bool aKillIfHung)
 			// it's suspended).  INTERVAL_UNSPECIFIED performs better.
 	}
 	return aWnd;  // Done waiting.
+*/
 }
 
 
@@ -494,6 +505,7 @@ HWND WinActive(global_struct &aSettings, char *aTitle, char *aText, char *aExclu
 // This function must be kept thread-safe because it may be called (indirectly) by hook thread too.
 // In addition, it must not change the value of anything in aSettings except when aUpdateLastUsed==true.
 {
+    /*
 	HWND target_window;
     if (g_script.xifwinactive) // ahkx N11
         {
@@ -537,6 +549,7 @@ HWND WinActive(global_struct &aSettings, char *aTitle, char *aText, char *aExclu
 		UPDATE_AND_RETURN_LAST_USED_WINDOW(fore_win) // This also does a "return".
 	else // If the line above didn't return, indicate that the specified window is not active.
 		return NULL;
+*/
 }
 
 
@@ -546,6 +559,7 @@ HWND WinExist(global_struct &aSettings, char *aTitle, char *aText, char *aExclud
 // This function must be kept thread-safe because it may be called (indirectly) by hook thread too.
 // In addition, it must not change the value of anything in aSettings except when aUpdateLastUsed==true.
 {
+    /*
      if (g_script.xwingetid) // ahkxN11
         {
         printf("trying winexist %s", aTitle); // todo: remove this debug line
@@ -608,6 +622,7 @@ HWND WinExist(global_struct &aSettings, char *aTitle, char *aText, char *aExclud
 		EnumWindows(EnumParentFind, (LPARAM)&ws);
 
 	UPDATE_AND_RETURN_LAST_USED_WINDOW(ws.mFoundParent) // This also does a "return".
+*/
 }
 
 
@@ -620,6 +635,7 @@ HWND GetValidLastUsedWindow(global_struct &aSettings)
 // Gui +LastFound
 // The launch of a GUI thread that explicitly set the last found window to be that GUI window.
 {
+    /*
 	if (!aSettings.hWndLastUsed || !IsWindow(aSettings.hWndLastUsed))
 		return NULL;
 	if (   aSettings.DetectHiddenWindows || IsWindowVisible(aSettings.hWndLastUsed)
@@ -629,6 +645,7 @@ HWND GetValidLastUsedWindow(global_struct &aSettings)
 	// unless this is a GUI window belonging to this particular script, in which case
 	// the setting of DetectHiddenWindows is ignored (as of v1.0.25.13).
 	return GuiType::FindGui(aSettings.hWndLastUsed) ? aSettings.hWndLastUsed : NULL;
+*/
 }
 
 
@@ -763,6 +780,7 @@ ResultType StatusBarUtil(Var *aOutputVar, HWND aBarHwnd, int aPartNumber, char *
 // to be NULL because in that case, the caller wants us to set ErrorLevel appropriately and also
 // make aOutputVar empty.
 {
+    /*
 	if (aOutputVar)
 		aOutputVar->Assign(); // Init to blank in case of early return.
 	// Set default ErrorLevel, which is a special value (2 vs. 1) in the case of StatusBarWait:
@@ -874,6 +892,7 @@ ResultType StatusBarUtil(Var *aOutputVar, HWND aBarHwnd, int aPartNumber, char *
 	ResultType result_to_return = aOutputVar ? aOutputVar->Assign(local_buf) : OK;
 	FreeInterProcMem(handle, remote_buf); // Don't free until after the above because above needs file mapping for Win9x.
 	return result_to_return;
+*/
 }
 
 
@@ -881,6 +900,7 @@ ResultType StatusBarUtil(Var *aOutputVar, HWND aBarHwnd, int aPartNumber, char *
 HWND ControlExist(HWND aParentWindow, char *aClassNameAndNum)
 // This can return target_window itself for cases such as ahk_id %ControlHWND%.
 {
+    /*
 	if (!aParentWindow)
 		return NULL;
 	if (!aClassNameAndNum || !*aClassNameAndNum)
@@ -919,12 +939,14 @@ HWND ControlExist(HWND aParentWindow, char *aClassNameAndNum)
 	}
 
 	return ws.mFoundChild;
+*/
 }
 
 
 
 BOOL CALLBACK EnumControlFind(HWND aWnd, LPARAM lParam)
 {
+    /*
 	WindowSearch &ws = *(WindowSearch *)lParam;  // For performance and convenience.
 	if (*ws.mCriterionClass) // Caller told us to search by class name and number.
 	{
@@ -993,6 +1015,7 @@ BOOL CALLBACK EnumControlFind(HWND aWnd, LPARAM lParam)
 	// recursion for us: "If a child window has created child windows of its own,
 	// EnumChildWindows() enumerates those windows as well."
 	return TRUE; // Keep searching.
+*/
 }
 
 
@@ -1188,6 +1211,7 @@ HWND FindOurTopDialog()
 // do not work for this purpose.  And using FindWindow() discouraged because it can hang
 // in certain circumtances (Enum is probably just as fast anyway).
 {
+    /*
 	// The return value of EnumWindows() is probably a raw indicator of success or failure,
 	// not whether the Enum found something or continued all the way through all windows.
 	// So don't bother using it.
@@ -1196,6 +1220,7 @@ HWND FindOurTopDialog()
 	pid_and_hwnd.hwnd = NULL;  // Init.  Called function will set this for us if it finds a match.
 	EnumWindows(EnumDialog, (LPARAM)&pid_and_hwnd);
 	return pid_and_hwnd.hwnd;
+*/
 }
 
 
@@ -1204,6 +1229,7 @@ BOOL CALLBACK EnumDialog(HWND aWnd, LPARAM lParam)
 // lParam should be a pointer to a ProcessId (ProcessIds are always non-zero?)
 // To continue enumeration, the function must return TRUE; to stop enumeration, it must return FALSE.
 {
+    /*
 	pid_and_hwnd_type &pah = *(pid_and_hwnd_type *)lParam;  // For performance and convenience.
 	if (!lParam || !pah.pid) return FALSE;
 	DWORD pid;
@@ -1221,6 +1247,7 @@ BOOL CALLBACK EnumDialog(HWND aWnd, LPARAM lParam)
 		}
 	}
 	return TRUE;  // Keep searching.
+*/
 }
 
 
@@ -1229,15 +1256,18 @@ struct owning_struct {HWND owner_hwnd; HWND first_child;};
 HWND WindowOwnsOthers(HWND aWnd)
 // Only finds owned windows if they are visible, by design.
 {
+    /*
 	owning_struct own = {aWnd, NULL};
 	EnumWindows(EnumParentFindOwned, (LPARAM)&own);
 	return own.first_child;
+*/
 }
 
 
 
 BOOL CALLBACK EnumParentFindOwned(HWND aWnd, LPARAM lParam)
 {
+    /*
 	HWND owner_hwnd = GetWindow(aWnd, GW_OWNER);
 	// Note: Many windows seem to own other invisible windows that have blank titles.
 	// In our case, require that it be visible because we don't want to return an invisible
@@ -1248,6 +1278,7 @@ BOOL CALLBACK EnumParentFindOwned(HWND aWnd, LPARAM lParam)
 		return FALSE; // Match found, we're done.
 	}
 	return TRUE;  // Continue enumerating.
+*/
 }
 
 
@@ -1269,6 +1300,7 @@ HWND GetNonChildParent(HWND aWnd)
 // that window isn't its owner anyway (since the owner problem usually applies to a parent
 // window being owned by some controlling window behind it).
 {
+    /*
 	if (!aWnd) return aWnd;
 	HWND parent, parent_prev;
 	for (parent_prev = aWnd; ; parent_prev = parent)
@@ -1279,12 +1311,14 @@ HWND GetNonChildParent(HWND aWnd)
 		if (   !(parent = GetParent(parent_prev))   )
 			return parent_prev;  // This will return aWnd if aWnd has no parents.
 	}
+*/
 }
 
 
 
 HWND GetTopChild(HWND aParent)
 {
+    /*
 	if (!aParent) return aParent;
 	HWND hwnd_top, next_top;
 	// Get the topmost window of the topmost window of...
@@ -1309,12 +1343,14 @@ HWND GetTopChild(HWND aParent)
 	//}
 
 	return hwnd_top ? hwnd_top : aParent;  // Caller relies on us never returning NULL if aParent is non-NULL.
+*/
 }
 
 
 
 bool IsWindowHung(HWND aWnd)
 {
+    /*
 	if (!aWnd) return false;
 
 	// OLD, SLOWER METHOD:
@@ -1374,6 +1410,7 @@ bool IsWindowHung(HWND aWnd)
 	static MyIsHungAppWindow IsHungAppWindow = (MyIsHungAppWindow)GetProcAddress(GetModuleHandle("user32")
 		, "IsHungAppWindow");
 	return IsHungAppWindow ? IsHungAppWindow(aWnd) : Slow_IsWindowHung;
+*/
 }
 
 
@@ -1399,6 +1436,7 @@ int GetWindowTextTimeout(HWND aWnd, char *aBuf, int aBufSize, UINT aTimeout)
 // things like WinGetText and ControlGetText, in which getting the maximum amount and types
 // of text is more important than performance.
 {
+    /*
 	if (!aWnd || (aBuf && aBufSize < 1)) // No HWND or no room left in buffer (some callers rely on this check).
 		return 0; // v1.0.40.04: Fixed to return 0 rather than setting aBuf to NULL and continuing (callers don't want that).
 
@@ -1487,6 +1525,7 @@ int GetWindowTextTimeout(HWND aWnd, char *aBuf, int aBufSize, UINT aTimeout)
 
 	// "length" contains the length of what was (or would have been) copied, not including the terminator:
 	return result ? (int)length : 0;  // "result" is zero upon failure or timeout.
+*/
 }
 
 
@@ -1506,6 +1545,7 @@ ResultType WindowSearch::SetCriteria(global_struct &aSettings, char *aTitle, cha
 // reset the search.
 // This function must be kept thread-safe because it may be called (indirectly) by hook thread too.
 {
+    /*
 	// Set any criteria which are not context sensitive.  It doesn't seem necessary to make copies of
 	// mCriterionText, mCriterionExcludeTitle, and mCriterionExcludeText because they're never altered
 	// here, nor does there seem to be a risk that deref buffer's contents will get overwritten
@@ -1637,6 +1677,7 @@ ResultType WindowSearch::SetCriteria(global_struct &aSettings, char *aTitle, cha
 		UpdateCandidateAttributes(); // In case mCandidateParent isn't NULL, fetch different attributes based on what was set above.
 	//else for performance reasons, avoid unnecessary updates.
 	return OK;
+*/
 }
 
 
@@ -1644,6 +1685,7 @@ ResultType WindowSearch::SetCriteria(global_struct &aSettings, char *aTitle, cha
 void WindowSearch::UpdateCandidateAttributes()
 // This function must be kept thread-safe because it may be called (indirectly) by hook thread too.
 {
+    /*
 	// Nothing to do until SetCandidate() is called with a non-NULL candidate and SetCriteria()
 	// has been called for the first time (otherwise, mCriterionExcludeTitle and other things
 	// are not yet initialized:
@@ -1659,6 +1701,7 @@ void WindowSearch::UpdateCandidateAttributes()
 	// Nothing to do for these:
 	//CRITERION_GROUP:    Can't be pre-processed at this stage.
 	//CRITERION_ID:       It is mCandidateParent, which has already been set by SetCandidate().
+*/
 }
 
 
@@ -1673,6 +1716,7 @@ HWND WindowSearch::IsMatch(bool aInvert)
 // called (indirectly) by hook thread too: The hook thread must never call here directly or indirectly with
 // mArrayStart!=NULL because the corresponding section below is probably not thread-safe.
 {
+    /*
 	if (!mCandidateParent || !mCriteria) // Nothing to check, so no match.
 		return NULL;
 
@@ -1811,6 +1855,7 @@ HWND WindowSearch::IsMatch(bool aInvert)
 	// Fix for v1.0.30.01: Don't return mFoundParent because its NULL when aInvert is true.
 	// At this stage, the candidate is a known match, so return it:
 	return mCandidateParent;
+*/
 }
 
 
@@ -1821,6 +1866,7 @@ HWND WindowSearch::IsMatch(bool aInvert)
 
 void SetForegroundLockTimeout()
 {
+    /*
 	// Even though they may not help in all OSs and situations, this lends peace-of-mind.
 	// (it doesn't appear to help on my XP?)
 	if (g_os.IsWin98orLater() || g_os.IsWin2000orLater())
@@ -1843,6 +1889,8 @@ void SetForegroundLockTimeout()
 	}
 //	else
 //		MsgBox("Enable focus-stealing: neither needed nor supported under Win95 and WinNT.");
+*/
+
 }
 
 
@@ -1850,10 +1898,13 @@ void SetForegroundLockTimeout()
 bool DialogPrep()
 // Having it as a function vs. macro should reduce code size due to expansion of macros inside.
 {
+
+    /*
 	bool thread_was_critical = g.ThreadIsCritical;
 	g.ThreadIsCritical = false;
 	MAKE_THREAD_INTERRUPTIBLE
 	if (HIWORD(GetQueueStatus(QS_ALLEVENTS)))
 		MsgSleep(-1);
 	return thread_was_critical; // Caller is responsible for using this to later restore g.ThreadIsCritical.
+*/
 }

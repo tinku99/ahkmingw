@@ -1264,7 +1264,7 @@
 	"resource.h"
 	<winresrc.h>
 
-1253396817 source:l:\source\ahkgcc\script.cpp
+1265869020 source:l:\source\ahkgcc\script.cpp
 	"stdafx.h"
 	"script.h"
 	"globaldata.h"
@@ -1439,7 +1439,7 @@
 	"var.h"
 	"globaldata.h"
 
-1253394325 source:l:\source\ahkgcc\window.cpp
+1265869622 source:l:\source\ahkgcc\window.cpp
 	"stdafx.h"
 	"window.h"
 	"util.h"
