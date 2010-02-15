@@ -39,6 +39,7 @@ GNU General Public License for more details.
 ResultType Line::Splash(char *aOptions, char *aSubText, char *aMainText, char *aTitle, char *aFontName
 	, char *aImageFile, bool aSplashImage)
 {
+/*
 	int window_index = 0;  // Set the default window to operate upon (the first).
 	char *options, *image_filename = aImageFile;  // Set default.
 	bool turn_off = false;
@@ -687,12 +688,14 @@ ResultType Line::Splash(char *aOptions, char *aSubText, char *aMainText, char *a
 	if (!initially_hidden)
 		ShowWindow(splash.hwnd,  SW_SHOWNOACTIVATE);
 	return OK;
+*/
 }
 
 
 
 ResultType Line::ToolTip(char *aText, char *aX, char *aY, char *aID)
 {
+    /*
 	int window_index = *aID ? ATOI(aID) - 1 : 0;
 	if (window_index < 0 || window_index >= MAX_TOOLTIPS)
 		return LineError("Max window number is " MAX_TOOLTIPS_STR "." ERR_ABORT, FAIL, aID);
@@ -853,12 +856,14 @@ ResultType Line::ToolTip(char *aText, char *aX, char *aY, char *aID)
 	// so that in case it was hidden or dismissed while its HWND still exists, it will be shown again:
 	SendMessage(tip_hwnd, TTM_TRACKACTIVATE, TRUE, (LPARAM)&ti);
 	return OK;
+*/
 }
 
 
 
 ResultType Line::TrayTip(char *aTitle, char *aText, char *aTimeout, char *aOptions)
 {
+    /*
 	if (!g_os.IsWin2000orLater()) // Older OSes do not support it, so do nothing.
 		return OK;
 	NOTIFYICONDATA nic = {0};
@@ -872,12 +877,14 @@ ResultType Line::TrayTip(char *aTitle, char *aText, char *aTimeout, char *aOptio
 	strlcpy(nic.szInfo, aText, sizeof(nic.szInfo));	// Empty text removes the balloon.
 	Shell_NotifyIcon(NIM_MODIFY, &nic);
 	return OK; // i.e. never a critical error if it fails.
+*/
 }
 
 
 
 ResultType Line::Transform(char *aCmd, char *aValue1, char *aValue2)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	TransformCmds trans_cmd = ConvertTransformCmd(aCmd);
 	// Since command names are validated at load-time, this only happens if the command name
@@ -1240,6 +1247,7 @@ ResultType Line::Transform(char *aCmd, char *aValue1, char *aValue2)
 	}
 
 	return FAIL;  // Never executed (increases maintainability and avoids compiler warning).
+*/
 }
 
 
@@ -1255,6 +1263,7 @@ ResultType Line::Input()
 // This signals the quasi-threads beneath, when they finally return, that their input
 // was terminated due to a new input that took precedence.
 {
+    /*
 	if (g_os.IsWin9x()) // v1.0.44.14: For simplicity, do nothing on Win9x rather than try to see if it actually supports the hook (such as if its some kind of emultated/hybrid OS).
 		return OK; // Could also set ErrorLevel to "Timeout" and output_var to be blank, but the benefits to backward compatibility seemed too dubious.
 
@@ -1617,6 +1626,7 @@ ResultType Line::Input()
 	// and its contents shouldn't be affected even if KILL_AND_PURGE_INPUT_TIMER's MsgSleep()
 	// results in a new thread being created that starts a new Input:
 	return output_var->Assign(input_buf);
+*/
 }
 
 
@@ -1624,6 +1634,7 @@ ResultType Line::Input()
 ResultType Line::PerformShowWindow(ActionTypeType aActionType, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	// By design, the WinShow command must always unhide a hidden window, even if the user has
 	// specified that hidden windows should not be detected.  So set this now so that
 	// DetermineTargetWindow() will make its calls in the right mode:
@@ -1696,6 +1707,7 @@ ResultType Line::PerformShowWindow(ActionTypeType aActionType, char *aTitle, cha
 		DoWinDelay;
 	}
 	return OK;  // Return success for all the above cases.
+*/
 }
 
 
@@ -1705,6 +1717,7 @@ ResultType Line::PerformWait()
 // these commands not refer to sArgDeref[] and sArgVar[] anytime after an interruption becomes possible.
 // This is because an interrupting thread usually changes the values to something inappropriate for this thread.
 {
+/*
 	bool wait_indefinitely;
 	int sleep_duration;
 	DWORD start_time;
@@ -1929,6 +1942,7 @@ ResultType Line::PerformWait()
 		else // Done waiting.
 			return g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Since it timed out, we override the default with this.
 	} // for()
+*/
 }
 
 
@@ -1936,6 +1950,7 @@ ResultType Line::PerformWait()
 ResultType Line::WinMove(char *aTitle, char *aText, char *aX, char *aY
 	, char *aWidth, char *aHeight, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	// So that compatibility is retained, don't set ErrorLevel for commands that are native to AutoIt2
 	// but that AutoIt2 doesn't use ErrorLevel with (such as this one).
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
@@ -1952,6 +1967,7 @@ ResultType Line::WinMove(char *aTitle, char *aText, char *aX, char *aY
 		, TRUE);  // Do repaint.
 	DoWinDelay;
 	return OK;
+*/
 }
 
 
@@ -1959,6 +1975,7 @@ ResultType Line::WinMove(char *aTitle, char *aText, char *aX, char *aY
 ResultType Line::ControlSend(char *aControl, char *aKeysToSend, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText, bool aSendRaw)
 {
+    /*
 
      if (g_script.xwingetid) // ahkxN11
         {
@@ -1990,6 +2007,7 @@ ResultType Line::ControlSend(char *aControl, char *aKeysToSend, char *aTitle, ch
 	SendKeys(aKeysToSend, aSendRaw, SM_EVENT, control_window);
 	// But don't do WinDelay because KeyDelay should have been in effect for the above.
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -1997,6 +2015,7 @@ ResultType Line::ControlSend(char *aControl, char *aKeysToSend, char *aTitle, ch
 ResultType Line::ControlClick(vk_type aVK, int aClickCount, char *aOptions, char *aControl
 	, char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)
@@ -2226,6 +2245,7 @@ ResultType Line::ControlClick(vk_type aVK, int aClickCount, char *aOptions, char
 	DETACH_THREAD_INPUT  // Also takes into account do_activate, indirectly.
 
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -2233,6 +2253,7 @@ ResultType Line::ControlClick(vk_type aVK, int aClickCount, char *aOptions, char
 ResultType Line::ControlMove(char *aControl, char *aX, char *aY, char *aWidth, char *aHeight
 	, char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)
 		return g_ErrorLevel->Assign(ERRORLEVEL_ERROR);
@@ -2297,12 +2318,14 @@ ResultType Line::ControlMove(char *aControl, char *aX, char *aY, char *aWidth, c
 
 	DoControlDelay
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
 
 ResultType Line::ControlGetPos(char *aControl, char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var *output_var_x = ARGVAR1;  // Ok if NULL.
 	Var *output_var_y = ARGVAR2;  // Ok if NULL.
 	Var *output_var_width = ARGVAR3;  // Ok if NULL.
@@ -2340,12 +2363,14 @@ ResultType Line::ControlGetPos(char *aControl, char *aTitle, char *aText, char *
 		return FAIL;
 
 	return OK;
+*/
 }
 
 
 
 ResultType Line::ControlGetFocus(char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	OUTPUT_VAR->Assign();  // Set default: blank for the output variable.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
@@ -2381,12 +2406,14 @@ ResultType Line::ControlGetFocus(char *aTitle, char *aText, char *aExcludeTitle,
 	snprintfcat(class_name, sizeof(class_name), "%d", cah.class_count);
 	g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
 	return OUTPUT_VAR->Assign(class_name);
+*/
 }
 
 
 
 BOOL CALLBACK EnumChildFindSeqNum(HWND aWnd, LPARAM lParam)
 {
+    /*
 	class_and_hwnd_type &cah = *(class_and_hwnd_type *)lParam;  // For performance and convenience.
 	char class_name[WINDOW_CLASS_SIZE];
 	if (!GetClassName(aWnd, class_name, sizeof(class_name)))
@@ -2401,6 +2428,7 @@ BOOL CALLBACK EnumChildFindSeqNum(HWND aWnd, LPARAM lParam)
 		}
 	}
 	return TRUE; // Continue enumeration until a match is found or there aren't any windows remaining.
+*/
 }
 
 
@@ -2408,6 +2436,7 @@ BOOL CALLBACK EnumChildFindSeqNum(HWND aWnd, LPARAM lParam)
 ResultType Line::ControlFocus(char *aControl, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)
@@ -2434,6 +2463,7 @@ ResultType Line::ControlFocus(char *aControl, char *aTitle, char *aText
 	DETACH_THREAD_INPUT
 
 	return OK;
+*/
 }
 
 
@@ -2441,6 +2471,7 @@ ResultType Line::ControlFocus(char *aControl, char *aTitle, char *aText
 ResultType Line::ControlSetText(char *aControl, char *aNewText, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)
@@ -2456,6 +2487,7 @@ ResultType Line::ControlSetText(char *aControl, char *aNewText, char *aTitle, ch
 		, SMTO_ABORTIFHUNG, 5000, &result);
 	DoControlDelay;
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -2463,6 +2495,7 @@ ResultType Line::ControlSetText(char *aControl, char *aNewText, char *aTitle, ch
 ResultType Line::ControlGetText(char *aControl, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR);  // Set default.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
@@ -2503,6 +2536,7 @@ ResultType Line::ControlGetText(char *aControl, char *aTitle, char *aText
 	// Consider the above to be always successful, even if the window wasn't found, except
 	// when below returns an error:
 	return output_var.Close();  // In case it's the clipboard.
+*/
 }
 
 
@@ -2512,6 +2546,7 @@ ResultType Line::ControlGetListView(Var &aOutputVar, HWND aHwnd, char *aOptions)
 // It has also initialized g_ErrorLevel to be ERRORLEVEL_ERROR, which will be overridden
 // if we succeed here.
 {
+    /*
 	aOutputVar.Assign(); // Init to blank in case of early return.  Caller has already initialized g_ErrorLevel for us.
 
 	// GET ROW COUNT
@@ -2745,6 +2780,7 @@ break_both:
 	aOutputVar.Close(); // In case it's the clipboard.
 	aOutputVar.Length() = (VarSizeType)total_length; // Update to actual vs. estimated length.
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE);  // Indicate success.
+*/
 }
 
 
@@ -2752,12 +2788,14 @@ break_both:
 ResultType Line::StatusBarGetText(char *aPart, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	// Note: ErrorLevel is handled by StatusBarUtil(), below.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	HWND control_window = target_window ? ControlExist(target_window, "msctls_statusbar321") : NULL;
 	// Call this even if control_window is NULL because in that case, it will set the output var to
 	// be blank for us:
 	return StatusBarUtil(OUTPUT_VAR, control_window, ATOI(aPart)); // It will handle any zero part# for us.
+*/
 }
 
 
@@ -2768,6 +2806,7 @@ ResultType Line::StatusBarWait(char *aTextToWaitFor, char *aSeconds, char *aPart
 // this command not refer to sArgDeref[] and sArgVar[] anytime after an interruption becomes possible.
 // This is because an interrupting thread usually changes the values to something inappropriate for this thread.
 {
+    /*
 	// Note: ErrorLevel is handled by StatusBarUtil(), below.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	// Make a copy of any memory areas that are volatile (due to Deref buf being overwritten
@@ -2779,6 +2818,7 @@ ResultType Line::StatusBarWait(char *aTextToWaitFor, char *aSeconds, char *aPart
 	return StatusBarUtil(NULL, control_window, ATOI(aPart) // It will handle a NULL control_window or zero part# for us.
 		, text_to_wait_for, *aSeconds ? (int)(ATOF(aSeconds)*1000) : -1 // Blank->indefinite.  0 means 500ms.
 		, ATOI(aInterval));
+*/
 }
 
 
@@ -2794,6 +2834,7 @@ ResultType Line::ScriptPostSendMessage(bool aUseSend)
 // sArgDeref[6]: ExcludeTitle
 // sArgDeref[7]: ExcludeText
 {
+    /*
 	HWND target_window, control_window;
 	if (   !(target_window = DetermineTargetWindow(sArgDeref[4], sArgDeref[5], sArgDeref[6], sArgDeref[7]))
 		|| !(control_window = *sArgDeref[3] ? ControlExist(target_window, sArgDeref[3]) : target_window)   ) // Relies on short-circuit boolean order.
@@ -2840,12 +2881,14 @@ ResultType Line::ScriptPostSendMessage(bool aUseSend)
 
 	// By design (since this is a power user feature), no ControlDelay is done here.
 	return OK;
+*/
 }
 
 
 
 ResultType Line::ScriptProcess(char *aCmd, char *aProcess, char *aParam3)
 {
+    /*
 	ProcessCmds process_cmd = ConvertProcessCmd(aCmd);
 	// Runtime error is rare since it is caught at load-time unless it's in a var. ref.
 	if (process_cmd == PROCESS_CMD_INVALID)
@@ -2946,6 +2989,7 @@ ResultType Line::ScriptProcess(char *aCmd, char *aProcess, char *aParam3)
 	} // switch()
 
 	return FAIL;  // Should never be executed; just here to catch bugs.
+*/
 }
 
 
@@ -2953,6 +2997,7 @@ ResultType Line::ScriptProcess(char *aCmd, char *aProcess, char *aParam3)
 ResultType WinSetRegion(HWND aWnd, char *aPoints)
 // Caller has initialized g_ErrorLevel to ERRORLEVEL_ERROR for us.
 {
+    /*
 	if (!*aPoints) // Attempt to restore the window's normal/correct region.
 	{
 		// Fix for v1.0.31.07: The old method used the following, but apparently it's not the correct
@@ -3112,6 +3157,7 @@ ResultType WinSetRegion(HWND aWnd, char *aPoints)
 
 	// Since above didn't return, indicate success.
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE);
+*/
 }
 
 
@@ -3119,6 +3165,7 @@ ResultType WinSetRegion(HWND aWnd, char *aPoints)
 ResultType Line::WinSet(char *aAttrib, char *aValue, char *aTitle, char *aText
 	, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	WinSetAttributes attrib = ConvertWinSetAttribute(aAttrib);
 	if (attrib == WINSET_INVALID)
 		return LineError(ERR_PARAM1_INVALID, FAIL, aAttrib);
@@ -3329,6 +3376,7 @@ ResultType Line::WinSet(char *aAttrib, char *aValue, char *aTitle, char *aText
 
 	} // switch()
 	return OK;
+*/
 }
 
 
@@ -3337,17 +3385,20 @@ ResultType Line::WinSetTitle(char *aTitle, char *aText, char *aNewTitle, char *a
 // Like AutoIt2, this function and others like it always return OK, even if the target window doesn't
 // exist or there action doesn't actually succeed.
 {
+    /*
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)
 		return OK;
 	SetWindowText(target_window, aNewTitle);
 	return OK;
+*/
 }
 
 
 
 ResultType Line::WinGetTitle(char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	// Even if target_window is NULL, we want to continue on so that the output
@@ -3372,12 +3423,14 @@ ResultType Line::WinGetTitle(char *aTitle, char *aText, char *aExcludeTitle, cha
 		output_var.Length() = 0;
 	}
 	return output_var.Close();  // In case it's the clipboard.
+*/
 }
 
 
 
 ResultType Line::WinGetClass(char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
 	if (!target_window)
 		return OUTPUT_VAR->Assign();
@@ -3385,6 +3438,7 @@ ResultType Line::WinGetClass(char *aTitle, char *aText, char *aExcludeTitle, cha
 	if (!GetClassName(target_window, class_name, sizeof(class_name)))
 		return OUTPUT_VAR->Assign();
 	return OUTPUT_VAR->Assign(class_name);
+*/
 }
 
 
@@ -3393,6 +3447,7 @@ ResultType WinGetList(Var &aOutputVar, WinGetCmds aCmd, char *aTitle, char *aTex
 // Helper function for WinGet() to avoid having a WindowSearch object on its stack (since that object
 // normally isn't needed).
 {
+    /*
 	WindowSearch ws;
 	ws.mFindLastMatch = true; // Must set mFindLastMatch to get all matches rather than just the first.
 	ws.mArrayStart = (aCmd == WINGET_CMD_LIST) ? &aOutputVar : NULL; // Provide the position in the var list of where the array-element vars will be.
@@ -3402,12 +3457,14 @@ ResultType WinGetList(Var &aOutputVar, WinGetCmds aCmd, char *aTitle, char *aTex
 		EnumWindows(EnumParentFind, (LPARAM)&ws);
 	//else leave ws.mFoundCount set to zero (by the constructor).
 	return aOutputVar.Assign(ws.mFoundCount);
+*/
 }
 
 
 
 ResultType Line::WinGet(char *aCmd, char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;  // This is done even for WINGET_CMD_LIST.
 	WinGetCmds cmd = ConvertWinGetCmd(aCmd);
 	// Since command names are validated at load-time, this only happens if the command name
@@ -3554,6 +3611,7 @@ ResultType Line::WinGet(char *aCmd, char *aTitle, char *aText, char *aExcludeTit
 	}
 
 	return FAIL;  // Never executed (increases maintainability and avoids compiler warning).
+*/
 }
 
 
@@ -3571,6 +3629,7 @@ ResultType Line::WinGetControlList(Var &aOutputVar, HWND aTargetWindow, bool aFe
 //    the overhead of being a script variable, not to mention that each variable has a minimum
 //    capacity (additional overhead) of 64 bytes.
 {
+    /*
 	control_list_type cl; // A big struct containing room to store class names and counts for each.
 	CL_INIT_CONTROL_LIST(cl)
 	cl.fetch_hwnds = aFetchHWNDs;
@@ -3598,12 +3657,14 @@ ResultType Line::WinGetControlList(Var &aOutputVar, HWND aTargetWindow, bool aFe
 	if (!cl.total_length) // Something went wrong, so make sure its terminated just in case.
 		*aOutputVar.Contents() = '\0';  // Safe because Assign() gave us a non-constant memory area.
 	return aOutputVar.Close();  // In case it's the clipboard.
+*/
 }
 
 
 
 BOOL CALLBACK EnumChildGetControlList(HWND aWnd, LPARAM lParam)
 {
+    /*
 	control_list_type &cl = *(control_list_type *)lParam;  // For performance and convenience.
 	char line[WINDOW_CLASS_SIZE + 5];  // +5 to allow room for the sequence number to be appended later below.
 	int line_length;
@@ -3680,12 +3741,14 @@ BOOL CALLBACK EnumChildGetControlList(HWND aWnd, LPARAM lParam)
 		cl.total_length += line_length + extra_length;
 
 	return TRUE; // Continue enumeration through all the windows.
+*/
 }
 
 
 
 ResultType Line::WinGetText(char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	HWND target_window = DetermineTargetWindow(aTitle, aText, aExcludeTitle, aExcludeText);
@@ -3740,12 +3803,14 @@ ResultType Line::WinGetText(char *aTitle, char *aText, char *aExcludeTitle, char
 	else // Something went wrong, so make sure we set to empty string.
 		*sab.buf = '\0';  // Safe because Assign() gave us a non-constant memory area.
 	return output_var.Close();  // In case it's the clipboard.
+*/
 }
 
 
 
 BOOL CALLBACK EnumChildGetText(HWND aWnd, LPARAM lParam)
 {
+    /*
 	if (!g.DetectHiddenText && !IsWindowVisible(aWnd))
 		return TRUE;  // This child/control is hidden and user doesn't want it considered, so skip it.
 	length_and_buf_type &lab = *(length_and_buf_type *)lParam;  // For performance and convenience.
@@ -3771,12 +3836,14 @@ BOOL CALLBACK EnumChildGetText(HWND aWnd, LPARAM lParam)
 			lab.total_length += 2; // Since buf is NULL, accumulate the size that *would* be needed.
 	}
 	return TRUE; // Continue enumeration through all the child windows of this parent.
+*/
 }
 
 
 
 ResultType Line::WinGetPos(char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	Var *output_var_x = ARGVAR1;  // Ok if NULL.
 	Var *output_var_y = ARGVAR2;  // Ok if NULL.
 	Var *output_var_width = ARGVAR3;  // Ok if NULL.
@@ -3832,12 +3899,14 @@ ResultType Line::WinGetPos(char *aTitle, char *aText, char *aExcludeTitle, char 
 				result = FAIL;
 
 	return result;
+*/
 }
 
 
 
 ResultType Line::EnvGet(char *aEnvVarName)
 {
+    /*
 	// Don't use a size greater than 32767 because that will cause it to fail on Win95 (tested by Robert Yalkin).
 	// According to MSDN, 32767 is exactly large enough to handle the largest variable plus its zero terminator.
 	char buf[32767];
@@ -3846,6 +3915,7 @@ ResultType Line::EnvGet(char *aEnvVarName)
 	// add code complexity, so it seems best to fetch it into a large buffer then just copy it to dest-var.
 	DWORD length = GetEnvironmentVariable(aEnvVarName, buf, sizeof(buf));
 	return OUTPUT_VAR->Assign(length ? buf : const_cast<char*>(""), length);
+*/
 }
 
 
@@ -3854,6 +3924,7 @@ ResultType Line::SysGet(char *aCmd, char *aValue)
 // Thanks to Gregory F. Hogg of Hogg's Software for providing sample code on which this function
 // is based.
 {
+    /*
 	// For simplicity and array look-up performance, this is done even for sub-commands that output to an array:
 	Var &output_var = *OUTPUT_VAR;
 	SysGetCmds cmd = ConvertSysGetCmd(aCmd);
@@ -3986,12 +4057,14 @@ ResultType Line::SysGet(char *aCmd, char *aValue)
 	} // switch()
 
 	return FAIL;  // Never executed (increases maintainability and avoids compiler warning).
+*/
 }
 
 
 
 BOOL CALLBACK EnumMonitorProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMonitor, LPARAM lParam)
 {
+    /*
 	MonitorInfoPackage &mip = *(MonitorInfoPackage *)lParam;  // For performance and convenience.
 	if (mip.monitor_number_to_find == COUNT_ALL_MONITORS)
 	{
@@ -4024,6 +4097,7 @@ BOOL CALLBACK EnumMonitorProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT lprcMoni
 			// one monitor.  MSDN certainly implies this through multiple references to the primary monitor.
 	// Otherwise, continue the enumeration:
 	return TRUE;
+*/
 }
 
 
@@ -4033,6 +4107,7 @@ LPCOLORREF getbits(HBITMAP ahImage, HDC hdc, LONG &aWidth, LONG &aHeight, bool &
 // Returns an array of pixels to the caller, which it must free when done.  Returns NULL on failure,
 // in which case the contents of the output parameters is indeterminate.
 {
+    /*
     	bool is_8bit ;
 	int image_pixel_count;
 	HDC tdc = CreateCompatibleDC(hdc);
@@ -4140,6 +4215,7 @@ end:
 		image_pixel = NULL;
 	}
 	return image_pixel;
+*/
 }
 
 
@@ -4150,6 +4226,7 @@ ResultType Line::PixelSearch(int aLeft, int aTop, int aRight, int aBottom, COLOR
 // it's in RGB format.
 // Author: The fast-mode PixelSearch was created by Aurelian Maga.
 {
+    /*
     LONG screen_pixel_count;
 	// For maintainability, get options and RGB/BGR conversion out of the way early.
 	bool fast_mode = aIsPixelGetColor || strcasestr(aOptions, "Fast");
@@ -4422,6 +4499,7 @@ fast_end:
 		return FAIL;
 	// Since above didn't return:
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -4429,6 +4507,7 @@ fast_end:
 ResultType Line::ImageSearch(int aLeft, int aTop, int aRight, int aBottom, char *aImageFile)
 // Author: ImageSearch was created by Aurelian Maga.
 {
+    /*
 	// Many of the following sections are similar to those in PixelSearch(), so they should be
 	// maintained together.
 	LONG screen_width, screen_height;
@@ -4814,6 +4893,7 @@ end:
 		return FAIL;
 
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
@@ -5305,6 +5385,7 @@ bool HandleMenuItem(HWND aHwnd, WORD aMenuItemID, WPARAM aGuiIndex)
 // its submenus was modified with the "menu, MenuName, Standard" command.
 // Returns true if the message is fully handled here, false otherwise.
 {
+    /*
     char buf_temp[2048];  // For various uses.
 
 	switch (aMenuItemID)
@@ -5449,6 +5530,7 @@ bool HandleMenuItem(HWND aHwnd, WORD aMenuItemID, WPARAM aGuiIndex)
 		return true;
 	} // switch()
 	return false;  // Indicate that the message was NOT handled.
+*/
 }
 
 
@@ -5456,6 +5538,7 @@ bool HandleMenuItem(HWND aHwnd, WORD aMenuItemID, WPARAM aGuiIndex)
 ResultType ShowMainWindow(MainWindowModes aMode, bool aRestricted)
 // Always returns OK for caller convenience.
 {
+    /*
 	// v1.0.30.05: Increased from 32 KB to 64 KB, which is the maximum size of an Edit
 	// in Win9x:
 	char buf_temp[65534] = "";  // Formerly 32767.
@@ -5552,6 +5635,7 @@ ResultType ShowMainWindow(MainWindowModes aMode, bool aRestricted)
 		//SendMessage(g_hWndEdit, EM_SCROLLCARET, 0, 0);
 	}
 	return OK;
+*/
 }
 
 
@@ -5561,11 +5645,13 @@ DWORD GetAHKInstallDir(char *aBuf)
 // to get the length, or by making it MAX_PATH in capacity).
 // Returns the length of the string (0 if empty).
 {
+    /*
 	char buf[MAX_PATH];
 	VarSizeType length = ReadRegString(HKEY_LOCAL_MACHINE, "SOFTWARE\\AutoHotkey", "InstallDir", buf, MAX_PATH);
 	if (aBuf)
 		strcpy(aBuf, buf); // v1.0.47: Must be done as a separate copy because passing a size of MAX_PATH for aBuf can crash when aBuf is actually smaller than that (even though it's large enough to hold the string).
 	return length;
+*/
 }
 
 
@@ -5577,6 +5663,7 @@ DWORD GetAHKInstallDir(char *aBuf)
 ResultType InputBox(Var *aOutputVar, char *aTitle, char *aText, bool aHideInput, int aWidth, int aHeight
 	, int aX, int aY, double aTimeout, char *aDefault)
 {
+    /*
 	// Note: for maximum compatibility with existing AutoIt2 scripts, do not
 	// set ErrorLevel to ERRORLEVEL_ERROR when the user presses cancel.  Instead,
 	// just set the output var to be blank.
@@ -5663,6 +5750,7 @@ ResultType InputBox(Var *aOutputVar, char *aTitle, char *aText, bool aHideInput,
 	}
 
 	return OK;
+*/
 }
 
 
@@ -5673,6 +5761,7 @@ BOOL CALLBACK InputBoxProc(HWND hWndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam
 // and FALSE if it did not. If the dialog box procedure returns FALSE, the dialog
 // manager performs the default dialog operation in response to the message.
 {
+    /*
 	// See GuiWindowProc() for details about this first part:
 	LRESULT msg_reply;
 	if (g_MsgMonitorCount // Count is checked here to avoid function-call overhead.
@@ -5935,12 +6024,14 @@ BOOL CALLBACK InputBoxProc(HWND hWndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam
 	} // Outer switch()
 	// Otherwise, let the dialog handler do its default action:
 	return FALSE;
+*/
 }
 
 
 
 VOID CALLBACK InputBoxTimeout(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime)
 {
+    /*
 	// First check if the window has already been destroyed.  There are quite a few ways this can
 	// happen, and in all of them we want to make sure not to do things such as calling EndDialog()
 	// again or updating the output variable.  Reasons:
@@ -5986,6 +6077,7 @@ VOID CALLBACK InputBoxTimeout(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime)
 		EndDialog(hWnd, AHK_TIMEOUT);
 	}
 	KillTimer(hWnd, idEvent);
+*/
 }
 
 
@@ -6000,6 +6092,7 @@ VOID CALLBACK DerefTimeout(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime)
 ResultType Line::MouseGetPos(DWORD aOptions)
 // Returns OK or FAIL.
 {
+    /*
 	// Caller should already have ensured that at least one of these will be non-NULL.
 	// The only time this isn't true is for dynamically-built variable names.  In that
 	// case, we don't worry about it if it's NULL, since the user will already have been
@@ -6091,6 +6184,7 @@ ResultType Line::MouseGetPos(DWORD aOptions)
 	// Append the class sequence number onto the class name and set the output param to be that value:
 	snprintfcat(class_name, sizeof(class_name), "%d", cah.class_count);
 	return output_var_child->Assign(class_name);
+*/
 }
 
 
@@ -6099,6 +6193,7 @@ BOOL CALLBACK EnumChildFindPoint(HWND aWnd, LPARAM lParam)
 // This is called by more than one caller.  It finds the most appropriate child window that contains
 // the specified point (the point should be in screen coordinates).
 {
+    /*
 	point_and_hwnd_type &pah = *(point_and_hwnd_type *)lParam;  // For performance and convenience.
 	if (!IsWindowVisible(aWnd)) // Omit hidden controls, like Window Spy does.
 		return TRUE;
@@ -6142,6 +6237,7 @@ BOOL CALLBACK EnumChildFindPoint(HWND aWnd, LPARAM lParam)
 		}
 	}
 	return TRUE; // Continue enumeration all the way through.
+*/
 }
 
 
@@ -6156,6 +6252,7 @@ ResultType Line::FormatTime(char *aYYYYMMDD, char *aFormat)
 // (setlocale() seems to be needed to put the user's or system's locale into effect for strftime()).
 // setlocale() weighs in at about 6.5 KB compressed (14 KB uncompressed).
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 
 	#define FT_MAX_INPUT_CHARS 2000  // In preparation for future use of TCHARs, since GetDateFormat() uses char-count not size.
@@ -6452,6 +6549,7 @@ ResultType Line::FormatTime(char *aYYYYMMDD, char *aFormat)
 	}
 
 	return output_var.Assign(output_buf);
+*/
 }
 
 
@@ -7481,6 +7579,7 @@ end:
 ResultType Line::GetKeyJoyState(char *aKeyName, char *aOption)
 // Keep this in sync with FUNC_GETKEYSTATE.
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	JoyControls joy;
 	int joystick_id;
@@ -7511,6 +7610,7 @@ ResultType Line::GetKeyJoyState(char *aKeyName, char *aOption)
 	default: key_state_type = KEYSTATE_LOGICAL;
 	}
 	return output_var.Assign((DWORD)(ScriptGetKeyState(vk, key_state_type) ? "D" : "U"));
+*/
 }
 
 
@@ -7520,6 +7620,7 @@ ResultType Line::DriveSpace(char *aPath, bool aGetFreeSpace)
 // have the same amount of free space as its root drive.  However, I'm not sure if this
 // method here actually takes that into account.
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	OUTPUT_VAR->Assign(); // Init to empty string regardless of whether we succeed here.
 
@@ -7567,12 +7668,14 @@ ResultType Line::DriveSpace(char *aPath, bool aGetFreeSpace)
 
 	g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
 	return OUTPUT_VAR->Assign(free_space);
+*/
 }
 
 
 
 ResultType Line::Drive(char *aCmd, char *aValue, char *aValue2) // aValue not aValue1, for use with a shared macro.
 {
+    /*
 	DriveCmds drive_cmd = ConvertDriveCmd(aCmd);
 
 	char path[MAX_PATH + 1];  // +1 to allow room for trailing backslash in case it needs to be added.
@@ -7644,12 +7747,14 @@ ResultType Line::Drive(char *aCmd, char *aValue, char *aValue2) // aValue not aV
 	} // switch()
 
 	return FAIL;  // Should never be executed.  Helps catch bugs.
+*/
 }
 
 
 
 ResultType Line::DriveLock(char aDriveLetter, bool aLockIt)
 {
+    /*
 	HANDLE hdevice;
 	DWORD unused;
 	BOOL result;
@@ -7667,7 +7772,7 @@ ResultType Line::DriveLock(char aDriveLetter, bool aLockIt)
 		// Use the Windows 9x method.  The code below is based on an example posted by Microsoft.
 		// Note: The presence of the code below does not add a detectible amount to the EXE size
 		// (probably because it's mostly defines and data types).
-		/* winemaker: #pragma pack(1) */
+		//
 		#include <pshpack1.h>
 		typedef struct _DIOC_REGISTERS
 		{
@@ -7684,8 +7789,8 @@ ResultType Line::DriveLock(char aDriveLetter, bool aLockIt)
 			BYTE Operation;
 			BYTE NumLocks;
 		} PARAMBLOCK, *PPARAMBLOCK;
-		/* winemaker: #pragma pack() */
-		/* winemaker:warning: Using 4 as the default alignment */
+		//
+		//
 		#include <pshpack4.h>
 
 		// MS: Prepare for lock or unlock IOCTL call
@@ -7736,12 +7841,14 @@ ResultType Line::DriveLock(char aDriveLetter, bool aLockIt)
 	}
 	CloseHandle(hdevice);
 	return result ? OK : FAIL;
+*/
 }
 
 
 
 ResultType Line::DriveGet(char *aCmd, char *aValue)
 {
+    /*
 	DriveGetCmds drive_get_cmd = ConvertDriveGetCmd(aCmd);
 	if (drive_get_cmd == DRIVEGET_CMD_CAPACITY)
 		return DriveSpace(aValue, false);
@@ -7902,6 +8009,8 @@ ResultType Line::DriveGet(char *aCmd, char *aValue)
 
 	// Note that ControlDelay is not done for the Get type commands, because it seems unnecessary.
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+
+*/
 }
 
 
@@ -7910,6 +8019,7 @@ ResultType Line::SoundSetGet(char *aSetting, DWORD aComponentType, int aComponen
 	, DWORD aControlType, UINT aMixerID)
 // If the caller specifies NULL for aSetting, the mode will be "Get".  Otherwise, it will be "Set".
 {
+    /*
 	#define SOUND_MODE_IS_SET aSetting // Boolean: i.e. if it's not NULL, the mode is "SET".
 	double setting_percent;
 	Var *output_var;
@@ -8094,12 +8204,14 @@ ResultType Line::SoundSetGet(char *aSetting, DWORD aComponentType, int aComponen
 		// left and right volume levels, unlike waveOutGetVolume():
 		return output_var->Assign(   ((double)100 * (mcdMeter.dwValue - (DWORD)mc.Bounds.dwMinimum))
 			/ (mc.Bounds.dwMaximum - mc.Bounds.dwMinimum)   );
+*/
 }
 
 
 
 ResultType Line::SoundGetWaveVolume(HWAVEOUT aDeviceID)
 {
+    /*
 	OUTPUT_VAR->Assign(); // Init to empty string regardless of whether we succeed here.
 
 	DWORD current_vol;
@@ -8112,12 +8224,14 @@ ResultType Line::SoundGetWaveVolume(HWAVEOUT aDeviceID)
 	// MSDN: "If a device does not support both left and right volume control, the low-order word
 	// of the specified location contains the mono volume level.
 	return OUTPUT_VAR->Assign((double)(LOWORD(current_vol) * 100) / 0xFFFF);
+*/
 }
 
 
 
 ResultType Line::SoundSetWaveVolume(char *aVolume, HWAVEOUT aDeviceID)
 {
+    /*
 	double volume = ATOF(aVolume);
 	if (volume < -100)
 		volume = -100;
@@ -8159,12 +8273,14 @@ ResultType Line::SoundSetWaveVolume(char *aVolume, HWAVEOUT aDeviceID)
 		return g_ErrorLevel->Assign(ERRORLEVEL_NONE);
 	else
 		return g_ErrorLevel->Assign(ERRORLEVEL_ERROR);
+*/
 }
 
 
 
 ResultType Line::SoundPlay(char *aFilespec, bool aSleepUntilDone)
 {
+    /*
 	char *cp = omit_leading_whitespace(aFilespec);
 	if (*cp == '*')
 		return g_ErrorLevel->Assign(MessageBeep(ATOU(cp + 1)) ? ERRORLEVEL_NONE : ERRORLEVEL_ERROR);
@@ -8203,6 +8319,7 @@ ResultType Line::SoundPlay(char *aFilespec, bool aSleepUntilDone)
 		MsgSleep(20);
 	}
 	return OK;
+*/
 }
 
 
@@ -8275,6 +8392,7 @@ ResultType Line::FileSelectFile(char *aOptions, char *aWorkingDir, char *aGreeti
 // this command not refer to sArgDeref[] and sArgVar[] anytime after an interruption becomes possible.
 // This is because an interrupting thread usually changes the values to something inappropriate for this thread.
 {
+	/*
 	Var &output_var = *OUTPUT_VAR; // Fix for v1.0.45.01: Must be resolved and saved early.  See comment above.
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	if (g_nFileDialogs >= MAX_FILEDIALOGS)
@@ -8542,12 +8660,14 @@ ResultType Line::FileSelectFile(char *aOptions, char *aWorkingDir, char *aGreeti
 		}
 	}
 	return output_var.Assign(file_buf);
+*/
 }
 
 
 
 ResultType Line::FileCreateDir(char *aDirSpec)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	if (!aDirSpec || !*aDirSpec)
 		return OK;  // Return OK because g_ErrorLevel tells the story.
@@ -8586,6 +8706,7 @@ ResultType Line::FileCreateDir(char *aDirSpec)
 	// Now we can create aDirSpec.  Be sure to explicitly set g_ErrorLevel since it's value
 	// is now indeterminate due to action above:
 	return g_ErrorLevel->Assign(CreateDirectory(aDirSpec, NULL) ? ERRORLEVEL_NONE : ERRORLEVEL_ERROR);
+*/
 }
 
 
@@ -8596,6 +8717,7 @@ ResultType Line::FileRead(char *aFilespec)
 // kind of unexpected and more serious error occurs, such as variable-out-of-memory,
 // that will cause FAIL to be returned.
 {
+    /*
 	Var &output_var = *OUTPUT_VAR;
 	// Init output var to be blank as an additional indicator of failure (or empty file).
 	// Caller must check ErrorLevel to distinguish between an empty file and an error.
@@ -8743,6 +8865,7 @@ ResultType Line::FileRead(char *aFilespec)
 
 	// ErrorLevel, as set in various places above, indicates success or failure.
 	return output_var.Close(is_binary_clipboard);
+*/
 }
 
 
@@ -8753,6 +8876,7 @@ ResultType Line::FileReadLine(char *aFilespec, char *aLineNumber)
 // kind of unexpected and more serious error occurs, such as variable-out-of-memory,
 // that will cause FAIL to be returned.
 {
+    /*
 	Var &output_var = *OUTPUT_VAR; // Fix for v1.0.45.01: Must be resolved and saved before MsgSleep() (LONG_OPERATION) because that allows some other thread to interrupt and overwrite sArgVar[].
 
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
@@ -8795,12 +8919,14 @@ ResultType Line::FileReadLine(char *aFilespec, char *aLineNumber)
 		if (!output_var.Assign(buf, (VarSizeType)buf_length))
 			return FAIL;
 	return g_ErrorLevel->Assign(ERRORLEVEL_NONE); // Indicate success.
+*/
 }
 
 
 
 ResultType Line::FileAppend(char *aFilespec, char *aBuf, LoopReadFileStruct *aCurrentReadFile)
 {
+    /*
 	// The below is avoided because want to allow "nothing" to be written to a file in case the
 	// user is doing this to reset it's timestamp (or create an empty file).
 	//if (!aBuf || !*aBuf)
@@ -8892,6 +9018,7 @@ ResultType Line::FileAppend(char *aFilespec, char *aBuf, LoopReadFileStruct *aCu
 	// else it's the caller's responsibility, or it's caller's, to close it.
 
 	return OK;
+*/
 }
 
 
@@ -8900,6 +9027,7 @@ ResultType Line::WriteClipboardToFile(char *aFilespec)
 // Returns OK or FAIL.  If OK, it sets ErrorLevel to the appropriate result.
 // If the clipboard is empty, a zero length file will be written, which seems best for its consistency.
 {
+    /*
 	// This method used is very similar to that used in PerformAssign(), so see that section
 	// for a large quantity of comments.
 
@@ -8971,6 +9099,7 @@ ResultType Line::WriteClipboardToFile(char *aFilespec)
 
 	CloseHandle(hfile);
 	return OK; // Let ErrorLevel, set above, tell the story.
+*/
 }
 
 
@@ -8981,6 +9110,7 @@ ResultType Line::ReadClipboardFromFile(HANDLE hfile)
 // The method used here is very similar to that used in PerformAssign(), so see that section
 // for a large quantity of comments.
 {
+    /*
 	if (!g_clip.Open())
 	{
 		CloseHandle(hfile);
@@ -9045,12 +9175,14 @@ ResultType Line::ReadClipboardFromFile(HANDLE hfile)
 		return OK; // Let ErrorLevel, set above, tell the story.
 	else // Indicate success.
 		return g_ErrorLevel->Assign(ERRORLEVEL_NONE);
+*/
 }
 
 
 
 ResultType Line::FileDelete()
 {
+    /*
 	// Below is done directly this way rather than passed in as args mainly to emphasize that
 	// ArgLength() can safely be called in Line methods like this one (which is done further below).
 	// It also may also slightly improve performance and reduce code size.
@@ -9131,12 +9263,14 @@ ResultType Line::FileDelete()
 	FindClose(file_search);
 
 	return g_ErrorLevel->Assign(failure_count); // i.e. indicate success if there were no failures.
+*/
 }
 
 
 
 ResultType Line::FileInstall(char *aSource, char *aDest, char *aFlag)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default ErrorLevel.
 	bool allow_overwrite = (ATOI(aFlag) == 1);
 #ifdef AUTOHOTKEYSC
@@ -9180,12 +9314,14 @@ ResultType Line::FileInstall(char *aSource, char *aDest, char *aFlag)
 	SetCurrentDirectory(g_WorkingDir); // Restore to proper value.
 #endif
 	return OK;
+*/
 }
 
 
 
 ResultType Line::FileGetAttrib(char *aFilespec)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default
 	OUTPUT_VAR->Assign(); // Init to be blank, in case of failure.
 
@@ -9199,6 +9335,7 @@ ResultType Line::FileGetAttrib(char *aFilespec)
 	g_ErrorLevel->Assign(ERRORLEVEL_NONE);
 	char attr_string[128];
 	return OUTPUT_VAR->Assign(FileAttribToStr(attr_string, attr));
+*/
 }
 
 
@@ -9207,6 +9344,7 @@ int Line::FileSetAttrib(char *aAttributes, char *aFilePattern, FileLoopModeType 
 	, bool aDoRecurse, bool aCalledRecursively)
 // Returns the number of files and folders that could not be changed due to an error.
 {
+    /*
 	if (!aCalledRecursively)  // i.e. Only need to do this if we're not called by ourself:
 	{
 		g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default
@@ -9420,12 +9558,14 @@ int Line::FileSetAttrib(char *aAttributes, char *aFilePattern, FileLoopModeType 
 	if (!aCalledRecursively) // i.e. Only need to do this if we're returning to top-level caller:
 		g_ErrorLevel->Assign(failure_count); // i.e. indicate success if there were no failures.
 	return failure_count;
+*/
 }
 
 
 
 ResultType Line::FileGetTime(char *aFilespec, char aWhichTime)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default.
 	OUTPUT_VAR->Assign(); // Init to be blank, in case of failure.
 
@@ -9456,6 +9596,7 @@ ResultType Line::FileGetTime(char *aFilespec, char aWhichTime)
     g_ErrorLevel->Assign(ERRORLEVEL_NONE);  // Indicate success.
 	char local_file_time_string[128];
 	return OUTPUT_VAR->Assign(FileTimeToYYYYMMDD(local_file_time_string, local_file_time));
+*/
 }
 
 
@@ -9466,6 +9607,7 @@ int Line::FileSetTime(char *aYYYYMMDD, char *aFilePattern, char aWhichTime
 // Current limitation: It will not recurse into subfolders unless their names also match
 // aFilePattern.
 {
+    /*
 	if (!aCalledRecursively)  // i.e. Only need to do this if we're not called by ourself:
 	{
 		g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default
@@ -9645,12 +9787,14 @@ int Line::FileSetTime(char *aYYYYMMDD, char *aFilePattern, char aWhichTime
 	if (!aCalledRecursively) // i.e. Only need to do this if we're returning to top-level caller:
 		g_ErrorLevel->Assign(failure_count); // i.e. indicate success if there were no failures.
 	return failure_count;
+*/
 }
 
 
 
 ResultType Line::FileGetSize(char *aFilespec, char *aGranularity)
 {
+    /*
 	g_ErrorLevel->Assign(ERRORLEVEL_ERROR); // Set default
 	OUTPUT_VAR->Assign(); // Init to be blank, in case of failure.
 
@@ -9699,6 +9843,7 @@ ResultType Line::FileGetSize(char *aFilespec, char *aGranularity)
 	// variables.  This is because an unsigned variable larger than INT_MAX would not be properly
 	// converted by ATOI(), which is current standard method for variables to be auto-converted
 	// from text back to a number whenever that is needed.
+*/
 }
 
 
@@ -9707,6 +9852,7 @@ ResultType Line::SetToggleState(vk_type aVK, ToggleValueType &ForceLock, char *a
 // Caller must have already validated that the args are correct.
 // Always returns OK, for use as caller's return value.
 {
+    /*
 	ToggleValueType toggle = ConvertOnOffAlways(aToggleText, NEUTRAL);
 	switch (toggle)
 	{
@@ -9737,6 +9883,7 @@ ResultType Line::SetToggleState(vk_type aVK, ToggleValueType &ForceLock, char *a
 		break;
 	}
 	return OK;
+*/
 }
 
 
@@ -9747,6 +9894,7 @@ ResultType Line::SetToggleState(vk_type aVK, ToggleValueType &ForceLock, char *a
 
 HWND Line::DetermineTargetWindow(char *aTitle, char *aText, char *aExcludeTitle, char *aExcludeText)
 {
+    /*
 	HWND target_window; // A variable of this name is used by the macros below.
 	IF_USE_FOREGROUND_WINDOW(g.DetectHiddenWindows, aTitle, aText, aExcludeTitle, aExcludeText)
 	else if (*aTitle || *aText || *aExcludeTitle || *aExcludeText)
@@ -9754,6 +9902,7 @@ HWND Line::DetermineTargetWindow(char *aTitle, char *aText, char *aExcludeTitle,
 	else // Use the "last found" window.
 		target_window = GetValidLastUsedWindow(g);
 	return target_window;
+*/
 }
 
 
@@ -9761,6 +9910,7 @@ HWND Line::DetermineTargetWindow(char *aTitle, char *aText, char *aExcludeTitle,
 #ifndef AUTOHOTKEYSC
 int Line::ConvertEscapeChar(char *aFilespec)
 {
+    /*
 	bool aFromAutoIt2 = true;  // This function currnetly always uses these defaults, so they're no longer passed in.
 	char aOldChar = '\\';      //
 	char aNewChar = '`';       //
@@ -9852,12 +10002,14 @@ int Line::ConvertEscapeChar(char *aFilespec)
 	fclose(f2);
 	MsgBox("The file was successfully converted.");
 	return 0;  // Return 0 on success in this case.
+*/
 }
 
 
 
 size_t Line::ConvertEscapeCharGetLine(char *aBuf, int aMaxCharsToRead, FILE *fp)
 {
+    /*
 	if (!aBuf || !fp) return -1;
 	if (aMaxCharsToRead < 1) return 0;
 	if (feof(fp)) return -1; // Previous call to this function probably already read the last line.
@@ -9867,6 +10019,7 @@ size_t Line::ConvertEscapeCharGetLine(char *aBuf, int aMaxCharsToRead, FILE *fp)
 		return -1;
 	}
 	return strlen(aBuf);
+*/
 }
 #endif  // The functions above are not needed by the self-contained version.
 

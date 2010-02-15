@@ -4,7 +4,7 @@
 	<File name="AutoHotkey.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="22" />
 	</File>
-	<File name="AutoHotkeyx.cpp" open="1" top="0" tabpos="1">
+	<File name="AutoHotkeyx.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="13732" topLine="373" />
 	</File>
 	<File name="application.cpp" open="0" top="0" tabpos="0">
@@ -13,7 +13,7 @@
 	<File name="application.h" open="0" top="0" tabpos="0">
 		<Cursor position="6765" topLine="116" />
 	</File>
-	<File name="defines.h" open="1" top="0" tabpos="2">
+	<File name="defines.h" open="0" top="0" tabpos="2">
 		<Cursor position="15316" topLine="235" />
 	</File>
 	<File name="exports.cpp" open="0" top="0" tabpos="1">
@@ -37,17 +37,26 @@
 	<File name="keyboard_mouse.h" open="0" top="0" tabpos="0">
 		<Cursor position="10657" topLine="231" />
 	</File>
-	<File name="script.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="541199" topLine="10839" />
+	<File name="script.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="7509" topLine="138" />
 	</File>
 	<File name="script.h" open="0" top="0" tabpos="0">
 		<Cursor position="119762" topLine="2325" />
 	</File>
-	<File name="script2.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="88110" topLine="1957" />
+	<File name="script2.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="389540" topLine="8260" />
+	</File>
+	<File name="script_autoit.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="80372" topLine="1995" />
 	</File>
 	<File name="script_gui.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="68252" topLine="1352" />
+		<Cursor position="497541" topLine="9374" />
+	</File>
+	<File name="script_menu.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="19179" topLine="426" />
+	</File>
+	<File name="script_registry.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="17622" topLine="422" />
 	</File>
 	<File name="util.h" open="0" top="0" tabpos="0">
 		<Cursor position="24330" topLine="505" />
@@ -56,6 +65,6 @@
 		<Cursor position="4337" topLine="84" />
 	</File>
 	<File name="window.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="28394" topLine="537" />
+		<Cursor position="3594" topLine="78" />
 	</File>
 </CodeBlocks_layout_file>

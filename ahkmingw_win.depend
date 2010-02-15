@@ -1274,7 +1274,7 @@
 	"application.h"
 	"exports.h"
 
-1253341862 source:l:\source\ahkgcc\script2.cpp
+1266206510 source:l:\source\ahkgcc\script2.cpp
 	"stdafx.h"
 	<olectl.h>
 	<winioctl.h>
@@ -1291,7 +1291,7 @@
 1251585311 l:\source\ahkgcc\qmath.h
 	<math.h>
 
-1251585310 source:l:\source\ahkgcc\script_autoit.cpp
+1265870257 source:l:\source\ahkgcc\script_autoit.cpp
 	"stdafx.h"
 	<winsock.h>
 	<tlhelp32.h>
