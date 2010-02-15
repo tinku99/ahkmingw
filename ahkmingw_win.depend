@@ -1274,7 +1274,7 @@
 	"application.h"
 	"exports.h"
 
-1266209477 source:l:\source\ahkgcc\script2.cpp
+1266212428 source:l:\source\ahkgcc\script2.cpp
 	"stdafx.h"
 	<olectl.h>
 	<winioctl.h>
@@ -1284,7 +1284,6 @@
 	"window.h"
 	"application.h"
 	"resources/resource.h"
-	"lib_pcre/pcre/pcre.h"
 	<pshpack1.h>
 	<pshpack4.h>
 
