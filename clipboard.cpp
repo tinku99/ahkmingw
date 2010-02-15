@@ -33,6 +33,7 @@ size_t Clipboard::Get(char *aBuf)
 // will use MsgBox to display an error, which in turn calls MsgSleep(), which will
 // immediately close the clipboard.
 {
+    /*
 	// Seems best to always have done this even if we return early due to failure:
 	if (aBuf)
 		// It should be safe to do this even at its peak capacity, because caller
@@ -165,6 +166,7 @@ size_t Clipboard::Get(char *aBuf)
 	//	return 0;
 	// However, that has the risks described in the comments above those two lines.
 	return mLength;
+*/
 }
 
 
@@ -172,6 +174,7 @@ size_t Clipboard::Get(char *aBuf)
 ResultType Clipboard::Set(char *aBuf, UINT aLength) //, bool aTrimIt)
 // Returns OK or FAIL.
 {
+    /*
 	// It was already open for writing from a prior call.  Return failure because callers that do this
 	// are probably handling things wrong:
 	if (IsReadyForWrite()) return FAIL;
@@ -202,12 +205,14 @@ ResultType Clipboard::Set(char *aBuf, UINT aLength) //, bool aTrimIt)
 	// by IsClipboardFormatAvailable(CF_TEXT) -- and we want to be able to make it truly
 	// empty for use with functions such as ClipWait:
 	return Commit();  // It will display any errors.
+*/
 }
 
 
 
 char *Clipboard::PrepareForWrite(size_t aAllocSize)
 {
+    /*
 	if (!aAllocSize) return NULL; // Caller should ensure that size is at least 1, i.e. room for the zero terminator.
 	if (IsReadyForWrite())
 		// It was already prepared due to a prior call.  Currently, the most useful thing to do
@@ -230,6 +235,7 @@ char *Clipboard::PrepareForWrite(size_t aAllocSize)
 	mCapacity = (UINT)aAllocSize; // Keep mCapacity in sync with the state of mClipMemNewLocked.
 	*mClipMemNewLocked = '\0'; // Init for caller.
 	return mClipMemNewLocked;  // The caller can now write to this mem.
+*/
 }
 
 
@@ -240,6 +246,7 @@ ResultType Clipboard::Commit(UINT aFormat)
 // was already physically open, this function will close it as part of the commit (since
 // whoever had it open before can't use the prior contents, since they're invalid).
 {
+    /*
 	if (!mIsOpen && !Open())
 		// Since this should be very rare, a shorter message is now used.  Formerly, it was
 		// "Could not open clipboard for writing after many timed attempts.  Another program is probably holding it open."
@@ -288,6 +295,7 @@ ResultType Clipboard::Commit(UINT aFormat)
 	// loses sight of how large it is, so the the value of mLength wouldn't be reliable unless
 	// the clipboard were going to be immediately opened again.
 	return Close();
+*/
 }
 
 
@@ -295,6 +303,7 @@ ResultType Clipboard::Commit(UINT aFormat)
 ResultType Clipboard::AbortWrite(char *aErrorMessage)
 // Always returns FAIL.
 {
+    /*
 	// Since we were called in conjunction with an aborted attempt to Commit(), always
 	// ensure the clipboard is physically closed because even an attempt to Commit()
 	// should physically close it:
@@ -310,6 +319,7 @@ ResultType Clipboard::AbortWrite(char *aErrorMessage)
 		mClipMemNew = GlobalFree(mClipMemNew);
 	// Caller needs us to always return FAIL:
 	return *aErrorMessage ? g_script.ScriptError(aErrorMessage) : FAIL;
+*/
 }
 
 
@@ -317,6 +327,7 @@ ResultType Clipboard::AbortWrite(char *aErrorMessage)
 ResultType Clipboard::Close(char *aErrorMessage)
 // Returns OK or FAIL (but it only returns FAIL if caller gave us a non-NULL aErrorMessage).
 {
+    /*
 	// Always close it ASAP so that it is free for other apps to use:
 	if (mIsOpen)
 	{
@@ -351,6 +362,7 @@ ResultType Clipboard::Close(char *aErrorMessage)
 	// Seems best not to reset mLength.  But it will quickly become out of date once
 	// the clipboard has been closed and other apps can use it.
 	return OK;
+*/
 }
 
 
@@ -366,6 +378,7 @@ HANDLE Clipboard::GetClipboardDataTimeout(UINT uFormat)
 // the OnClipboardChange label, where sometimes a clipboard-change notification comes in before the owning
 // app has finished preparing its data for subsequent readers of the clipboard.
 {
+    /*
 #ifdef DEBUG_BY_LOGGING_CLIPBOARD_FORMATS  // Provides a convenient log of clipboard formats for analysis.
 	static FILE *fp = fopen("c:\\debug_clipboard_formats.txt", "w");
 #endif
@@ -444,12 +457,14 @@ HANDLE Clipboard::GetClipboardDataTimeout(UINT uFormat)
 		// the deref buffer if this object's caller gave it any pointers into that memory area):
 		SLEEP_WITHOUT_INTERRUPTION(INTERVAL_UNSPECIFIED)
 	}
+	*/
 }
 
 
 
 ResultType Clipboard::Open()
 {
+    /*
 	if (mIsOpen)
 		return OK;
 	for (DWORD start_time = GetTickCount();;)
@@ -470,4 +485,5 @@ ResultType Clipboard::Open()
 		// the deref buffer if this object's caller gave it any pointers into that memory area):
 		SLEEP_WITHOUT_INTERRUPTION(INTERVAL_UNSPECIFIED)
 	}
+*/
 }
