@@ -99,6 +99,7 @@ void SendKeys(char *aKeys, bool aSendRaw, SendModes aSendModeOrig, HWND aTargetW
 // they will be released prior to sending the batch of keys specified in <aKeys>.
 // v1.0.43: aSendModeOrig was added.
 {
+    /*
 	if (!*aKeys)
 		return;
 
@@ -785,6 +786,7 @@ brace_case_end: // This label is used to simplify the code without sacrificing p
 	// v1.0.43.08: Restore the original thread key-delay values in case above temporarily overrode them.
 	g.KeyDelay = orig_key_delay;
 	g.PressDuration = orig_press_duration;
+*/
 }
 
 
@@ -798,6 +800,7 @@ void SendKey(vk_type aVK, sc_type aSC, modLR_type aModifiersLR, modLR_type aModi
 // modifier keys  back to the way they were originally (UPDATE: It does this only for Win/Alt
 // for the reasons described near the end of this function).
 {
+    /*
 	// Caller is now responsible for verifying this:
 	// Avoid changing modifier states and other things if there is nothing to be sent.
 	// Otherwise, menu bar might activated due to ALT keystrokes that don't modify any key,
@@ -941,6 +944,7 @@ void SendKey(vk_type aVK, sc_type aSC, modLR_type aModifiersLR, modLR_type aModi
 			SetModifierLRState(state_now & ~win_alt_to_be_released
 				, state_now, aTargetWindow, true, false); // It also does DoKeyDelay(g.PressDuration).
 	}
+*/
 }
 
 
@@ -952,6 +956,7 @@ void SendKeySpecial(char aChar, int aRepeatCount)
 // (assuming € is a character for which SendKeySpecial() is required in the current layout).
 // This function uses some of the same code as SendKey() above, so maintain them together.
 {
+    /*
 	// Caller must verify that aRepeatCount > 1.
 	// Avoid changing modifier states and other things if there is nothing to be sent.
 	// Otherwise, menu bar might activated due to ALT keystrokes that don't modify any key,
@@ -1014,6 +1019,7 @@ void SendKeySpecial(char aChar, int aRepeatCount)
 	// 2) Our callers, if they need to push ALT back down because we didn't do it, will either disguise it
 	//    or avoid doing so because they're about to send a keystroke (just about anything) that ALT will
 	//    modify and thus not need to be disguised.
+*/
 }
 
 
@@ -1024,6 +1030,7 @@ void SendASC(char *aAscii)
 // sending 0216.  The caller is also responsible for restoring any desired modifier keys to the down position
 // (this function needs to release some of them if they're down).
 {
+    /*
 	// UPDATE: In v1.0.42.04, the left Alt key is always used below because:
 	// 1) It might be required on Win95/NT (though testing shows that RALT works okay on Windows 98se).
 	// 2) It improves maintainability because if the keyboard layout has AltGr, and the Control portion
@@ -1087,6 +1094,7 @@ void SendASC(char *aAscii)
 	// the user to release Alt (in the meantime, the caller will likely press Alt back down to match the physical
 	// state).
 	KeyEvent(KEYUP, VK_MENU);
+*/
 }
 
 
@@ -1094,6 +1102,7 @@ void SendASC(char *aAscii)
 LRESULT CALLBACK PlaybackProc(int aCode, WPARAM wParam, LPARAM lParam)
 // Journal playback hook.
 {
+    /*
 	static bool sThisEventHasBeenLogged, sThisEventIsScreenCoord;
 
 	switch (aCode)
@@ -1288,6 +1297,7 @@ LRESULT CALLBACK PlaybackProc(int aCode, WPARAM wParam, LPARAM lParam)
 	} // switch().
 
 	// Execution should never reach since all cases do their own custom return above.
+*/
 }
 
 
@@ -1295,6 +1305,7 @@ LRESULT CALLBACK PlaybackProc(int aCode, WPARAM wParam, LPARAM lParam)
 #ifdef JOURNAL_RECORD_MODE
 LRESULT CALLBACK RecordProc(int aCode, WPARAM wParam, LPARAM lParam)
 {
+    /*
 	switch (aCode)
 	{
 	case HC_ACTION:
@@ -1342,6 +1353,7 @@ LRESULT CALLBACK RecordProc(int aCode, WPARAM wParam, LPARAM lParam)
 	// any other journal record hooks can also record the event.  But MSDN is quite vague about this.
 	return CallNextHookEx(g_PlaybackHook, aCode, wParam, lParam);
 	// Return value is ignored, except possibly when aCode < 0 (MSDN is unclear).
+*/
 }
 #endif
 
@@ -1367,6 +1379,7 @@ void KeyEvent(KeyEventTypes aEventType, vk_type aVK, sc_type aSC, HWND aTargetWi
 // things done in here that should reduce the impact to nearly as low as having a dedicated
 // KeyEvent function solely for calling by the hook thread (which might have other problems of its own).
 {
+    /*
 	if (!(aVK | aSC)) // MUST USE BITWISE-OR (see comment below).
 		return;
 	// The above implements the rule "if neither VK nor SC was specified, return".  But they must be done as
@@ -1679,6 +1692,7 @@ void KeyEvent(KeyEventTypes aEventType, vk_type aVK, sc_type aSC, HWND aTargetWi
 
 	if (aDoKeyDelay) // SM_PLAY also uses DoKeyDelay(): it stores the delay item in the event array.
 		DoKeyDelay(); // Thread-safe because only called by main thread in this mode.  See notes above.
+*/
 }
 
 
@@ -1688,6 +1702,7 @@ void KeyEvent(KeyEventTypes aEventType, vk_type aVK, sc_type aSC, HWND aTargetWi
 
 ResultType PerformClick(char *aOptions)
 {
+    /*
 	int x, y;
 	vk_type vk;
 	KeyEventTypes event_type;
@@ -1699,6 +1714,7 @@ ResultType PerformClick(char *aOptions)
 		, vk, x, y, 0, 0, repeat_count, event_type, g.DefaultMouseSpeed, move_offset);
 
 	return OK; // For caller convenience.
+*/
 }
 
 
@@ -1708,6 +1724,7 @@ void ParseClickOptions(char *aOptions, int &aX, int &aY, vk_type &aVK, KeyEventT
 // Caller has trimmed leading whitespace from aOptions, but not necessarily the trailing whitespace.
 // aOptions must be a modifiable string because this function temporarily alters it.
 {
+    /*
 	// Set defaults for all output parameters for caller.
 	aX = COORD_UNSPECIFIED;
 	aY = COORD_UNSPECIFIED;
@@ -1776,6 +1793,7 @@ break_both:
 		aRepeatCount = aX;
 		aX = COORD_UNSPECIFIED;
 	}
+*/
 }
 
 
@@ -1783,6 +1801,7 @@ break_both:
 ResultType PerformMouse(ActionTypeType aActionType, char *aButton, char *aX1, char *aY1, char *aX2, char *aY2
 	, char *aSpeed, char *aOffsetMode, char *aRepeatCount, char *aDownUp)
 {
+    /*
 	vk_type vk;
 	if (aActionType == ACT_MOUSEMOVE)
 		vk = 0;
@@ -1825,6 +1844,7 @@ ResultType PerformMouse(ActionTypeType aActionType, char *aButton, char *aX1, ch
 		, toupper(*aOffsetMode) == 'R'); // aMoveOffset.
 
 	return OK; // For caller convenience.
+*/
 }
 
 
@@ -1832,6 +1852,7 @@ ResultType PerformMouse(ActionTypeType aActionType, char *aButton, char *aX1, ch
 void PerformMouseCommon(ActionTypeType aActionType, vk_type aVK, int aX1, int aY1, int aX2, int aY2
 	, int aRepeatCount, KeyEventTypes aEventType, int aSpeed, bool aMoveOffset)
 {
+    /*
 	// The maximum number of events, which in this case would be from a MouseClickDrag.  To be conservative
 	// (even though INPUT is a much larger struct than PlaybackEvent and SendInput doesn't use mouse-delays),
 	// include room for the maximum number of mouse delays too.
@@ -1883,12 +1904,14 @@ void PerformMouseCommon(ActionTypeType aActionType, vk_type aVK, int aX1, int aY
 
 	if (do_selective_blockinput && !blockinput_prev)  // Turn it back off only if it was off before we started.
 		Line::ScriptBlockInput(false);
+*/
 }
 
 
 
 void MouseClickDrag(vk_type aVK, int aX1, int aY1, int aX2, int aY2, int aSpeed, bool aMoveOffset)
 {
+    /*
 	// Check if one of the coordinates is missing, which can happen in cases where this was called from
 	// a source that didn't already validate it. Can't call Line::ValidateMouseCoords() because that accepts strings.
 	if (   (aX1 == COORD_UNSPECIFIED && aY1 != COORD_UNSPECIFIED) || (aX1 != COORD_UNSPECIFIED && aY1 == COORD_UNSPECIFIED)
@@ -1966,6 +1989,7 @@ void MouseClickDrag(vk_type aVK, int aX1, int aY1, int aX2, int aY2, int aSpeed,
 	// caused us to be called here is followed immediately by another script line which
 	// is either another mouse click or something that relies upon this mouse drag
 	// having been completed:
+*/
 }
 
 
@@ -1973,6 +1997,7 @@ void MouseClickDrag(vk_type aVK, int aX1, int aY1, int aX2, int aY2, int aSpeed,
 void MouseClick(vk_type aVK, int aX, int aY, int aRepeatCount, int aSpeed, KeyEventTypes aEventType
 	, bool aMoveOffset)
 {
+    /*
 	// Check if one of the coordinates is missing, which can happen in cases where this was called from
 	// a source that didn't already validate it (such as MouseClick, %x%, %BlankVar%).
 	// Allow aRepeatCount<1 to simply "do nothing", because it increases flexibility in the case where
@@ -2202,6 +2227,7 @@ void MouseClick(vk_type aVK, int aX, int aY, int aRepeatCount, int aSpeed, KeyEv
 	} // for()
 
 	sWorkaroundVK = 0; // Reset this indicator in all cases except those for which above already returned.
+*/
 }
 
 
@@ -2213,6 +2239,7 @@ void MouseMove(int &aX, int &aY, DWORD &aEventFlags, int aSpeed, bool aMoveOffse
 // both here and by the caller.
 // It also puts appropriate bit-flags into aEventFlags.
 {
+    /*
 	// Most callers have already validated this, but some haven't.  Since it doesn't take too long to check,
 	// do it here rather than requiring all callers to do (helps maintainability).
 	if (aX == COORD_UNSPECIFIED || aY == COORD_UNSPECIFIED)
@@ -2339,6 +2366,7 @@ void MouseMove(int &aX, int &aY, DWORD &aEventFlags, int aSpeed, bool aMoveOffse
 		  MOUSE_COORD_TO_ABS(cursor_pos.x, screen_width)  // Source/starting coords.
 		, MOUSE_COORD_TO_ABS(cursor_pos.y, screen_height) //
 		, aX, aY, aSpeed);                                // Destination/ending coords.
+*/
 }
 
 
@@ -2347,6 +2375,7 @@ void MouseEvent(DWORD aEventFlags, DWORD aData, DWORD aX, DWORD aY)
 // Having this part outsourced to a function helps remember to use KEY_IGNORE so that our own mouse
 // events won't be falsely detected as hotkeys by the hooks (if they are installed).
 {
+    /*
 	if (sSendMode)
 		PutMouseEventIntoArray(aEventFlags, aData, aX, aY);
 	else
@@ -2354,6 +2383,7 @@ void MouseEvent(DWORD aEventFlags, DWORD aData, DWORD aX, DWORD aY)
 			, aX == COORD_UNSPECIFIED ? 0 : aX // v1.0.43.01: Must be zero if no change in position is desired
 			, aY == COORD_UNSPECIFIED ? 0 : aY // (fixes compatibility with certain apps/games).
 			, aData, KEY_IGNORE);
+*/
 }
 
 
@@ -2366,6 +2396,7 @@ void PutKeybdEventIntoArray(modLR_type aKeyAsModifiersLR, vk_type aVK, sc_type a
 // Playback hook only supports sending neutral modifiers.  Caller must ensure that any left/right modfiiers
 // such as VK_RCONTROL are translated into neutral (e.g. VK_CONTROL).
 {
+    /*
 	bool key_up = aEventFlags & KEYEVENTF_KEYUP;
 	// To make the SendPlay method identical in output to the other keystroke methods, have it generate
 	// a leading down/up LControl event immediately prior to each RAlt event (with no key-delay).
@@ -2445,6 +2476,7 @@ void PutKeybdEventIntoArray(modLR_type aKeyAsModifiersLR, vk_type aVK, sc_type a
 		}
 	}
 	++sEventCount;
+*/
 }
 
 
