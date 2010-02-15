@@ -507,10 +507,12 @@ ResultType Script::CreateWindows()
 
 void Script::EnableOrDisableViewMenuItems(HMENU aMenu, UINT aFlags)
 {
+    /*
 	EnableMenuItem(aMenu, ID_VIEW_KEYHISTORY, aFlags);
 	EnableMenuItem(aMenu, ID_VIEW_LINES, aFlags);
 	EnableMenuItem(aMenu, ID_VIEW_VARIABLES, aFlags);
 	EnableMenuItem(aMenu, ID_VIEW_HOTKEYS, aFlags);
+*/
 }
 
 
@@ -520,6 +522,7 @@ void Script::CreateTrayIcon()
 // before calling us to install a new one.  However, that is probably not needed if the Explorer
 // crashed, since the memory used by the tray icon was probably destroyed along with it.
 {
+    /*
 	ZeroMemory(&mNIC, sizeof(mNIC));  // To be safe.
 	// Using NOTIFYICONDATA_V2_SIZE vs. sizeof(NOTIFYICONDATA) improves compatibility with Win9x maybe.
 	// MSDN: "Using [NOTIFYICONDATA_V2_SIZE] for cbSize will allow your application to use NOTIFYICONDATA
@@ -543,12 +546,14 @@ void Script::CreateTrayIcon()
 	// along with Explorer.  So just add it unconditionally:
 	if (!Shell_NotifyIcon(NIM_ADD, &mNIC))
 		mNIC.hWnd = NULL;  // Set this as an indicator that tray icon is not installed.
+*/
 }
 
 
 
 void Script::UpdateTrayIcon(bool aForceUpdate)
 {
+    /*
 	if (!mNIC.hWnd) // tray icon is not installed
 		return;
 	static bool icon_shows_paused = false;
@@ -577,6 +582,7 @@ void Script::UpdateTrayIcon(bool aForceUpdate)
 		icon_shows_suspended = g_IsSuspended;
 	}
 	// else do nothing, just leave it in the same state.
+*/
 }
 
 
@@ -629,6 +635,7 @@ ResultType Script::AutoExecSection()
 
 ResultType Script::Edit()
 {
+    /*
 #ifdef AUTOHOTKEYSC
 	return OK; // Do nothing.
 #else
@@ -672,6 +679,7 @@ ResultType Script::Edit()
 	}
 	return OK;
 #endif
+*/
 }
 
 
