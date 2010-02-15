@@ -11572,6 +11572,7 @@ void ConvertDllArgType(char *aBuf[], DYNAPARM &aDynaParam)
 // Helper function for DllCall().  Updates aDynaParam's type and other attributes.
 // Caller has ensured that aBuf contains exactly two strings (though the second can be NULL).
 {
+
 	char buf[32], *type_string;
 	int i;
 
@@ -12351,6 +12352,7 @@ pcre *get_compiled_regex(char *aRegEx, bool &aGetPositionsNotSubstrings, pcre_ex
 //    aExtra
 //    (but it doesn't change ErrorLevel on success, not even if aResultToken!=NULL)
 {
+/*
 	// While reading from or writing to the cache, don't allow another thread entry.  This is because
 	// that thread (or this one) might write to the cache while the other one is reading/writing, which
 	// could cause loss of data integrity (the hook thread can enter here via #IfWin & SetTitleMatchMode RegEx).
@@ -12626,6 +12628,7 @@ error: // Since NULL is returned here, caller should ignore the contents of the 
 
 	LeaveCriticalSection(&g_CriticalRegExCache);
 	return NULL; // Indicate failure.
+*/
 }
 
 
@@ -12633,6 +12636,7 @@ error: // Since NULL is returned here, caller should ignore the contents of the 
 char *RegExMatch(char *aHaystack, char *aNeedleRegEx)
 // Returns NULL if no match.  Otherwise, returns the address where the pattern was found in aHaystack.
 {
+    /*
 	bool get_positions_not_substrings; // Currently ignored.
 	pcre_extra *extra;
 	pcre *re;
@@ -12654,6 +12658,7 @@ char *RegExMatch(char *aHaystack, char *aNeedleRegEx)
 
 	// Otherwise, captured_pattern_count>=0 (it's 0 when offset[] was too small; but that's harmless in this case).
 	return aHaystack + offset[0]; // Return the position of the entire-pattern match.
+*/
 }
 
 
@@ -12662,6 +12667,7 @@ void RegExReplace(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPar
 	, pcre *aRE, pcre_extra *aExtra, char *aHaystack, int aHaystackLength, int aStartingOffset
 	, int aOffset[], int aNumberOfIntsInOffset)
 {
+    /*
 	// Set default return value in case of early return.
 	aResultToken.symbol = SYM_STRING;
 	aResultToken.marker = aHaystack; // v1.0.46.06: aHaystack vs. "" is the new default because it seems a much safer and more convenient to return aHaystack when an unexpected PCRE-exec error occurs (such an error might otherwise cause loss of data in scripts that don't meticulously check ErrorLevel after each RegExReplace()).
@@ -13028,6 +13034,7 @@ out_of_mem:
 set_count_and_return:
 	if (output_var_count)
 		output_var_count->Assign(replacement_count); // v1.0.47.05: Must be done last in case output_var_count shares the same memory with haystack, needle, or replacement.
+*/
 }
 
 
@@ -13036,6 +13043,7 @@ void BIF_RegEx(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamC
 // This function is the initial entry point for both RegExMatch() and RegExReplace().
 // Caller has set aResultToken.symbol to a default of SYM_INTEGER.
 {
+    /*
 	bool mode_is_replace = toupper(aResultToken.marker[5]) == 'R'; // Union's marker initially contains the function name; e.g. RegEx[R]eplace.
 	char *needle = ExprTokenToString(*aParam[1], aResultToken.buf); // Load-time validation has already ensured that at least two actual parameters are present.
 
@@ -13314,6 +13322,7 @@ void BIF_RegEx(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamC
 free_and_return:
 	if (mem_to_free)
 		free(mem_to_free);
+*/
 }
 
 
@@ -13675,6 +13684,7 @@ void BIF_FileExist(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 
 void BIF_WinExistActive(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamCount)
 {
+    /*
 	char *bif_name = aResultToken.marker;  // Save this early for maintainability (it is the name of the function, provided by the caller).
 	aResultToken.symbol = SYM_STRING; // Returns a string to preserve hex format.
 
@@ -13696,6 +13706,7 @@ void BIF_WinExistActive(ExprTokenType &aResultToken, ExprTokenType *aParam[], in
 	aResultToken.marker[0] = '0';
 	aResultToken.marker[1] = 'x';
 	_ui64toa((unsigned __int64)found_hwnd, aResultToken.marker + 2, 16); // If necessary, it will be moved to a persistent memory location by our caller.
+*/
 }
 
 
@@ -13973,6 +13984,7 @@ void BIF_OnMessage(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 // 2: Name of the function that will monitor the message.
 // 3: (FUTURE): A flex-list of space-delimited option words/letters.
 {
+    /*
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	// Set default result in case of early return; a blank value:
 	aResultToken.symbol = SYM_STRING;
@@ -14070,6 +14082,7 @@ void BIF_OnMessage(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 	else // Unspecified, so if this item is being newly created fall back to the default.
 		if (!item_already_exists)
 			monitor.max_instances = 1;
+*/
 }
 
 
