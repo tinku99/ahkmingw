@@ -2486,6 +2486,7 @@ void PutMouseEventIntoArray(DWORD aEventFlags, DWORD aData, DWORD aX, DWORD aY)
 // If the array-type is journal playback, caller should include MOUSEEVENTF_ABSOLUTE in aEventFlags if the
 // the mouse coordinates aX and aY are relative to the screen rather than the active window.
 {
+    /*
 	if (sEventCount == sMaxEvents) // Array's capacity needs expanding.
 		if (!ExpandEventArray())
 			return;
@@ -2543,6 +2544,7 @@ void PutMouseEventIntoArray(DWORD aEventFlags, DWORD aData, DWORD aX, DWORD aY)
 			this_event.message |= MSG_OFFSET_MOUSE_MOVE;
 	}
 	++sEventCount;
+*/
 }
 
 
@@ -2550,6 +2552,7 @@ void PutMouseEventIntoArray(DWORD aEventFlags, DWORD aData, DWORD aX, DWORD aY)
 ResultType ExpandEventArray()
 // Returns OK or FAIL.
 {
+    /*
 	#define EVENT_EXPANSION_MULTIPLIER 2  // Should be very rare for array to need to expand more than a few times.
 	size_t event_size = (sSendMode == SM_INPUT) ? sizeof(INPUT) : sizeof(PlaybackEvent);
 	void *new_mem;
@@ -2572,6 +2575,7 @@ ResultType ExpandEventArray()
 	sEventSI = (LPINPUT)new_mem; // Note that sEventSI and sEventPB are different views of the same variable.
 	sMaxEvents *= EVENT_EXPANSION_MULTIPLIER;
 	return OK;
+*/
 }
 
 
@@ -2599,6 +2603,7 @@ void SendEventArray(int &aFinalKeyDelay, modLR_type aModsDuringSend)
 // to the desired/final delay.  Caller must not act upon it until changing sTypeOfHookToBuild to something
 // that will allow DoKeyDelay() to do a real delay.
 {
+    /*
 	if (sSendMode == SM_INPUT)
 	{
 		// Remove hook(s) temporarily because the presence of low-level (LL) keybd hook completely disables
@@ -2736,6 +2741,7 @@ void SendEventArray(int &aFinalKeyDelay, modLR_type aModsDuringSend)
 	// will keep its own modifiers up-to-date if any physical or simulate keystrokes happen to
 	// come in during playback (such keystrokes arrive in the hook in real time, but they don't
 	// actually hit the active window until the playback finishes).
+*/
 }
 
 
@@ -2758,6 +2764,7 @@ void CleanupEventArray(int aFinalKeyDelay)
 void DoKeyDelay(int aDelay)
 // Doesn't need to be thread safe because it should only ever be called from main thread.
 {
+    /*
 	if (aDelay < 0) // To support user-specified KeyDelay of -1 (fastest send rate).
 		return;
 	if (sSendMode)
@@ -2775,12 +2782,14 @@ void DoKeyDelay(int aDelay)
 		return;
 	}
 	SLEEP_WITHOUT_INTERRUPTION(aDelay);
+*/
 }
 
 
 
 void DoMouseDelay() // Helper function for the mouse functions below.
 {
+    /*
 	int mouse_delay = sSendMode == SM_PLAY ? g.MouseDelayPlay : g.MouseDelay;
 	if (mouse_delay < 0) // To support user-specified KeyDelay of -1 (fastest send rate).
 		return;
@@ -2813,12 +2822,14 @@ void DoMouseDelay() // Helper function for the mouse functions below.
 		Sleep(mouse_delay);
 	else
 		SLEEP_WITHOUT_INTERRUPTION(mouse_delay)
+*/
 }
 
 
 
 void UpdateKeyEventHistory(bool aKeyUp, vk_type aVK, sc_type aSC)
 {
+    /*
 	if (!g_KeyHistory) // Don't access the array if it doesn't exist (i.e. key history is disabled).
 		return;
 	g_KeyHistory[g_KeyHistoryNext].key_up = aKeyUp;
@@ -2841,6 +2852,7 @@ void UpdateKeyEventHistory(bool aKeyUp, vk_type aVK, sc_type aSC)
 	g_HistoryHwndPrev = fore_win; // Update unconditionally in case it's NULL.
 	if (++g_KeyHistoryNext >= g_MaxHistoryKeys)
 		g_KeyHistoryNext = 0;
+*/
 }
 
 
@@ -2850,6 +2862,7 @@ ToggleValueType ToggleKeyState(vk_type aVK, ToggleValueType aToggleValue)
 // ensure that aVK is a toggleable key such as capslock, numlock, or scrolllock.
 // Returns the state the key was in before it was changed (but it's only a best-guess under Win9x).
 {
+    /*
 	// Can't use GetAsyncKeyState() because it doesn't have this info:
 	ToggleValueType starting_state = IsKeyToggledOn(aVK) ? TOGGLED_ON : TOGGLED_OFF;
 	if (aToggleValue != TOGGLED_ON && aToggleValue != TOGGLED_OFF) // Shouldn't be called this way.
@@ -2895,6 +2908,7 @@ ToggleValueType ToggleKeyState(vk_type aVK, ToggleValueType aToggleValue)
 			SLEEP_WITHOUT_INTERRUPTION(-1); // Check msg queue to put SHIFT's turning off of Capslock into effect from our thread's POV.
 	}
 	return starting_state;
+*/
 }
 
 
@@ -2903,10 +2917,12 @@ void ToggleNumlockWin9x()
 // Numlock requires a special method to toggle the state and its indicator light under Win9x.
 // Capslock and Scrolllock do not need this method, since keybd_event() works for them.
 {
+    /*
 	BYTE state[256];
 	GetKeyboardState((PBYTE)&state);
 	state[VK_NUMLOCK] ^= 0x01;  // Toggle the low-order bit to the opposite state.
 	SetKeyboardState((PBYTE)&state);
+*/
 }
 
 
@@ -2950,6 +2966,7 @@ void SetModifierLRState(modLR_type aModifiersLRnew, modLR_type aModifiersLRnow, 
 // various calls to KeyEvent() here.  It is only used as a workaround for the GUI window issue described
 // at the bottom.
 {
+    /*
 	if (aModifiersLRnow == aModifiersLRnew) // They're already in the right state, so avoid doing all the checks.
 		return; // Especially avoids the aTargetWindow check at the bottom.
 
@@ -3361,6 +3378,7 @@ void SetModifierLRState(modLR_type aModifiersLRnew, modLR_type aModifiersLRnow, 
 	// ctrl-down alt-down alt-up ctrl-up
 	// alt-down ctrl-down ctrl-up alt-up
 	// (also seems true for all other permutations of Ctrl/Alt)
+*/
 }
 
 
@@ -3379,6 +3397,7 @@ modLR_type GetModifierLRState(bool aExplicitlyGet)
 // return the exact same thing whenever there are no messages in the hook's thread-queue (which is almost
 // always the case).
 {
+    /*
 	// If the hook is active, rely only on its tracked value rather than calling Get():
 	if (g_KeybdHook && !aExplicitlyGet)
 		return g_modifiersLR_logical;
@@ -3463,6 +3482,7 @@ modLR_type GetModifierLRState(bool aExplicitlyGet)
 	// if the keyboard hook is active.  Bitwise and is used because generally it's safer
 	// to assume a modifier key is up, when in doubt (e.g. to avoid firing unwanted hotkeys):
 //	return g_KeybdHook ? (g_modifiersLR_logical & g_modifiersLR_get) : g_modifiersLR_get;
+*/
 }
 
 
@@ -3495,6 +3515,7 @@ modLR_type KeyToModifiersLR(vk_type aVK, sc_type aSC, bool *pIsNeutral)
 // The SendPlay method relies on this to properly release AltGr, such as after "SendPlay @" in German.
 // Other things may also rely on it because it is more correct.
 {
+    /*
 	bool placeholder;
 	bool &is_neutral = pIsNeutral ? *pIsNeutral : placeholder; // Simplifies other things below.
 	is_neutral = false; // Set default for output parameter for caller.
@@ -3552,6 +3573,7 @@ modLR_type KeyToModifiersLR(vk_type aVK, sc_type aSC, bool *pIsNeutral)
 	case SC_RWIN: return MOD_RWIN;
 	}
 	return 0;
+*/
 }
 
 
@@ -3559,12 +3581,14 @@ modLR_type KeyToModifiersLR(vk_type aVK, sc_type aSC, bool *pIsNeutral)
 modLR_type ConvertModifiers(mod_type aModifiers)
 // Convert the input param to a modifiersLR value and return it.
 {
+    /*
 	modLR_type modifiersLR = 0;
 	if (aModifiers & MOD_WIN) modifiersLR |= (MOD_LWIN | MOD_RWIN);
 	if (aModifiers & MOD_ALT) modifiersLR |= (MOD_LALT | MOD_RALT);
 	if (aModifiers & MOD_CONTROL) modifiersLR |= (MOD_LCONTROL | MOD_RCONTROL);
 	if (aModifiers & MOD_SHIFT) modifiersLR |= (MOD_LSHIFT | MOD_RSHIFT);
 	return modifiersLR;
+*/
 }
 
 
@@ -3572,12 +3596,14 @@ modLR_type ConvertModifiers(mod_type aModifiers)
 mod_type ConvertModifiersLR(modLR_type aModifiersLR)
 // Convert the input param to a normal modifiers value and return it.
 {
+    /*
 	mod_type modifiers = 0;
 	if (aModifiersLR & (MOD_LWIN | MOD_RWIN)) modifiers |= MOD_WIN;
 	if (aModifiersLR & (MOD_LALT | MOD_RALT)) modifiers |= MOD_ALT;
 	if (aModifiersLR & (MOD_LSHIFT | MOD_RSHIFT)) modifiers |= MOD_SHIFT;
 	if (aModifiersLR & (MOD_LCONTROL | MOD_RCONTROL)) modifiers |= MOD_CONTROL;
 	return modifiers;
+*/
 }
 
 
@@ -3585,6 +3611,7 @@ mod_type ConvertModifiersLR(modLR_type aModifiersLR)
 char *ModifiersLRToText(modLR_type aModifiersLR, char *aBuf)
 // Caller has ensured that aBuf is not NULL.
 {
+    /*
 	*aBuf = '\0';
 	if (aModifiersLR & MOD_LWIN) strcat(aBuf, "LWin ");
 	if (aModifiersLR & MOD_RWIN) strcat(aBuf, "RWin ");
@@ -3595,6 +3622,7 @@ char *ModifiersLRToText(modLR_type aModifiersLR, char *aBuf)
 	if (aModifiersLR & MOD_LALT) strcat(aBuf, "LAlt ");
 	if (aModifiersLR & MOD_RALT) strcat(aBuf, "RAlt ");
 	return aBuf;
+*/
 }
 
 
@@ -3602,8 +3630,10 @@ char *ModifiersLRToText(modLR_type aModifiersLR, char *aBuf)
 bool ActiveWindowLayoutHasAltGr()
 // Thread-safety: See comments in LayoutHasAltGr() below.
 {
+    /*
 	Get_active_window_keybd_layout // Defines the variable active_window_keybd_layout for use below.
 	return LayoutHasAltGr(active_window_keybd_layout) == CONDITION_TRUE; // i.e caller wants both CONDITION_FALSE and LAYOUT_UNDETERMINED to be considered non-AltGr.
+*/
 }
 
 
@@ -3615,6 +3645,7 @@ ResultType LayoutHasAltGr(HKL aLayout, ResultType aHasAltGr)
 // If aHasAltGr is not at its default of LAYOUT_UNDETERMINED, the specified layout's has_altgr property is
 // updated to the new value, but only if it is currently undetermined (callers can rely on this).
 {
+    /*
 	// Layouts are cached for performance (to avoid the discovery loop later below).
 	int i;
 	for (i = 0; i < MAX_CACHED_LAYOUTS && sCachedLayout[i].hkl; ++i)
@@ -3661,6 +3692,7 @@ ResultType LayoutHasAltGr(HKL aLayout, ResultType aHasAltGr)
 	// present (see other comments for details).
 	cl.hkl = aLayout; // This is done here (immediately after has_altgr was set in the loop above) rather than earlier to minimize the consequences of not being fully thread-safe.
 	return cl.has_altgr;
+*/
 }
 
 
@@ -3669,6 +3701,7 @@ char *SCtoKeyName(sc_type aSC, char *aBuf, int aBufSize)
 // aBufSize is an int so that any negative values passed in from caller are not lost.
 // Always produces a non-empty string.
 {
+    /*
 	for (int i = 0; i < g_key_to_sc_count; ++i)
 	{
 		if (g_key_to_sc[i].sc == aSC)
@@ -3680,6 +3713,7 @@ char *SCtoKeyName(sc_type aSC, char *aBuf, int aBufSize)
 	// Since above didn't return, no match was found.  Use the default format for an unknown scan code:
 	snprintf(aBuf, aBufSize, "SC%03x", aSC);
 	return aBuf;
+*/
 }
 
 
@@ -3688,6 +3722,7 @@ char *VKtoKeyName(vk_type aVK, sc_type aSC, char *aBuf, int aBufSize)
 // aBufSize is an int so that any negative values passed in from caller are not lost.
 // Caller may omit aSC and it will be derived if needed.
 {
+    /*
 	for (int i = 0; i < g_key_to_vk_count; ++i)
 	{
 		if (g_key_to_vk[i].vk == aVK)
@@ -3699,6 +3734,7 @@ char *VKtoKeyName(vk_type aVK, sc_type aSC, char *aBuf, int aBufSize)
 	// Since above didn't return, no match was found.  Ask the OS for the name instead (it's probably
 	// a letter key such as A through Z, but could be anything for which we don't have a listing):
 	return GetKeyName(aVK, aSC, aBuf, aBufSize);
+*/
 }
 
 
