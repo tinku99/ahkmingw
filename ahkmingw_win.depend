@@ -1066,7 +1066,7 @@
 1251585311 l:\source\ahkgcc\os_version.h
 	<windows.h>
 
-1251585309 source:l:\source\ahkgcc\wingroup.cpp
+1266211314 source:l:\source\ahkgcc\wingroup.cpp
 	"stdafx.h"
 	"WinGroup.h"
 	"window.h"
@@ -1081,7 +1081,7 @@
 1251585311 l:\source\ahkgcc\application.h
 	"defines.h"
 
-1251585309 source:l:\source\ahkgcc\application.cpp
+1266211314 source:l:\source\ahkgcc\application.cpp
 	"stdafx.h"
 	"application.h"
 	"globaldata.h"
