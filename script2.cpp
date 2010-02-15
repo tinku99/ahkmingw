@@ -24,7 +24,7 @@ GNU General Public License for more details.
 #include "resources/resource.h"  // For InputBox.
 
 #define PCRE_STATIC             // For RegEx. PCRE_STATIC tells PCRE to declare its functions for normal, static
-#include "lib_pcre/pcre/pcre.h" // linkage rather than as functions inside an external DLL.
+// #include "lib_pcre/pcre/pcre.h" // linkage rather than as functions inside an external DLL.
 
 #define DATE_YEARMONTH 8
 
@@ -12339,7 +12339,8 @@ void BIF_InStr(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamC
 }
 
 
-
+typedef  int pcre; // ahkgcc remove pcre
+typedef  int pcre_extra; // ahkgcc remove pcre
 pcre *get_compiled_regex(char *aRegEx, bool &aGetPositionsNotSubstrings, pcre_extra *&aExtra
 	, ExprTokenType *aResultToken)
 // Returns the compiled RegEx, or NULL on failure.
