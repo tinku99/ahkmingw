@@ -14111,6 +14111,7 @@ UINT __stdcall RegisterCallbackCStub(UINT *params, char *address) // Used by BIF
 // convention assumes that the parameter size equals the pointer size. 64 integers on Win32 are passed on
 // pointers, or as two 32 bit halves for some functions…
 {
+    /*
 	#define DEFAULT_CB_RETURN_VALUE 0  // The value returned to the callback's caller if script doesn't provide one.
 
 	RCCallbackFunc &cb = *((RCCallbackFunc*)(address-5)); //second instruction is 5 bytes after start (return address pushed by call)
@@ -14204,6 +14205,7 @@ UINT __stdcall RegisterCallbackCStub(UINT *params, char *address) // Used by BIF
 		g.EventInfo = EventInfo_saved;
 
 	return number_to_return; //return integer value to callback stub
+*/
 }
 
 
@@ -14218,6 +14220,7 @@ void BIF_RegisterCallback(ExprTokenType &aResultToken, ExprTokenType *aParam[], 
 //
 // Author: RegisterCallback() was created by Jonathan Rennison (JGR).
 {
+    /*
 	// Set default result in case of early return; a blank value:
 	aResultToken.symbol = SYM_STRING;
 	aResultToken.marker = "";
@@ -14294,12 +14297,14 @@ void BIF_RegisterCallback(ExprTokenType &aResultToken, ExprTokenType *aParam[], 
 
 	aResultToken.symbol = SYM_INTEGER; // Override the default set earlier.
 	aResultToken.value_int64 = (__int64)callbackfunc; // Yield the callable address as the result.
+*/
 }
 
 
 
 void BIF_StatusBar(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamCount)
 {
+    /*
 	char mode = toupper(aResultToken.marker[6]); // Union's marker initially contains the function name. SB_Set[T]ext.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after consulting marker above.
@@ -14387,6 +14392,7 @@ void BIF_StatusBar(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 	//case 'T': // SB_SetTipText()
 	//	break;
 	} // switch(mode)
+*/
 }
 
 
@@ -14399,6 +14405,7 @@ void BIF_LV_GetNextOrCount(ExprTokenType &aResultToken, ExprTokenType *aParam[],
 // 2: Options string.
 // 3: (FUTURE): Possible for use with LV_FindItem (though I think it can only search item text, not subitem text).
 {
+    /*
 	bool mode_is_count = toupper(aResultToken.marker[6]) == 'C'; // Union's marker initially contains the function name. LV_Get[C]ount.  Bug-fixed for v1.0.43.09.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after consulting marker above.
@@ -14468,6 +14475,7 @@ void BIF_LV_GetNextOrCount(ExprTokenType &aResultToken, ExprTokenType *aParam[],
 		// Since above didn't return, no match found.  The 0/false value previously set as the default is retained.
 		break;
 	}
+*/
 }
 
 
@@ -14480,6 +14488,7 @@ void BIF_LV_GetText(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aP
 // 2: Row index (one-based when it comes in).
 // 3: Column index (one-based when it comes in).
 {
+    /*
 	aResultToken.value_int64 = 0; // Set default return value.
 	// Above sets default result in case of early return.  For code reduction, a zero is returned for all
 	// the following conditions:
@@ -14538,6 +14547,7 @@ void BIF_LV_GetText(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aP
 		else // On failure, it seems best to also clear the output var for better consistency and in case the script doesn't check the return value.
 			output_var.Assign();
 	}
+*/
 }
 
 
@@ -14550,6 +14560,7 @@ void BIF_LV_AddInsertModify(ExprTokenType &aResultToken, ExprTokenType *aParam[]
 // 3 and beyond: Additional field text.
 // In Add/Insert mode, if there are no text fields present, a blank for is appended/inserted.
 {
+    /*
 	char mode = toupper(aResultToken.marker[3]); // Union's marker initially contains the function name. e.g. LV_[I]nsert.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after consulting marker above.
@@ -14795,6 +14806,7 @@ void BIF_LV_AddInsertModify(ExprTokenType &aResultToken, ExprTokenType *aParam[]
 		SendMessage(control.hwnd, LVM_SETITEMCOUNT, control.union_lv_attrib->row_count_hint, 0); // Last parameter should be 0 for LVS_OWNERDATA (verified if you look at the definition of ListView_SetItemCount macro).
 		control.union_lv_attrib->row_count_hint = 0; // Reset so that it only gets set once per request.
 	}
+*/
 }
 
 
@@ -14804,6 +14816,7 @@ void BIF_LV_Delete(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 // Parameters:
 // 1: Row index (one-based when it comes in).
 {
+    /*
 	aResultToken.value_int64 = 0; // Set default return value.
 	// Above sets default result in case of early return.  For code reduction, a zero is returned for all
 	// the following conditions:
@@ -14829,6 +14842,7 @@ void BIF_LV_Delete(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 	if (index > -1)
 		aResultToken.value_int64 = SendMessage(control_hwnd, LVM_DELETEITEM, index, 0); // Returns TRUE/FALSE.
 	//else even if index==0, for safety, it seems not to do a delete-all.
+*/
 }
 
 
@@ -14841,6 +14855,7 @@ void BIF_LV_InsertModifyDeleteCol(ExprTokenType &aResultToken, ExprTokenType *aP
 // 3: New text of column
 // There are also some special modes when only zero or one parameter is present, see below.
 {
+    /*
 	char mode = toupper(aResultToken.marker[3]); // Union's marker initially contains the function name. LV_[I]nsertCol.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after consulting marker above.
@@ -15139,6 +15154,7 @@ void BIF_LV_InsertModifyDeleteCol(ExprTokenType &aResultToken, ExprTokenType *aP
 
 	if (sort_now)
 		GuiType::LV_Sort(control, index, false, sort_now_direction);
+*/
 }
 
 
@@ -15149,6 +15165,7 @@ void BIF_LV_SetImageList(ExprTokenType &aResultToken, ExprTokenType *aParam[], i
 // 1: HIMAGELIST obtained from somewhere such as IL_Create().
 // 2: Optional: Type of list.
 {
+    /*
 	aResultToken.value_int64 = 0; // Set default return value.
 	// Above sets default result in case of early return.  For code reduction, a zero is returned for all
 	// the following conditions:
@@ -15173,6 +15190,7 @@ void BIF_LV_SetImageList(ExprTokenType &aResultToken, ExprTokenType *aParam[], i
 		list_type = (cx > GetSystemMetrics(SM_CXSMICON)) ? LVSIL_NORMAL : LVSIL_SMALL;
 	}
 	aResultToken.value_int64 = (__int64)ListView_SetImageList(gui.mCurrentListView->hwnd, himl, list_type);
+*/
 }
 
 
@@ -15193,6 +15211,7 @@ void BIF_TV_AddModifyDelete(ExprTokenType &aResultToken, ExprTokenType *aParam[]
 // Parameters for TV_Delete():
 //    1: ID of item to delete (if omitted, all items are deleted).
 {
+    /*
 	char mode = toupper(aResultToken.marker[3]); // Union's marker initially contains the function name. e.g. TV_[A]dd.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after consulting marker above.
@@ -15444,6 +15463,7 @@ void BIF_TV_AddModifyDelete(ExprTokenType &aResultToken, ExprTokenType *aParam[]
 	if (select_flag)
 		if (!TreeView_Select(control.hwnd, tvi.item.hItem, select_flag) && !add_mode) // Relies on short-circuit boolean order.
 			aResultToken.value_int64 = 0; // When not in add-mode, indicate partial failure by overriding the return value set earlier (add-mode should always return the new item's ID).
+*/
 }
 
 
@@ -15454,6 +15474,7 @@ HTREEITEM GetNextTreeItem(HWND aTreeHwnd, HTREEITEM aItem)
 // Otherwise, the next child, sibling, or parent's sibling is returned in a manner that allows the caller
 // to traverse every item in the tree easily.
 {
+    /*
 	if (!aItem)
 		return TreeView_GetRoot(aTreeHwnd);
 	// Otherwise, do depth-first recursion.  Must be done in the following order to allow full traversal:
@@ -15476,6 +15497,7 @@ HTREEITEM GetNextTreeItem(HWND aTreeHwnd, HTREEITEM aItem)
 			return hitem;
 		// Otherwise, parent has no sibling, but does its parent (and so on)? Continue looping to find out.
 	}
+*/
 }
 
 
@@ -15487,6 +15509,7 @@ void BIF_TV_GetRelatedItem(ExprTokenType &aResultToken, ExprTokenType *aParam[],
 // but also children and parents, which allows a tree to be traversed from top to bottom without the script
 // having to do something fancy.
 {
+    /*
 	char *fn_name = aResultToken.marker; // Save early for maintainability: Union's marker initially contains the function name. TV_Get[S]election.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after saving marker above.
@@ -15577,6 +15600,7 @@ void BIF_TV_GetRelatedItem(ExprTokenType &aResultToken, ExprTokenType *aParam[],
 		}
 	// Since above didn't return, the entire tree starting at the specified item has been searched,
 	// with no match found.  Retain the default value of 0 set for aResultToken.value_int64 higher above.
+*/
 }
 
 
@@ -15594,6 +15618,7 @@ void BIF_TV_Get(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParam
 //       simplifies the code since there is currently no easy means of passing back large strings to our caller).
 //    2: HTREEITEM.
 {
+    /*
 	bool get_text = (toupper(aResultToken.marker[6]) == 'T'); // Union's marker initially contains the function name. e.g. TV_Get[T]ext.
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default return value. Must be done only after consulting marker above.
@@ -15663,6 +15688,7 @@ void BIF_TV_Get(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParam
 	else // On failure, it seems best to also clear the output var for better consistency and in case the script doesn't check the return value.
 		output_var.Assign();
 		// And leave aResultToken.value_int64 set to its default of 0.
+*/
 }
 
 
@@ -15676,6 +15702,7 @@ void BIF_IL_Create(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 // 4: Future: Height of each image [if this param is present and >0, it would mean param 3 is not being used in its TRUE/FALSE mode)
 // 5: Future: Flags/Color depth
 {
+    /*
 	// So that param3 can be reserved as a future "specified width" param, to go along with "specified height"
 	// after it, only when the parameter is both present and numerically zero are large icons used.  Otherwise,
 	// small icons are used.
@@ -15685,6 +15712,7 @@ void BIF_IL_Create(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aPa
 		, ILC_MASK | ILC_COLOR32  // ILC_COLOR32 or at least something higher than ILC_COLOR is necessary to support true-color icons.
 		, aParamCount > 0 ? (int)ExprTokenToInt64(*aParam[0]) : 2    // cInitial. 2 seems a better default than one, since it might be common to have only two icons in the list.
 		, aParamCount > 1 ? (int)ExprTokenToInt64(*aParam[1]) : 5);  // cGrow.  Somewhat arbitrary default.
+*/
 }
 
 
@@ -15694,10 +15722,12 @@ void BIF_IL_Destroy(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aP
 // Parameters:
 // 1: HIMAGELIST obtained from somewhere such as IL_Create().
 {
+    /*
 	// Load-time validation has ensured there is at least one parameter.
 	// Returns nonzero if successful, or zero otherwise, so force it to conform to TRUE/FALSE for
 	// better consistency with other functions:
 	aResultToken.value_int64 = ImageList_Destroy((HIMAGELIST)ExprTokenToInt64(*aParam[0])) ? 1 : 0;
+*/
 }
 
 
@@ -15719,6 +15749,7 @@ void BIF_IL_Add(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParam
 // The parameters above (at least #4) can be overloaded in the future calling ImageList_GetImageInfo() to determine
 // whether the imagelist has a mask.
 {
+    /*
 	char *buf = aResultToken.buf; // Must be saved early since below overwrites the union (better maintainability too).
 	aResultToken.value_int64 = 0; // Set default in case of early return.
 	HIMAGELIST himl = (HIMAGELIST)ExprTokenToInt64(*aParam[0]); // Load-time validation has ensured there is a first parameter.
@@ -15756,6 +15787,7 @@ void BIF_IL_Add(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParam
 		aResultToken.value_int64 = ImageList_AddIcon(himl, (HICON)hbitmap) + 1; // +1 to convert to one-based.
 		DestroyIcon((HICON)hbitmap); // Works on cursors too.  See notes in LoadPicture().
 	}
+	*/
 }
 
 
@@ -15865,6 +15897,7 @@ int ConvertJoy(char *aBuf, int *aJoystickID, bool aAllowOnlyButtons)
 // that can fit in a sc_type (USHORT) is returned, which is true since the joystick buttons
 // are very small numbers (JOYCTRL_1==12).
 {
+    /*
 	if (aJoystickID)
 		*aJoystickID = 0;  // Set default output value for the caller.
 	if (!aBuf || !*aBuf) return JOYCTRL_INVALID;
@@ -15905,6 +15938,7 @@ int ConvertJoy(char *aBuf, int *aJoystickID, bool aAllowOnlyButtons)
 	if (!stricmp(aBuf, "JoyAxes")) return JOYCTRL_AXES;
 	if (!stricmp(aBuf, "JoyInfo")) return JOYCTRL_INFO;
 	return JOYCTRL_INVALID;
+*/
 }
 
 
@@ -15912,6 +15946,7 @@ int ConvertJoy(char *aBuf, int *aJoystickID, bool aAllowOnlyButtons)
 bool ScriptGetKeyState(vk_type aVK, KeyStateTypes aKeyStateType)
 // Returns true if "down", false if "up".
 {
+/*
     if (!aVK) // Assume "up" if indeterminate.
 		return false;
 
@@ -15979,6 +16014,7 @@ bool ScriptGetKeyState(vk_type aVK, KeyStateTypes aKeyStateType)
 		// Known limitation: For some reason, both the above and IsKeyDown9xNT() will indicate
 		// that the CONTROL key is up whenever RButton is down, at least if the mouse hook is
 		// installed without the keyboard hook.  No known explanation.
+*/
 }
 
 
@@ -15992,6 +16028,7 @@ double ScriptGetJoyState(JoyControls aJoy, int aJoystickID, ExprTokenType &aToke
 // Also returns zero in cases where a non-numerical result is requested, such as the joystick name.
 // In those cases, caller should use aToken.marker as the result.
 {
+    /*
 	// Set default in case of early return.
 	*aToken.marker = '\0'; // Blank vs. string "0" serves as an indication of failure.
 
@@ -16120,4 +16157,5 @@ double ScriptGetJoyState(JoyControls aJoy, int aJoystickID, ExprTokenType &aToke
 	aToken.symbol = SYM_FLOAT; // Override default type.
 	aToken.value_double = result_double;
 	return result_double;
+*/
 }
