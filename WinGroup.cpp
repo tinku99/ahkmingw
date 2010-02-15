@@ -33,6 +33,7 @@ ResultType WinGroup::AddWindow(char *aTitle, char *aText, Label *aJumpToLabel, c
 // In addition, if this function is being called by one thread while another thread is calling IsMember(),
 // the thread-safety notes in IsMember() apply.
 {
+    /*
 	// v1.0.41: If a window group can ever be deleted (or its window specs), that might defeat the
 	// thread-safety of WinExist/WinActive.
 	// v1.0.36.05: If all four window parameters are blank, allow it to be added but provide
@@ -77,12 +78,14 @@ ResultType WinGroup::AddWindow(char *aTitle, char *aText, Label *aJumpToLabel, c
 	mLastWindow->mNextWindow = mFirstWindow;
 	++mWindowCount;
 	return OK;
+*/
 }
 
 
 
 ResultType WinGroup::ActUponAll(ActionTypeType aActionType, int aTimeToWaitForClose)
 {
+    /*
 	if (IsEmpty())
 		return OK;  // OK since this is the expected behavior in this case.
 	// Don't need to call Update() in this case.
@@ -94,6 +97,7 @@ ResultType WinGroup::ActUponAll(ActionTypeType aActionType, int aTimeToWaitForCl
 	if (ws.mFoundParent) // It acted upon least one window.
 		DoWinDelay;
 	return OK;
+*/
 }
 
 
@@ -102,6 +106,7 @@ ResultType WinGroup::CloseAndGoToNext(bool aStartWithMostRecent)
 // If the foreground window is a member of this group, close it and activate
 // the next member.
 {
+    /*
 	if (IsEmpty())
 		return OK;  // OK since this is the expected behavior in this case.
 	// Otherwise:
@@ -139,12 +144,14 @@ ResultType WinGroup::CloseAndGoToNext(bool aStartWithMostRecent)
 	}
 	//else do the activation below anyway, even though no close was done.
 	return mIsModeActivate ? Activate(aStartWithMostRecent, win_spec) : Deactivate(aStartWithMostRecent);
+*/
 }
 
 
 
 ResultType WinGroup::Activate(bool aStartWithMostRecent, WindowSpec *aWinSpec, Label **aJumpToLabel)
 {
+    /*
 	if (aJumpToLabel) // Initialize early in case of early return.
 		*aJumpToLabel = NULL;
 	if (IsEmpty())
@@ -282,12 +289,14 @@ ResultType WinGroup::Activate(bool aStartWithMostRecent, WindowSpec *aWinSpec, L
 		}
 	}
 	return OK;
+*/
 }
 
 
 
 ResultType WinGroup::Deactivate(bool aStartWithMostRecent)
 {
+    /*
 	if (IsEmpty())
 		return OK;  // OK since this is the expected behavior in this case.
 	// Otherwise:
@@ -353,12 +362,14 @@ ResultType WinGroup::Deactivate(bool aStartWithMostRecent)
 	}
 	// Even if a window wasn't found, we've done our job so return OK:
 	return OK;
+*/
 }
 
 
 
 inline ResultType WinGroup::Update(bool aIsModeActivate)
 {
+    /*
 	mIsModeActivate = aIsModeActivate;
 	if (sGroupLastUsed != this)
 	{
@@ -372,6 +383,7 @@ inline ResultType WinGroup::Update(bool aIsModeActivate)
 		if (   !(sAlreadyVisited = (HWND *)SimpleHeap::Malloc(MAX_ALREADY_VISITED * sizeof(HWND)))   )
 			return FAIL;  // It already displayed the error for us.
 	return OK;
+*/
 }
 
 
@@ -384,6 +396,7 @@ WindowSpec *WinGroup::IsMember(HWND aWnd, global_struct &aSettings)
 // a recursive call back to that same method, things have been reviewed to ensure that
 // thread-safety is maintained, even if the calling thread is the hook.
 {
+    /*
 	if (!aWnd)
 		return NULL;  // Some callers on this.
 	WindowSearch ws;
@@ -401,6 +414,7 @@ WindowSpec *WinGroup::IsMember(HWND aWnd, global_struct &aSettings)
 			break;
 	}
 	return NULL;  // Because it would have returned already if a match was found.
+*/
 }
 
 
@@ -411,6 +425,7 @@ BOOL CALLBACK EnumParentFindAnyExcept(HWND aWnd, LPARAM lParam)
 // Find the first parent window that doesn't match any of the WindowSpecs in
 // the linked list, and that hasn't already been visited.
 {
+    /*
 	// Since the following two sections apply only to GroupDeactivate (since that's our only caller),
 	// they both seem okay even in light of the ahk_group method.
 
@@ -477,6 +492,7 @@ BOOL CALLBACK EnumParentFindAnyExcept(HWND aWnd, LPARAM lParam)
 			return ws.mFindLastMatch;
 		}
 	} // The loop above is infinite unless a "return" is encountered inside.
+*/
 }
 
 
@@ -484,6 +500,7 @@ BOOL CALLBACK EnumParentFindAnyExcept(HWND aWnd, LPARAM lParam)
 BOOL CALLBACK EnumParentActUponAll(HWND aWnd, LPARAM lParam)
 // Caller must have ensured that lParam isn't NULL and that it contains a non-NULL mFirstWinSpec.
 {
+    /*
 	WindowSearch &ws = *(WindowSearch *)lParam;  // For performance and convenience.
 
 	// Skip windows the command isn't supposed to detect.  ACT_WINSHOW is exempt because
@@ -546,4 +563,5 @@ BOOL CALLBACK EnumParentActUponAll(HWND aWnd, LPARAM lParam)
 			// should not be closed.
 			return TRUE; // Continue the enumeration.
 	}
+	*/
 }

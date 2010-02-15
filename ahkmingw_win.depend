@@ -1089,7 +1089,7 @@
 	"util.h"
 	"resources/resource.h"
 
-1251585309 source:l:\source\ahkgcc\clipboard.cpp
+1266211099 source:l:\source\ahkgcc\clipboard.cpp
 	"stdafx.h"
 	"clipboard.h"
 	"globaldata.h"

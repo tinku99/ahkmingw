@@ -820,7 +820,7 @@ bool MsgSleep(int aSleepDuration, MessageMode aMode)
 				// and since most such criteria are #IfWinActive rather than Exist, the performance will
 				// typically not be reduced much at all.  Futhermore, trading performance for greater
 				// reliability seems worth it in this case.
-				// 
+				//
 				// The inefficiency of calling HotCriterionAllowsFiring() twice for each hotkey --
 				// once in the hook and again here -- seems justifed for the following reasons:
 				// - It only happens twice if the hotkey a hook hotkey (multi-variant keyboard hotkeys
@@ -1682,6 +1682,7 @@ void PollJoysticks()
 // 4) Even if the joySetCapture() succeeds, other programs (e.g. older games), would be prevented from
 //    capturing the joystick while the script in question is running.
 {
+    /*
 	// Even if joystick hotkeys aren't currently allowed to fire, poll it anyway so that hotkey
 	// messages can be buffered for later.
 	static DWORD sButtonsPrev[MAX_JOYSTICKS] = {0}; // Set initial state to "all buttons up for all joysticks".
@@ -1710,6 +1711,7 @@ void PollJoysticks()
 		// be processed when messages are next checked:
 		Hotkey::TriggerJoyHotkeys(i, buttons_newly_down);
 	}
+*/
 }
 
 
