@@ -699,6 +699,7 @@ bool Hotkey::CriterionFiringIsCertain(HotkeyIDType &aHotkeyIDwithFlags, bool aKe
 
 void Hotkey::TriggerJoyHotkeys(int aJoystickID, DWORD aButtonsNewlyDown)
 {
+    /*
 	for (int i = 0; i < sHotkeyCount; ++i)
 	{
 		Hotkey &hk = *shk[i]; // For performance and convenience.
@@ -727,6 +728,7 @@ void Hotkey::TriggerJoyHotkeys(int aJoystickID, DWORD aButtonsNewlyDown)
 		}
 		//else continue the loop in case the user has newly pressed more than one joystick button.
 	}
+*/
 }
 
 

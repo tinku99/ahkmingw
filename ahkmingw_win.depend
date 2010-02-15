@@ -1118,13 +1118,13 @@
 	"window.h"
 	"application.h"
 
-1252277527 source:l:\source\ahkgcc\hotkey.cpp
+1266210746 source:l:\source\ahkgcc\hotkey.cpp
 	"stdafx.h"
 	"hotkey.h"
 	"globaldata.h"
 	"window.h"
 
-1253394324 source:l:\source\ahkgcc\keyboard_mouse.cpp
+1266210507 source:l:\source\ahkgcc\keyboard_mouse.cpp
 	"stdafx.h"
 	"keyboard_mouse.h"
 	"globaldata.h"

@@ -98,16 +98,16 @@ static key_type *ksc = NULL;
 // 5) Similar to #4, but if the driver needs to generate a shift-up for an unexpected Numpad-up event,
 //    the restoration of the shift key will be "lazy".  This case was added in response to the below
 //    example, wherein the shift key got stuck physically down (incorrectly) by the hook:
-// 68  048	 	d	0.00	Num 8          	
-// 6B  04E	 	d	0.09	Num +          	
-// 68  048	i	d	0.00	Num 8          	
-// 68  048	i	u	0.00	Num 8          	
+// 68  048	 	d	0.00	Num 8
+// 6B  04E	 	d	0.09	Num +
+// 68  048	i	d	0.00	Num 8
+// 68  048	i	u	0.00	Num 8
 // A0  02A	i	d	0.02	Shift          	part of the macro
-// 01  000	i	d	0.03	LButton        	
+// 01  000	i	d	0.03	LButton
 // A0  02A	 	u	0.00	Shift          	driver, for the next key
-// 26  048	 	u	0.00	Num 8          	
+// 26  048	 	u	0.00	Num 8
 // A0  02A	 	d	0.49	Shift          	driver lazy down (but not detected as non-physical)
-// 6B  04E	 	d	0.00	Num +          	
+// 6B  04E	 	d	0.00	Num +
 
 // The below timeout is for the subset of driver-generated shift-events that occur immediately
 // before or after some other keyboard event.  The elapsed time is usually zero, but using 22ms
@@ -157,6 +157,7 @@ inline bool IsIgnored(ULONG_PTR aExtraInfo)
 
 LRESULT CALLBACK LowLevelKeybdProc(int aCode, WPARAM wParam, LPARAM lParam)
 {
+    /*
 	if (aCode != HC_ACTION)  // MSDN docs specify that both LL keybd & mouse hook should return in this case.
 		return CallNextHookEx(g_KeybdHook, aCode, wParam, lParam);
 
@@ -282,12 +283,14 @@ LRESULT CALLBACK LowLevelKeybdProc(int aCode, WPARAM wParam, LPARAM lParam)
 	} // if (vk == VK_LCONTROL)
 
 	return LowLevelCommon(g_KeybdHook, aCode, wParam, lParam, vk, sc, key_up, event.dwExtraInfo, event.flags);
+*/
 }
 
 
 
 LRESULT CALLBACK LowLevelMouseProc(int aCode, WPARAM wParam, LPARAM lParam)
 {
+    /*
 	// code != HC_ACTION should be evaluated PRIOR to considering the values
 	// of wParam and lParam, because those values may be invalid or untrustworthy
 	// whenever code < 0.
@@ -351,6 +354,7 @@ LRESULT CALLBACK LowLevelMouseProc(int aCode, WPARAM wParam, LPARAM lParam)
 	}
 
 	return LowLevelCommon(g_MouseHook, aCode, wParam, lParam, vk, sc, key_up, event.dwExtraInfo, event.flags);
+*/
 }
 
 
@@ -361,6 +365,7 @@ LRESULT LowLevelCommon(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lPara
 // maintainability.  The code size savings as of v1.0.38.06 is 3.5 KB of uncompressed code, but that
 // savings will grow larger if more complexity is ever added to the hooks.
 {
+    /*
 	HotkeyIDType hotkey_id_to_post = HOTKEY_ID_INVALID; // Set default.
 	bool is_ignored = IsIgnored(aExtraInfo);
 
@@ -1387,7 +1392,7 @@ LRESULT LowLevelCommon(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lPara
 			// Not sure if it's necessary to set this in this case.  Review.
 			if (!aKeyUp)
 				this_key.down_performed_action = true; // aKeyUp is known to be false due to an earlier check.
-		
+
 			if (   !(g_modifiersLR_logical & (MOD_LALT | MOD_RALT))   )  // Neither ALT key is down.
 				// Note: Don't set the ignore-flag in this case because we want the hook to notice it.
 				// UPDATE: It might be best, after all, to have the hook ignore these keys.  That's because
@@ -1859,7 +1864,7 @@ LRESULT LowLevelCommon(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lPara
 				// it being permanently down even after the user releases the key!:
 				if (shift_put_up && !vk_is_shift) // Must do this regardless of the value of aKeyUp.
 					KeyEvent(KEYDOWN, which_shift_down);
-				
+
 				// Update: Can't do this one because going down on control will instantly
 				// dismiss the alt-tab menu, which we don't want if we're here.
 				//if (control_put_up && !vk_is_control) // Must do this regardless of the value of aKeyUp.
@@ -1905,7 +1910,7 @@ LRESULT LowLevelCommon(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lPara
 
 			// Even when the menu is visible, it's possible that neither of the ALT keys
 			// is down, at least under XP (probably NT and 2k also).  Not sure about Win9x:
-			if (   !(g_modifiersLR_logical & (MOD_LALT | MOD_RALT))   // Neither ALT key is down 
+			if (   !(g_modifiersLR_logical & (MOD_LALT | MOD_RALT))   // Neither ALT key is down
 				|| (aKeyUp && (aVK == VK_LMENU || aVK == VK_RMENU))   ) // Or the suffix key for Alt-tab *is* an ALT key and it's being released: must push ALT down for upcoming TAB to work.
 				KeyEvent(KEYDOWN, VK_MENU);
 				// And never put it back up because that would dismiss the menu.
@@ -2020,11 +2025,11 @@ LRESULT LowLevelCommon(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lPara
 			// *capslock::Send {Ctrl Down}
 			// *~capslock up:: Send {Ctrl Up}  ; Specify tilde to allow caps lock to be toggled upon release.
 			// ... the following key history is produced (see note):
-			//14  03A	h	d	3.46	Caps Lock   	
-			//A2  01D	i	d	0.00	Ctrl        	
-			//14  03A	h	u	0.10	Caps Lock   	
+			//14  03A	h	d	3.46	Caps Lock
+			//A2  01D	i	d	0.00	Ctrl
+			//14  03A	h	u	0.10	Caps Lock
 			//14  03A	i	d	0.00	Caps Lock    <<< This actually came before the prior due to re-entrancy.
-			//A2  01D	i	u	0.00	Ctrl        	
+			//A2  01D	i	u	0.00	Ctrl
 			// Can't use this_toggle_key_can_be_toggled in this case. Relies on short-circuit boolean order:
 			bool suppress_to_prevent_toggle = this_key.pForceToggle && *this_key.pForceToggle != NEUTRAL;
 			// The following isn't checked as part of the above because this_key.was_just_used would
@@ -2115,11 +2120,12 @@ LRESULT LowLevelCommon(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lPara
 			KeyEvent(KEYUP, aVK, aSC);
 		}
 	}
-	
+
 	// Otherwise:
 	if (!aKeyUp)
 		this_key.hotkey_down_was_suppressed = true;
 	return SuppressThisKey;
+*/
 }
 
 
@@ -2130,6 +2136,7 @@ LRESULT SuppressThisKeyFunc(const HHOOK aHook, LPARAM lParam, const vk_type aVK,
 // might have adjusted vk, namely to make it a left/right specific modifier key rather than a
 // neutral one.
 {
+    /*
 	if (pKeyHistoryCurr->event_type == ' ') // then it hasn't been already set somewhere else
 		pKeyHistoryCurr->event_type = 's';
 	// This handles the troublesome Numlock key, which on some (most/all?) keyboards
@@ -2190,6 +2197,7 @@ LRESULT SuppressThisKeyFunc(const HHOOK aHook, LPARAM lParam, const vk_type aVK,
 	if (aHSwParamToPost != HOTSTRING_INDEX_INVALID)
 		PostMessage(g_hWnd, AHK_HOTSTRING, aHSwParamToPost, aHSlParamToPost);
 	return 1;
+*/
 }
 
 
@@ -2200,6 +2208,7 @@ LRESULT AllowIt(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lParam, cons
 // might have adjusted vk, namely to make it a left/right specific modifier key rather than a
 // neutral one.
 {
+    /*
 	WPARAM hs_wparam_to_post = HOTSTRING_INDEX_INVALID; // Set default.
 	LPARAM hs_lparam_to_post; // Not initialized because the above is the sole indicator of whether its contents should even be examined.
 
@@ -2327,9 +2336,9 @@ LRESULT AllowIt(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lParam, cons
 			// someone for when the pressed ctrl-alt-del and then pressed esc to dismiss the dialog
 			// on Win2k (Win2k invokes a 6-button dialog, with choices such as task manager and lock
 			// workstation, if I recall correctly -- unlike XP which invokes task mgr by default):
-			// A4  038	 	d	21.24	Alt            	
-			// A2  01D	 	d	0.00	Ctrl           	
-			// A2  01D	 	d	0.52	Ctrl           	
+			// A4  038	 	d	21.24	Alt
+			// A2  01D	 	d	0.00	Ctrl
+			// A2  01D	 	d	0.52	Ctrl
 			// 2E  053	 	d	0.02	Num Del        	<-- notice how there's no following up event
 			// 1B  001	 	u	2.80	Esc             <-- notice how there's no preceding down event
 			// Other notes: On XP at least, shift key must not be down, otherwise Ctrl-Alt-Delete does
@@ -2424,6 +2433,7 @@ LRESULT AllowIt(const HHOOK aHook, int aCode, WPARAM wParam, LPARAM lParam, cons
 	if (hs_wparam_to_post != HOTSTRING_INDEX_INVALID)
 		PostMessage(g_hWnd, AHK_HOTSTRING, hs_wparam_to_post, hs_lparam_to_post);
 	return result_to_return;
+*/
 }
 
 
@@ -2436,6 +2446,7 @@ bool CollectInput(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type aSC,
 // might have adjusted vk, namely to make it a left/right specific modifier key rather than a
 // neutral one.
 {
+    /*
 #define shs Hotstring::shs  // For convenience.
 	// Generally, we return this value to our caller so that it will treat the event as visible
 	// if either there's no input in progress or if there is but it's visible.  Below relies on
@@ -2447,7 +2458,7 @@ bool CollectInput(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type aSC,
 		// Always pass modifier-up events through unaltered.  At the very least, this is needed for
 		// cases where a user presses a #z hotkey, for example, to initiate an Input.  When the user
 		// releases the LWIN/RWIN key during the input, that up-event should not be suppressed
-		// otherwise the modifier key would get "stuck down".  
+		// otherwise the modifier key would get "stuck down".
 		return kvk[aVK].as_modifiersLR ? true : treat_as_visible;
 
 	// Hotstrings monitor neither ignored input nor input that is invisible due to suppression by
@@ -2589,7 +2600,7 @@ bool CollectInput(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type aSC,
 		key_state[VK_CAPITAL] &= ~STATE_ON;
 
 	// Use ToAsciiEx() vs. ToAscii() because there is evidence from Putty author that ToAsciiEx() works better
-	// with more keyboard layouts under 2k/XP than ToAscii() does (though if true, there is no MSDN explanation). 
+	// with more keyboard layouts under 2k/XP than ToAscii() does (though if true, there is no MSDN explanation).
 	// UPDATE: In v1.0.44.03, need to use ToAsciiEx() anyway because of the adapt-to-active-window-layout feature.
 	Get_active_window_keybd_layout // Defines the variables active_window and active_window_keybd_layout for use below.
 	int byte_count = ToAsciiEx(aVK, aEvent.scanCode  // Uses the original scan code, not the adjusted "sc" one.
@@ -2632,7 +2643,7 @@ bool CollectInput(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type aSC,
 	// 2) Have main thread (rather than hook thread) reinsert the dead key and its successor key (hook would have
 	//    suppressed both), which allows the main thread to do a Sleep or MsgSleep.  Such a Sleep be more effective
 	//    because the main thread's priority is lower than that of the hook's, allowing better round-robin.
-	// 
+	//
 	// If this key isn't a dead key but there's a dead key pending and this incoming key is capable of
 	// completing/triggering it, do a workaround for the side-effects of ToAsciiEx().  This workaround
 	// allows dead keys to continue to operate properly in the user's foreground window, while still
@@ -3090,6 +3101,7 @@ bool CollectInput(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type aSC,
 		g_input.status = INPUT_LIMIT_REACHED;
 	return treat_as_visible;
 #undef shs  // To avoid naming conflicts
+*/
 }
 
 
@@ -3100,6 +3112,7 @@ void UpdateKeybdState(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type 
 // might have adjusted vk, namely to make it a left/right specific modifier key rather than a
 // neutral one.
 {
+    /*
 	// See above notes near the first mention of SHIFT_KEY_WORKAROUND_TIMEOUT for details.
 	// This part of the workaround can be tested via "NumpadEnd::KeyHistory".  Turn on numlock,
 	// hold down shift, and press numpad1. The hotkey will fire and the status should display
@@ -3225,6 +3238,7 @@ void UpdateKeybdState(KBDLLHOOKSTRUCT &aEvent, const vk_type aVK, const sc_type 
 	sPriorEventWasKeyUp = aKeyUp;
 	sPriorEventWasPhysical = KeybdEventIsPhysical(aEvent.flags, aVK, aKeyUp);
 	sPriorEventTickCount = GetTickCount();
+*/
 }
 
 
@@ -3234,6 +3248,7 @@ bool KeybdEventIsPhysical(DWORD aEventFlags, const vk_type aVK, bool aKeyUp)
 // might have adjusted vk, namely to make it a left/right specific modifier key rather than a
 // neutral one.
 {
+    /*
 	// MSDN: "The keyboard input can come from the local keyboard driver or from calls to the keybd_event
 	// function. If the input comes from a call to keybd_event, the input was "injected"".
 	// My: This also applies to mouse events, so use it for them too:
@@ -3269,12 +3284,14 @@ bool KeybdEventIsPhysical(DWORD aEventFlags, const vk_type aVK, bool aKeyUp)
 	// events can impact the script's calls to GetKeyState("LControl", "P"), etc.
 	g_TimeLastInputPhysical = GetTickCount();
 	return true;
+*/
 }
 
 
 
 bool DualStateNumpadKeyIsDown()
 {
+    /*
 	// Note: GetKeyState() might not agree with us that the key is physically down because
 	// the hook may have suppressed it (e.g. if it's a hotkey).  Therefore, sPadState
 	// is the only way to know for user if the user is physically holding down a *qualified*
@@ -3288,12 +3305,14 @@ bool DualStateNumpadKeyIsDown()
 		if (sPadState[i])
 			return true;
 	return false;
+*/
 }
 
 
 
 bool IsDualStateNumpadKey(const vk_type aVK, const sc_type aSC)
 {
+    /*
 	if (aSC & 0x100)  // If it's extended, it can't be a numpad key.
 		return false;
 
@@ -3318,6 +3337,7 @@ bool IsDualStateNumpadKey(const vk_type aVK, const sc_type aSC)
 	}
 
 	return false;
+*/
 }
 
 
@@ -3441,6 +3461,7 @@ int sort_most_general_before_least(const void *a1, const void *a2)
 void SetModifierAsPrefix(vk_type aVK, sc_type aSC, bool aAlwaysSetAsPrefix = false)
 // The caller has already ensured that vk and/or sc is a modifier such as VK_CONTROL.
 {
+    /*
 	if (aVK)
 	{
 		switch (aVK)
@@ -3511,6 +3532,7 @@ void SetModifierAsPrefix(vk_type aVK, sc_type aSC, bool aAlwaysSetAsPrefix = fal
 	else
 		if (Hotkey::FindHotkeyContainingModLR(ksc[aSC].as_modifiersLR))
 			ksc[aSC].used_as_prefix = PREFIX_ACTUAL;
+*/
 }
 
 
@@ -3533,6 +3555,7 @@ void ChangeHookState(Hotkey *aHK[], int aHK_count, HookType aWhichHook, HookType
 // the hooks.
 // Returns the set of hooks that are active after processing is complete.
 {
+    /*
 	// v1.0.39: For simplicity and maintainability, don't even make the attempt on Win9x since it
 	// seems too rare that they would have LL hook capability somehow (such as in an emultator).
 	// NOTE: Some sections rely on the fact that no warning dialogs are displayed if the hook is
@@ -3949,7 +3972,7 @@ void ChangeHookState(Hotkey *aHK[], int aHK_count, HookType aWhichHook, HookType
 							its_table_entry = this_hk.id_with_flags;
 						}
 					}
-					
+
 					if (do_cascade)
 					{
 						switch (this_hk.vk)
@@ -3996,6 +4019,7 @@ void ChangeHookState(Hotkey *aHK[], int aHK_count, HookType aWhichHook, HookType
 
 	// Add or remove hooks, as needed.  No change is made if the hooks are already in the correct state.
 	AddRemoveHooks(hooks_to_be_active);
+*/
 }
 
 
@@ -4006,6 +4030,7 @@ void AddRemoveHooks(HookType aHooksToBeActive, bool aChangeIsTemporary)
 // Caller is always the main thread, never the hook thread because this function isn't thread-safe
 // and it also calls PeekMessage() for the main thread.
 {
+    /*
 	HookType hooks_active_orig = GetActiveHooks();
 	if (aHooksToBeActive == hooks_active_orig) // It's already in the right state.
 		return;
@@ -4215,19 +4240,21 @@ void AddRemoveHooks(HookType aHooksToBeActive, bool aChangeIsTemporary)
 		// to avoid the possibility that the script will continue to call this function recursively, resulting
 		// in an infinite stack of MsgBoxes. This approach is similar to that used in Hotkey::Perform()
 		// for the #MaxHotkeysPerInterval warning dialog:
-		g_AllowInterruption = false; 
+		g_AllowInterruption = false;
 		// Below is a generic message to reduce code size.  Failure is rare, but has been known to happen when
 		// certain types of games are running).
 		MsgBox("Warning: The keyboard and/or mouse hook could not be activated; "
 			"some parts of the script will not function.");
 		g_AllowInterruption = true;
 	}
+*/
 }
 
 
 
 bool SystemHasAnotherKeybdHook()
 {
+    /*
 	if (sKeybdMutex)
 		CloseHandle(sKeybdMutex); // But don't set it to NULL because we need its value below as a flag.
 	HANDLE mutex = CreateMutex(NULL, FALSE, KEYBD_MUTEX_NAME); // Create() vs. Open() has enough access to open the mutex if it exists.
@@ -4239,12 +4266,14 @@ bool SystemHasAnotherKeybdHook()
 	else // Keep it closed because the system tracks how many handles there are, deleting the mutex when zero.
 		CloseHandle(mutex);  // This facilitates other instances of the program getting the proper last_error value.
 	return last_error == ERROR_ALREADY_EXISTS;
+*/
 }
 
 
 
 bool SystemHasAnotherMouseHook()
 {
+    /*
 	if (sMouseMutex)
 		CloseHandle(sMouseMutex); // But don't set it to NULL because we need its value below as a flag.
 	HANDLE mutex = CreateMutex(NULL, FALSE, MOUSE_MUTEX_NAME); // Create() vs. Open() has enough access to open the mutex if it exists.
@@ -4256,6 +4285,7 @@ bool SystemHasAnotherMouseHook()
 	else // Keep it closed because the system tracks how many handles there are, deleting the mutex when zero.
 		CloseHandle(mutex);  // This facilitates other instances of the program getting the proper last_error value.
 	return last_error == ERROR_ALREADY_EXISTS;
+*/
 }
 
 
@@ -4264,6 +4294,7 @@ DWORD WINAPI HookThreadProc(LPVOID aUnused)
 // The creator of this thread relies on the fact that this function always exits its thread
 // when both hooks are deactivated.
 {
+    /*
 	MSG msg;
 	bool problem_activating_hooks;
 
@@ -4341,6 +4372,7 @@ DWORD WINAPI HookThreadProc(LPVOID aUnused)
 
 		} // switch (msg.message)
 	} // for(;;)
+*/
 }
 
 
@@ -4348,6 +4380,7 @@ DWORD WINAPI HookThreadProc(LPVOID aUnused)
 void ResetHook(bool aAllModifiersUp, HookType aWhichHook, bool aResetKVKandKSC)
 // Caller should ensure that aWhichHook indicates at least one of the hooks (not none).
 {
+    /*
 	// Reset items common to both hooks:
 	pPrefixKey = NULL;
 
@@ -4427,18 +4460,21 @@ void ResetHook(bool aAllModifiersUp, HookType aWhichHook, bool aResetKVKandKSC)
 				ResetKeyTypeState(ksc[i]);
 		}
 	}
+*/
 }
 
 
 
 HookType GetActiveHooks()
 {
+    /*
 	HookType hooks_currently_active = 0;
 	if (g_KeybdHook)
 		hooks_currently_active |= HOOK_KEYBD;
 	if (g_MouseHook)
 		hooks_currently_active |= HOOK_MOUSE;
 	return hooks_currently_active;
+*/
 }
 
 
@@ -4507,7 +4543,7 @@ void GetHookStatus(char *aBuf, int aBufSize)
 			"(not the user's), because the keyboard hook isn't installed.\r\n");
 
 	// Add the below even if key history is already disabled so that the column headings can be seen.
-	snprintfcat(aBuf, aBufSize, 
+	snprintfcat(aBuf, aBufSize,
 		"\r\nNOTE: To disable the key history shown below, add the line \"#KeyHistory 0\" "
 		"anywhere in the script.  The same method can be used to change the size "
 		"of the history buffer.  For example: #KeyHistory 100  (Default is 40, Max is 500)"
