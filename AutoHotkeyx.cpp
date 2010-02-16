@@ -362,7 +362,7 @@ EXPORT int ahkdll(char *fileName, char *argv, char *args)
 // probably for window creation
 // Todo: better cleanup in DLL_PROCESS_DETACH: windows, variables, no exit from script
 
-BOOL WINAPI DllMain(HINSTANCE hInstance,DWORD fwdReason, LPVOID lpvReserved)
+EXPORT BOOL WINAPI DllMain(HINSTANCE hInstance,DWORD fwdReason, LPVOID lpvReserved)
  {
 switch(fwdReason)
  {

@@ -57,10 +57,29 @@ EXPORT int ahkLabel(char *aLabelName)
 
 EXPORT int ahkKey(char *keys) // N11 sendahk
 {
-SendKeys(keys, false, SM_EVENT, 0, 1);
+    // SendKeys(keys, false, SM_EVENT, 0, 1);
+	// sc_type aSC = TextToSC(keys);
+	// vk_type aVK = TextToVK(keys);
+	// keybd_event((byte)aVK, (byte)aSC, 0, 0);
+	// char buf[10] = {0};
+	// strncpy(buf, keys, 10);
+	// printf("in ahkkey with %s", buf);
+	PostMessage(g_hWnd, AHK_SENDKEYS, (WPARAM)keys, (LPARAM)keys);
 return 0;
 }
 
+void BIF_sendahk(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamCount) // Added in N11
+{
+	aResultToken.symbol = SYM_INTEGER ;
+	aResultToken.marker = "";
+
+	char keys_buf[MAX_NUMBER_SIZE]; // A separate buf because aResultToken.buf is sometimes used to store the result.
+	char *keys = ExprTokenToString(*aParam[0], keys_buf); // Remember that aResultToken.buf is part of a union, though in this case there's no danger of overwriting it since our result will always be of STRING type (not int or float).
+	int keys_length = (int)EXPR_TOKEN_LENGTH(aParam[0], keys);
+	SendKeys(keys, false, SM_EVENT, 0, 1);
+	aResultToken.value_int64 = 0;
+	return;
+}
 
 // Naveen: v6 addFile()
 // Todo: support for #Directives, and proper treatment of mIsReadytoExecute

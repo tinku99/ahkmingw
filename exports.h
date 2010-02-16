@@ -6,7 +6,7 @@ EXPORT unsigned int addFile(char *fileName, bool aAllowDuplicateInclude, int aIg
 EXPORT int ahkdll(char *fileName, char *argv, char *args);
 void BIF_Import(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamCount);
 void BIF_Getvar(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamCount);
-
+void BIF_sendahk(ExprTokenType &aResultToken, ExprTokenType *aParam[], int aParamCount); // Added in N11
 BIF(BIF_Static) ;
 BIF(BIF_Alias) ;
 BIF(BIF_CacheEnable) ;

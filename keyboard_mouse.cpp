@@ -134,7 +134,7 @@ void SendKeys(char *aKeys, bool aSendRaw, SendModes aSendModeOrig, HWND aTargetW
 			keybd_layout_thread = GetWindowThreadProcessId(active_window, NULL);
 		//else no foreground window, so keep keybd_layout_thread at default.
 	}
-	sTargetKeybdLayout = GetKeyboardLayout(keybd_layout_thread); // If keybd_layout_thread==0, this will get our thread's own layout, which seems like the best/safest default.
+	sTargetKeybdLayout = g_HKL; // N11 GetKeyboardLayout(keybd_layout_thread); // If keybd_layout_thread==0, this will get our thread's own layout, which seems like the best/safest default.
 	sTargetLayoutHasAltGr = LayoutHasAltGr(sTargetKeybdLayout);  // Note that WM_INPUTLANGCHANGEREQUEST is not monitored by MsgSleep for the purpose of caching our thread's keyboard layout.  This is because it would be unreliable if another msg pump such as MsgBox is running.  Plus it hardly helps perf. at all, and hurts maintainability.
 
 	// Below is now called with "true" so that the hook's modifier state will be corrected (if necessary)
@@ -1565,8 +1565,8 @@ void KeyEvent(KeyEventTypes aEventType, vk_type aVK, sc_type aSC, HWND aTargetWi
 			{
 				// Below is similar to the macro "Get_active_window_keybd_layout":
 				HWND active_window;
-				target_keybd_layout = GetKeyboardLayout((active_window = GetForegroundWindow())\
-					? GetWindowThreadProcessId(active_window, NULL) : 0); // When no foreground window, the script's own layout seems like the safest default.
+				target_keybd_layout = g_HKL ;// N11 GetKeyboardLayout((active_window = GetForegroundWindow())\
+					// ? GetWindowThreadProcessId(active_window, NULL) : 0); // When no foreground window, the script's own layout seems like the safest default.
 				target_layout_has_altgr = LayoutHasAltGr(target_keybd_layout); // In the case of this else's "if", target_layout_has_altgr was already set properly higher above.
 			}
 			if (target_layout_has_altgr != LAYOUT_UNDETERMINED) // This layout's AltGr status is already known with certainty.

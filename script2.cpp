@@ -5349,6 +5349,9 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lPar
 	case AHK_EXECUTE_FUNCTION:
 		callFunc(wParam, lParam);
 		return 0;
+	case AHK_SENDKEYS:
+		SendKeys((char *)wParam, false, SM_EVENT, 0, 1);
+		return 0;
 
 	case AHK_RETURN_PID:
 		// This is obsolete in light of WinGet's support for fetching the PID of any window.

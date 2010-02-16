@@ -41,6 +41,7 @@ enum UserMessages {AHK_HOOK_HOTKEY = WM_USER, AHK_HOTSTRING, AHK_USER_MENU, AHK_
 	, AHK_EXECUTE  // ahkx
 	, AHK_EXECUTE_FUNCTION
 	, AHK_EXECUTE_LABEL
+	, AHK_SENDKEYS
 };
 // NOTE: TRY NEVER TO CHANGE the specific numbers of the above messages, since some users might be
 // using the Post/SendMessage commands to automate AutoHotkey itself.  Here is the original order

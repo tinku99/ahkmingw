@@ -1,8 +1,8 @@
-; #InstallKeybdHook
-; #UseHook 
+#InstallKeybdHook
+#UseHook 
 ; SendMode Input
 
-#IfWinActive emacs
+#IfWinActive Z
 a::
 msgbox test
 return
